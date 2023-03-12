@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "PyMyGekko"
+version = "0.0.1"
+authors = [
+  { name="Stephan Uhle", email="stephanu@gmx.net" },
+]
+description = "Python Library to access the myGEKKO Query API."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "aiohttp >= 3.8"
+]
+
+[project.optional-dependencies]
+dev = [
+    'pyTest',
+    'pytest-asyncio'
+]
+
+[project.urls]
+"Homepage" = "https://github.com/StephanU/PyMyGekko"
+"Bug Tracker" = "https://github.com/StephanU/PyMyGekko/issues"

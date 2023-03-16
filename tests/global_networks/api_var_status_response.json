@@ -1,0 +1,18 @@
+{
+  "globals": {
+    "network": {
+      "gekkoname": {
+        "value": "myGEKKO"
+      },
+      "language": {
+        "value": "0"
+      },
+      "version": {
+        "value": "596610"
+      },
+      "hardware": {
+        "value": "Slide 2 (AC0DFE300913)"
+      }
+    }
+  }
+}

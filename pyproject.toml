@@ -23,6 +23,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     'pyTest',
+    'pytest-aiohttp',
     'pytest-asyncio',
     'python-decouple'
 ]

@@ -1,0 +1,30 @@
+{
+  "globals": {
+    "network": {
+      "gekkoname": {
+        "value": "Hostname of myGEKKO",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 1
+      },
+      "language": {
+        "value": "Language of myGEKKO [0=DE|1=IT|2=EN|3=NL|4=ES|5=FR|6=CS]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 2
+      },
+      "version": {
+        "value": "Software version of myGEKKO",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 3
+      },
+      "hardware": {
+        "value": "Hardware version of myGEKKO",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 4
+      }
+    }
+  }
+}

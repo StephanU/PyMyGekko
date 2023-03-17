@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "PyMyGekko"
 description = "Python Library to access the myGEKKO Query API."
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 license = "MIT"
 keywords = ['mygekko']
 authors = [
@@ -15,9 +15,6 @@ authors = [
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.7",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: Implementation :: CPython",
@@ -48,13 +45,13 @@ cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=PyMyGe
 no-cov = "cov --no-cov {args}"
 
 [[tool.hatch.envs.test.matrix]]
-python = ["37", "38", "39", "310", "311"]
+python = ["310", "311"]
 
 [tool.coverage.run]
 branch = true
 parallel = true
 omit = [
-  "pymygekko2/__about__.py",
+  "PyMyGekko/__about__.py",
 ]
 
 [tool.coverage.report]

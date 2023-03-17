@@ -1,6 +1,8 @@
 import aiohttp
 from yarl import URL
 
+from PyMyGekko.resources.Blinds import Blinds
+
 
 class PyMyGekko:
     def __init__(
@@ -29,19 +31,37 @@ class PyMyGekko:
     async def read_data(self) -> None:
         async with aiohttp.ClientSession() as session:
             async with session.get(
+                self._url.with_path("/api/v1/var"),
+                params=self._authentication_params,
+            ) as resp:
+                self._resources = await resp.json(content_type="text/plain")
+            async with session.get(
                 self._url.with_path("/api/v1/var/status"),
                 params=self._authentication_params,
             ) as resp:
-                self._data = await resp.json(content_type="text/plain")
+                self._status = await resp.json(content_type="text/plain")
 
     def get_globals_network(self):
-        if self._data == None:
+        if self._status == None:
             return None
 
         result = {}
-        if self._data["globals"] and self._data["globals"]["network"]:
-            network_data = self._data["globals"]["network"]
+        if self._status["globals"] and self._status["globals"]["network"]:
+            network_data = self._status["globals"]["network"]
             for key in network_data:
                 result[key] = network_data[key]["value"]
+
+        return result
+
+    def get_blinds(self) -> list[Blinds] | None:
+        if self._resources == None:
+            return None
+
+        result: list[Blinds] = []
+        if self._resources["blinds"]:
+            blinds = self._resources["blinds"]
+            for key in blinds:
+                if key.startswith("item"):
+                    result.append(Blinds(key, blinds[key]["name"]))
 
         return result

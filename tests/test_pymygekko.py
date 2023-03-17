@@ -1,7 +1,7 @@
 import pytest
 
 from aiohttp import web
-from PyMyGekko.PyMyGekko import PyMyGekko
+from PyMyGekko.PyMyGekkoApiClient import PyMyGekkoApiClient
 
 
 async def response(request):
@@ -16,7 +16,7 @@ def mock_server(aiohttp_server):
 
 
 def test_init():
-    api = PyMyGekko("username", "apiKey", "gekkoId")
+    api = PyMyGekkoApiClient("username", "apiKey", "gekkoId")
 
     assert api != None
 
@@ -24,7 +24,7 @@ def test_init():
 @pytest.mark.asyncio
 async def test_try_connect(mock_server):
     server = await mock_server
-    api = PyMyGekko(
+    api = PyMyGekkoApiClient(
         "USERNAME",
         "APIKEY",
         "GEKKOID",

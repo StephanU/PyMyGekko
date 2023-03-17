@@ -1,7 +1,7 @@
 import pytest
 
 from aiohttp import web
-from PyMyGekko.PyMyGekko import PyMyGekko
+from PyMyGekko.PyMyGekkoApiClient import PyMyGekkoApiClient
 
 
 async def var_response(request):
@@ -25,7 +25,7 @@ def mock_server(aiohttp_server):
 @pytest.mark.asyncio
 async def test_get_blinds(mock_server):
     server = await mock_server
-    api = PyMyGekko(
+    api = PyMyGekkoApiClient(
         "USERNAME",
         "APIKEY",
         "GEKKOID",

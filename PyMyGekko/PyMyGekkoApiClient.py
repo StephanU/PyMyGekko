@@ -4,7 +4,7 @@ from yarl import URL
 from PyMyGekko.resources.Blinds import Blinds
 
 
-class PyMyGekko:
+class PyMyGekkoApiClient:
     def __init__(
         self,
         username: str,

@@ -1,7 +1,7 @@
 import pytest
 
-from aiohttp import web
-from PyMyGekko.PyMyGekkoApiClient import PyMyGekkoApiClient
+from aiohttp import web, ClientSession
+from PyMyGekko import PyMyGekkoApiClient
 
 
 async def var_response(request):
@@ -25,20 +25,22 @@ def mock_server(aiohttp_server):
 @pytest.mark.asyncio
 async def test_get_blinds(mock_server):
     server = await mock_server
-    api = PyMyGekkoApiClient(
-        "USERNAME",
-        "APIKEY",
-        "GEKKOID",
-        scheme=server.scheme,
-        host=server.host,
-        port=server.port,
-    )
+    async with ClientSession() as session:
+        api = PyMyGekkoApiClient(
+            "USERNAME",
+            "APIKEY",
+            "GEKKOID",
+            session,
+            scheme=server.scheme,
+            host=server.host,
+            port=server.port,
+        )
 
-    await api.read_data()
-    blinds = api.get_blinds()
+        await api.read_data()
+        blinds = api.get_blinds()
 
-    assert blinds != None
-    assert len(blinds) == 10
+        assert blinds != None
+        assert len(blinds) == 10
 
-    assert blinds[0]._id == "item0"
-    assert blinds[0]._name == "Wohnen Terrasse"
+        assert blinds[0]._id == "item0"
+        assert blinds[0]._name == "Wohnen Terrasse"

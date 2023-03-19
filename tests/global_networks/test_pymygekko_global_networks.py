@@ -1,7 +1,6 @@
-import pytest
-
-from aiohttp import web
-from PyMyGekko.PyMyGekkoApiClient import PyMyGekkoApiClient
+from pytest import fixture, mark
+from aiohttp import web, ClientSession
+from PyMyGekko import PyMyGekkoApiClient
 
 
 async def var_response(request):
@@ -14,7 +13,7 @@ async def var_status_response(request):
     return web.Response(status=200, body=statusResponseFile.read())
 
 
-@pytest.fixture
+@fixture
 def mock_server(aiohttp_server):
     app = web.Application()
     app.router.add_get("/api/v1/var", var_response)
@@ -22,23 +21,26 @@ def mock_server(aiohttp_server):
     return aiohttp_server(app)
 
 
-@pytest.mark.asyncio
+@mark.asyncio
 async def test_get_globals_network(mock_server):
     server = await mock_server
-    api = PyMyGekkoApiClient(
-        "USERNAME",
-        "APIKEY",
-        "GEKKOID",
-        scheme=server.scheme,
-        host=server.host,
-        port=server.port,
-    )
 
-    await api.read_data()
-    globals_network = api.get_globals_network()
+    async with ClientSession() as session:
+        api = PyMyGekkoApiClient(
+            "USERNAME",
+            "APIKEY",
+            "GEKKOID",
+            session,
+            scheme=server.scheme,
+            host=server.host,
+            port=server.port,
+        )
 
-    assert globals_network != None
-    assert globals_network["gekkoname"] == "myGEKKO"
-    assert globals_network["language"] == "0"
-    assert globals_network["version"] == "596610"
-    assert globals_network["hardware"] == "Slide 2 (AC0DFE300913)"
+        await api.read_data()
+        globals_network = api.get_globals_network()
+
+        assert globals_network != None
+        assert globals_network["gekkoname"] == "myGEKKO"
+        assert globals_network["language"] == "0"
+        assert globals_network["version"] == "596610"
+        assert globals_network["hardware"] == "Slide 2 (AC0DFE300913)"

@@ -1,7 +1,7 @@
-import aiohttp
+from aiohttp import ClientSession
 from yarl import URL
 
-from PyMyGekko.resources.Blinds import Blinds
+from PyMyGekko.resources import Blinds
 
 
 class PyMyGekkoApiClient:
@@ -10,6 +10,7 @@ class PyMyGekkoApiClient:
         username: str,
         apiKey: str,
         gekkoId: str,
+        session: ClientSession,
         scheme: str = "https",
         host: str = "live.my-gekko.com",
         port: int = None,
@@ -20,26 +21,25 @@ class PyMyGekkoApiClient:
             "key": apiKey,
             "gekkoid": gekkoId,
         }
+        self._session = session
 
     async def try_connect(self) -> int:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(
-                self._url.with_path("/api/v1/var"), params=self._authentication_params
-            ) as resp:
-                return resp.status
+        async with self._session.get(
+            self._url.with_path("/api/v1/var"), params=self._authentication_params
+        ) as resp:
+            return resp.status
 
     async def read_data(self) -> None:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(
-                self._url.with_path("/api/v1/var"),
-                params=self._authentication_params,
-            ) as resp:
-                self._resources = await resp.json(content_type="text/plain")
-            async with session.get(
-                self._url.with_path("/api/v1/var/status"),
-                params=self._authentication_params,
-            ) as resp:
-                self._status = await resp.json(content_type="text/plain")
+        async with self._session.get(
+            self._url.with_path("/api/v1/var"),
+            params=self._authentication_params,
+        ) as resp:
+            self._resources = await resp.json(content_type="text/plain")
+        async with self._session.get(
+            self._url.with_path("/api/v1/var/status"),
+            params=self._authentication_params,
+        ) as resp:
+            self._status = await resp.json(content_type="text/plain")
 
     def get_globals_network(self):
         if self._status == None:

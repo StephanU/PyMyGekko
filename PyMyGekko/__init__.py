@@ -2,4 +2,4 @@
 #
 # SPDX-License-Identifier: MIT
 
-from .PyMyGekkoApiClient import PyMyGekkoApiClient as PyMyGekkoApiClient
+from .MyGekkoApiClient import MyGekkoApiClient as MyGekkoApiClient

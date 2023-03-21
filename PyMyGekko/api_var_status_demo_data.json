@@ -1,0 +1,85 @@
+{
+  "globals": {
+    "network": {
+      "gekkoname": {
+        "value": "myGEKKO"
+      },
+      "language": {
+        "value": "0"
+      },
+      "version": {
+        "value": "596610"
+      },
+      "hardware": {
+        "value": "Slide 2 (AC0DFE300913)"
+      }
+    }
+  },
+  "blinds": {
+    "item0": {
+      "sumstate": {
+        "value": "0;100.00;;0;90"
+      }
+    },
+    "item1": {
+      "sumstate": {
+        "value": "0;100.00;;0;90"
+      }
+    },
+    "item2": {
+      "sumstate": {
+        "value": "0;100.00;;0;90"
+      }
+    },
+    "item3": {
+      "sumstate": {
+        "value": "0;100.00;;0;90"
+      }
+    },
+    "item4": {
+      "sumstate": {
+        "value": "0;100.00;;0;90"
+      }
+    },
+    "item5": {
+      "sumstate": {
+        "value": "0;100.00;;0;90"
+      }
+    },
+    "item6": {
+      "sumstate": {
+        "value": "0;94.96;;0;90"
+      }
+    },
+    "item7": {
+      "sumstate": {
+        "value": "0;100.00;;0;90"
+      }
+    },
+    "item8": {
+      "sumstate": {
+        "value": "0;100.00;;0;90"
+      }
+    },
+    "item9": {
+      "sumstate": {
+        "value": "0;100.00;;0;90"
+      }
+    },
+    "group0": {
+      "sumstate": {
+        "value": "0"
+      }
+    },
+    "group1": {
+      "sumstate": {
+        "value": "0"
+      }
+    },
+    "group2": {
+      "sumstate": {
+        "value": "0"
+      }
+    }
+  }
+}

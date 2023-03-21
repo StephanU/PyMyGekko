@@ -1,10 +1,7 @@
-import json
-import pkgutil
-from typing import Any
-from aiohttp import ClientSession
+import aiohttp
 from yarl import URL
 
-from PyMyGekko.resources import Blind
+from PyMyGekko.resources.Blind import Blinds
 
 
 class PyMyGekkoApiClient:
@@ -13,8 +10,6 @@ class PyMyGekkoApiClient:
         username: str,
         apiKey: str,
         gekkoId: str,
-        session: ClientSession,
-        demo_mode: bool = False,
         scheme: str = "https",
         host: str = "live.my-gekko.com",
         port: int = None,
@@ -25,36 +20,22 @@ class PyMyGekkoApiClient:
             "key": apiKey,
             "gekkoid": gekkoId,
         }
-        self._session = session
-        self._demo_mode = demo_mode
-        self._resources: Any = None
-        self._status: Any = None
 
     async def try_connect(self) -> int:
-        if self._demo_mode:
-            return 200
-        else:
-            async with self._session.get(
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
                 self._url.with_path("/api/v1/var"), params=self._authentication_params
             ) as resp:
                 return resp.status
 
     async def read_data(self) -> None:
-        if self._demo_mode:
-            var_demo_data = pkgutil.get_data(__name__, "api_var_demo_data.json")
-            self._resources = json.loads(var_demo_data)
-            status_demo_data = pkgutil.get_data(
-                __name__, "api_var_status_demo_data.json"
-            )
-            self._status = json.loads(status_demo_data)
-            return
-        else:
-            async with self._session.get(
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
                 self._url.with_path("/api/v1/var"),
                 params=self._authentication_params,
             ) as resp:
                 self._resources = await resp.json(content_type="text/plain")
-            async with self._session.get(
+            async with session.get(
                 self._url.with_path("/api/v1/var/status"),
                 params=self._authentication_params,
             ) as resp:
@@ -72,15 +53,15 @@ class PyMyGekkoApiClient:
 
         return result
 
-    def get_blinds(self) -> list[Blind] | None:
+    def get_blinds(self) -> list[Blinds] | None:
         if self._resources == None:
             return None
 
-        result: list[Blind] = []
+        result: list[Blinds] = []
         if self._resources["blinds"]:
             blinds = self._resources["blinds"]
             for key in blinds:
                 if key.startswith("item"):
-                    result.append(Blind(key, blinds[key]["name"]))
+                    result.append(Blinds(key, blinds[key]["name"]))
 
         return result

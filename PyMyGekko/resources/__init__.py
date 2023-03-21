@@ -2,4 +2,5 @@
 #
 # SPDX-License-Identifier: MIT
 
-from .Blinds import Blinds as Blinds
+from .Entity import Entity as Entity
+from .Blind import Blind as Blind

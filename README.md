@@ -1,6 +1,6 @@
 # PyMyGekko
 
-Python Library to access the myGEKKO Query API.
+Python Library to access the myGEKKO Query API. This project is a work in progress. No guarantee to work until 1.0.0
 
 [![PyPI - Version](https://img.shields.io/pypi/v/pymygekko.svg)](https://pypi.org/project/pymygekko)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pymygekko.svg)](https://pypi.org/project/pymygekko)

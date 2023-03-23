@@ -12,7 +12,7 @@ class Blind(Entity):
         self._resource_path = "/blinds/" + self.id
 
     @property
-    def position(self) -> int | None:
+    def position(self) -> float | None:
         return self._value_accessor.get_position(self)
 
     async def set_position(self, position: float):
@@ -75,7 +75,7 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
 
         return result
 
-    def get_position(self, blind: Blind) -> int | None:
+    def get_position(self, blind: Blind) -> float | None:
         if blind and blind.id:
             if (
                 blind.id in self._blind_data

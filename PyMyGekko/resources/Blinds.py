@@ -16,14 +16,14 @@ class Blind(Entity):
         return self._value_accessor.get_position(self)
 
     async def set_position(self, position: float):
-        self._value_accessor.set_position(self, position)
+        await self._value_accessor.set_position(self, position)
 
     @property
     def state(self) -> BlindState:
         return self._value_accessor.get_state(self)
 
     async def set_state(self, blind_state: BlindState):
-        self._value_accessor.set_state(self, blind_state)
+        await self._value_accessor.set_state(self, blind_state)
 
 
 class BlindState(IntEnum):

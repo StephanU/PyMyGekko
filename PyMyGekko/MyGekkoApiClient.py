@@ -2,7 +2,7 @@ from typing import Any
 from aiohttp import ClientSession
 from yarl import URL
 
-from .DataProvider import DataProvider
+from .DataProvider import DataProvider, DummyDataProvider
 from PyMyGekko.resources.Blinds import Blind, BlindValueAccessor
 
 
@@ -26,9 +26,14 @@ class MyGekkoApiClient:
         }
         self._session = session
         self._demo_mode = demo_mode
-        self._data_provider = DataProvider(
-            self._url, self._authentication_params, self._session, self._demo_mode
-        )
+
+        if self._demo_mode:
+            self._data_provider = DummyDataProvider()
+        else:
+            self._data_provider = DataProvider(
+                self._url, self._authentication_params, self._session
+            )
+
         self._blind_value_accessor = BlindValueAccessor(self._data_provider)
 
     async def try_connect(self) -> int:

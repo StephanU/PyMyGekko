@@ -1,0 +1,35 @@
+{
+  "lights": {
+    "item0": {
+      "name": "Aussen",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; dimValue[%]; RGBcolor[24Bit]; tunableWhite[0-100]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 100000
+      },
+      "scmd": {
+        "value": "0|1|D100|T|C44782|TW100 ([0=Off|1=On]|[Dim%]|[Toggle]|[RGB24Bit]|[TW0-100])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 100001
+      }
+    },
+    "group0": {
+      "name": "alle",
+      "sumstate": {
+        "value": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1000000
+      },
+      "scmd": {
+        "value": "0|1 (Off|On)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1000001
+      }
+    }
+  }
+}

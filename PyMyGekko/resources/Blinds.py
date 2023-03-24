@@ -39,7 +39,7 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
 
     def __init__(self, data_provider: DataProvider.DataProvider):
         self._data_provider = data_provider
-        data_provider.subscribe(self)
+        self._data_provider.subscribe(self)
 
     def update_status(self, status):
         if status != None and "blinds" in status:

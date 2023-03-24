@@ -4,6 +4,7 @@ from yarl import URL
 
 from .DataProvider import DataProvider, DummyDataProvider
 from PyMyGekko.resources.Blinds import Blind, BlindValueAccessor
+from PyMyGekko.resources.Lights import Light, LightValueAccessor
 
 
 class MyGekkoApiClient:
@@ -35,6 +36,7 @@ class MyGekkoApiClient:
             )
 
         self._blind_value_accessor = BlindValueAccessor(self._data_provider)
+        self._light_value_accessor = LightValueAccessor(self._data_provider)
 
     async def try_connect(self) -> int:
         if self._demo_mode:
@@ -65,3 +67,6 @@ class MyGekkoApiClient:
 
     def get_blinds(self) -> list[Blind]:
         return self._blind_value_accessor.blinds
+
+    def get_lights(self) -> list[Light]:
+        return self._light_value_accessor.lights

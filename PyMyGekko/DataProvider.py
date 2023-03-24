@@ -63,7 +63,7 @@ class DummyDataProvider(DataProviderBase):
         ...
 
 
-class DataProvider:
+class DataProvider(DataProviderBase):
     def __init__(
         self, url: URL, authentication_params: dict[str, str], session: ClientSession
     ):

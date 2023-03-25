@@ -10,13 +10,18 @@ class Light(Entity):
         super().__init__(id, name)
         self._value_accessor = value_accessor
         self._resource_path = "/lights/" + self.id
+        self._supported_features = self._value_accessor.get_features(self)
+
+    @property
+    def supported_features(self) -> list[LightFeature]:
+        return self._supported_features
 
     @property
     def state(self) -> LightState:
         return self._value_accessor.get_state(self)
 
-    async def set_state(self, blind_state: LightState):
-        await self._value_accessor.set_state(self, blind_state)
+    async def set_state(self, light_state: LightState):
+        await self._value_accessor.set_state(self, light_state)
 
 
 class LightState(IntEnum):
@@ -24,8 +29,12 @@ class LightState(IntEnum):
     ON = 1
 
 
+class LightFeature(IntEnum):
+    ON_OFF = 0
+
+
 class LightValueAccessor(DataProvider.DataSubscriberInterface):
-    _light_data = {}
+    _lights_data = {}
 
     def __init__(self, data_provider: DataProvider.DataProvider):
         self._data_provider = data_provider
@@ -36,16 +45,16 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
             lights = status["lights"]
             for key in lights:
                 if key.startswith("item"):
-                    if not key in self._light_data:
-                        self._light_data[key] = {}
+                    if not key in self._lights_data:
+                        self._lights_data[key] = {}
 
                     if "sumstate" in lights[key] and "value" in lights[key]["sumstate"]:
                         (
-                            self._light_data[key]["state"],
-                            self._light_data[key]["dimValue"],
-                            self._light_data[key]["RGBcolor"],
-                            self._light_data[key]["tunableWhite"],
-                            self._light_data[key]["sum"],
+                            self._lights_data[key]["state"],
+                            self._lights_data[key]["dimValue"],
+                            self._lights_data[key]["RGBcolor"],
+                            self._lights_data[key]["tunableWhite"],
+                            self._lights_data[key]["sum"],
                         ) = lights[key]["sumstate"]["value"].split(";")
 
     def update_resources(self, resources):
@@ -53,24 +62,39 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
             lights = resources["lights"]
             for key in lights:
                 if key.startswith("item"):
-                    if not key in self._light_data:
-                        self._light_data[key] = {}
-                    self._light_data[key]["name"] = lights[key]["name"]
+                    if not key in self._lights_data:
+                        self._lights_data[key] = {}
+                    self._lights_data[key]["name"] = lights[key]["name"]
 
     @property
     def lights(self):
         result: list[Light] = []
-        for key in self._light_data:
-            result.append(Light(key, self._light_data[key]["name"], self))
+        for key in self._lights_data:
+            result.append(Light(key, self._lights_data[key]["name"], self))
+
+        return result
+
+    def get_features(self, light: Light) -> list[LightFeature]:
+        result = list()
+
+        if light and light.id:
+            if light.id in self._lights_data:
+                light_data = self._lights_data[light.id]
+                if light_data["state"]:
+                    result.append(LightFeature.ON_OFF)
 
         return result
 
     def get_state(self, light: Light) -> LightState:
         if light and light.id:
-            if light.id in self._light_data and "state" in self._light_data[light.id]:
-                return LightState(int(self._light_data[light.id]["state"]))
+            if (
+                light.id in self._lights_data
+                and "state" in self._lights_data[light.id]
+                and self._lights_data[light.id]["state"]
+            ):
+                return LightState(int(self._lights_data[light.id]["state"]))
         return LightState.STOP
 
-    async def set_state(self, light: Light, blind_state: LightState) -> None:
+    async def set_state(self, light: Light, light_state: LightState) -> None:
         if light and light.id:
-            await self._data_provider.write_data("/lights/" + light.id, blind_state)
+            await self._data_provider.write_data("/lights/" + light.id, light_state)

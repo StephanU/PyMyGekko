@@ -1,4 +1,4 @@
-from PyMyGekko.resources.Lights import LightState
+from PyMyGekko.resources.Lights import LightFeature, LightState
 import pytest
 
 from aiohttp import web, ClientSession
@@ -46,3 +46,5 @@ async def test_get_lights(mock_server):
         assert lights[0].id == "item0"
         assert lights[0].name == "Aussen"
         assert lights[0].state == LightState.ON
+        assert len(lights[0].supported_features) == 1
+        assert LightFeature.ON_OFF in lights[0].supported_features

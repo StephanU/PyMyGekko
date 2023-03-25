@@ -81,5 +81,17 @@
         "value": "0"
       }
     }
+  },
+  "lights": {
+    "item0": {
+      "sumstate": {
+        "value": "1;;;;0"
+      }
+    },
+    "group0": {
+      "sumstate": {
+        "value": "1"
+      }
+    }
   }
 }

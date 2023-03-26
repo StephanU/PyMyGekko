@@ -24,7 +24,7 @@ class Blind(Entity):
         await self._value_accessor.set_position(self, position)
 
     @property
-    def state(self) -> BlindState:
+    def state(self) -> BlindState | None:
         return self._value_accessor.get_state(self)
 
     async def set_state(self, blind_state: BlindState):
@@ -142,7 +142,7 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
                 "/blinds/" + blind.id, "S" + str(position)
             )
 
-    def get_state(self, blind: Blind) -> BlindState:
+    def get_state(self, blind: Blind) -> BlindState | None:
         if blind and blind.id:
             if (
                 blind.id in self._blinds_data
@@ -150,7 +150,7 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
                 and self._blinds_data[blind.id]["state"]
             ):
                 return BlindState(int(self._blinds_data[blind.id]["state"]))
-        return BlindState.STOP
+        return BlindState.NONE
 
     async def set_state(self, blind: Blind, blind_state: BlindState) -> None:
         if blind and blind.id:

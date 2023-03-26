@@ -18,7 +18,7 @@ class Light(Entity):
         return self._supported_features
 
     @property
-    def state(self) -> LightState:
+    def state(self) -> LightState | None:
         return self._value_accessor.get_state(self)
 
     async def set_state(self, light_state: LightState):
@@ -114,7 +114,7 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
                 and self._lights_data[light.id]["state"]
             ):
                 return LightState(int(self._lights_data[light.id]["state"]))
-        return LightState.OFF
+        return None
 
     async def set_state(self, light: Light, light_state: LightState) -> None:
         if light and light.id:

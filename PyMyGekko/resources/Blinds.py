@@ -99,13 +99,13 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
         if blind and blind.id:
             if blind.id in self._blinds_data:
                 blind_data = self._blinds_data[blind.id]
-                if blind_data["state"]:
+                if "state" in blind_data and blind_data["state"]:
                     result.append(BlindFeature.OPEN_CLOSE_STOP)
 
-                if blind_data["position"]:
+                if "position" in blind_data and blind_data["position"]:
                     result.append(BlindFeature.SET_POSITION)
 
-                if blind_data["angle"]:
+                if "angle" in blind_data and blind_data["angle"]:
                     result.append(BlindFeature.SET_TILT_POSITION)
 
         return result

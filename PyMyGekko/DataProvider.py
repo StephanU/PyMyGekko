@@ -60,7 +60,7 @@ class DummyDataProvider(DataProviderBase):
         self.status = json.loads(status_demo_data)
 
     async def write_data(self, resource_path: str, value: str):
-        ...
+        print("Writing to ", resource_path, value)
 
 
 class DataProvider(DataProviderBase):

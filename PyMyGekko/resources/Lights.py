@@ -1,5 +1,6 @@
 from __future__ import annotations
 from enum import IntEnum
+from math import ceil
 
 from PyMyGekko import DataProvider
 from PyMyGekko.resources import Entity
@@ -23,6 +24,20 @@ class Light(Entity):
     async def set_state(self, light_state: LightState):
         await self._value_accessor.set_state(self, light_state)
 
+    @property
+    def brightness(self) -> int | None:
+        return self._value_accessor.get_brightness(self)
+
+    async def set_brightness(self, brightness: int):
+        await self._value_accessor.set_brightness(self, brightness)
+
+    @property
+    def rgb_color(self) -> tuple[int, int, int] | None:
+        return self._value_accessor.get_rgb_color(self)
+
+    async def set_rgb_color(self, rgb_color: tuple[int, int, int]):
+        await self._value_accessor.set_rgb_color(self, rgb_color)
+
 
 class LightState(IntEnum):
     OFF = 0
@@ -31,6 +46,8 @@ class LightState(IntEnum):
 
 class LightFeature(IntEnum):
     ON_OFF = 0
+    DIMMABLE = 1
+    RGB_COLOR = 2
 
 
 class LightValueAccessor(DataProvider.DataSubscriberInterface):
@@ -80,8 +97,12 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
         if light and light.id:
             if light.id in self._lights_data:
                 light_data = self._lights_data[light.id]
-                if light_data["state"]:
+                if "state" in light_data and light_data["state"]:
                     result.append(LightFeature.ON_OFF)
+                if "dimValue" in light_data and light_data["dimValue"]:
+                    result.append(LightFeature.DIMMABLE)
+                if "RGBcolor" in light_data and light_data["RGBcolor"]:
+                    result.append(LightFeature.RGB_COLOR)
 
         return result
 
@@ -93,8 +114,65 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
                 and self._lights_data[light.id]["state"]
             ):
                 return LightState(int(self._lights_data[light.id]["state"]))
-        return LightState.STOP
+        return LightState.OFF
 
     async def set_state(self, light: Light, light_state: LightState) -> None:
         if light and light.id:
             await self._data_provider.write_data("/lights/" + light.id, light_state)
+
+    def get_brightness(self, light: Light) -> int | None:
+        if light and light.id:
+            if (
+                light.id in self._lights_data
+                and "dimValue" in self._lights_data[light.id]
+                and self._lights_data[light.id]["dimValue"]
+            ):
+                return ceil(float(self._lights_data[light.id]["dimValue"]))
+        return None
+
+    async def set_brightness(self, light: Light, brightness: int) -> None:
+        if light and light.id and brightness >= 0 and brightness <= 100:
+            await self._data_provider.write_data(
+                "/lights/" + light.id, "D" + str(brightness)
+            )
+
+    def get_rgb_color(self, light: Light) -> tuple[int, int, int] | None:
+        if light and light.id:
+            if (
+                light.id in self._lights_data
+                and "RGBcolor" in self._lights_data[light.id]
+                and self._lights_data[light.id]["RGBcolor"]
+            ):
+                decimal_rgb_color = int(self._lights_data[light.id]["RGBcolor"])
+                return ColorUtilities.decimal_to_rgb(decimal_rgb_color)
+        return None
+
+    async def set_rgb_color(
+        self, light: Light, rgb_color: tuple[int, int, int]
+    ) -> None:
+        if (
+            light
+            and light.id
+            and rgb_color[0] >= 0
+            and rgb_color[0] <= 255
+            and rgb_color[1] >= 0
+            and rgb_color[1] <= 255
+            and rgb_color[2] >= 0
+            and rgb_color[2] <= 255
+        ):
+            decimal_rbg_color = (
+                (rgb_color[0] << 16) + (rgb_color[1] << 8) + rgb_color[2]
+            )
+            await self._data_provider.write_data(
+                "/lights/" + light.id, "C" + str(decimal_rbg_color)
+            )
+
+
+class ColorUtilities:
+    @staticmethod
+    def decimal_to_rgb(decimal_rgb_color: int) -> tuple[int, int, int]:
+        return tuple[
+            (decimal_rgb_color >> 16) & 255,
+            (decimal_rgb_color >> 8) & 255,
+            decimal_rgb_color & 255,
+        ]

@@ -171,8 +171,8 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
 class ColorUtilities:
     @staticmethod
     def decimal_to_rgb(decimal_rgb_color: int) -> tuple[int, int, int]:
-        return tuple[
+        return (
             (decimal_rgb_color >> 16) & 255,
             (decimal_rgb_color >> 8) & 255,
             decimal_rgb_color & 255,
-        ]
+        )

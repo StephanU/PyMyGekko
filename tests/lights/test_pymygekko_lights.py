@@ -61,7 +61,7 @@ async def test_get_lights(mock_server):
         assert lights[2].name == "Aussen3"
         assert lights[2].state == LightState.OFF
         assert lights[2].brightness == 44
-        assert lights[2].rgb_color == tuple[255, 0, 39]
+        assert lights[2].rgb_color == (255, 0, 39)
         assert len(lights[2].supported_features) == 3
         assert LightFeature.ON_OFF in lights[2].supported_features
         assert LightFeature.DIMMABLE in lights[2].supported_features

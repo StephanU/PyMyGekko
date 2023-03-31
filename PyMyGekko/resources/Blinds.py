@@ -98,14 +98,14 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
 
         if blind and blind.id:
             if blind.id in self._data:
-                blind_data = self._data[blind.id]
-                if "state" in blind_data and blind_data["state"]:
+                data = self._data[blind.id]
+                if "state" in data and data["state"]:
                     result.append(BlindFeature.OPEN_CLOSE_STOP)
 
-                if "position" in blind_data and blind_data["position"]:
+                if "position" in data and data["position"]:
                     result.append(BlindFeature.SET_POSITION)
 
-                if "angle" in blind_data and blind_data["angle"]:
+                if "angle" in data and data["angle"]:
                     result.append(BlindFeature.SET_TILT_POSITION)
 
         return result
@@ -123,7 +123,7 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
     async def set_position(self, blind: Blind, position: float) -> None:
         if blind and blind.id and position >= 0 and position <= 100.0:
             await self._data_provider.write_data(
-                "/blinds/" + blind.id, "P" + str(position)
+                blind._resource_path, "P" + str(position)
             )
 
     def get_tilt_position(self, blind: Blind) -> float | None:
@@ -139,7 +139,7 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
     async def set_tilt_position(self, blind: Blind, position: float) -> None:
         if blind and blind.id and position >= 0 and position <= 100.0:
             await self._data_provider.write_data(
-                "/blinds/" + blind.id, "S" + str(position)
+                blind._resource_path, "S" + str(position)
             )
 
     def get_state(self, blind: Blind) -> BlindState | None:
@@ -154,4 +154,4 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
 
     async def set_state(self, blind: Blind, state: BlindState) -> None:
         if blind and blind.id:
-            await self._data_provider.write_data("/blinds/" + blind.id, state)
+            await self._data_provider.write_data(blind._resource_path, state)

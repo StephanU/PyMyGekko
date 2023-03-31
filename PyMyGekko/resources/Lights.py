@@ -96,12 +96,12 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
 
         if light and light.id:
             if light.id in self._data:
-                light_data = self._data[light.id]
-                if "state" in light_data and light_data["state"]:
+                data = self._data[light.id]
+                if "state" in data and data["state"]:
                     result.append(LightFeature.ON_OFF)
-                if "dimValue" in light_data and light_data["dimValue"]:
+                if "dimValue" in data and data["dimValue"]:
                     result.append(LightFeature.DIMMABLE)
-                if "RGBcolor" in light_data and light_data["RGBcolor"]:
+                if "RGBcolor" in data and data["RGBcolor"]:
                     result.append(LightFeature.RGB_COLOR)
 
         return result
@@ -118,7 +118,7 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
 
     async def set_state(self, light: Light, state: LightState) -> None:
         if light and light.id:
-            await self._data_provider.write_data("/lights/" + light.id, state)
+            await self._data_provider.write_data(light._resource_path, state)
 
     def get_brightness(self, light: Light) -> int | None:
         if light and light.id:
@@ -133,7 +133,7 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
     async def set_brightness(self, light: Light, brightness: int) -> None:
         if light and light.id and brightness >= 0 and brightness <= 100:
             await self._data_provider.write_data(
-                "/lights/" + light.id, "D" + str(brightness)
+                light._resource_path, "D" + str(brightness)
             )
 
     def get_rgb_color(self, light: Light) -> tuple[int, int, int] | None:
@@ -164,7 +164,7 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
                 (rgb_color[0] << 16) + (rgb_color[1] << 8) + rgb_color[2]
             )
             await self._data_provider.write_data(
-                "/lights/" + light.id, "C" + str(decimal_rbg_color)
+                light._resource_path, "C" + str(decimal_rbg_color)
             )
 
 

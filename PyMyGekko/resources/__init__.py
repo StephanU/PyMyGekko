@@ -2,4 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
-from .Blinds import Blinds as Blinds
+
+class Entity:
+    def __init__(self, id: str, name: str) -> None:
+        self.id = id
+        self.name = name

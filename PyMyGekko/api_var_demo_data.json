@@ -1,0 +1,447 @@
+{
+  "globals": {
+    "network": {
+      "gekkoname": {
+        "value": "Hostname of myGEKKO",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 1
+      },
+      "language": {
+        "value": "Language of myGEKKO [0=DE|1=IT|2=EN|3=NL|4=ES|5=FR|6=CS]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 2
+      },
+      "version": {
+        "value": "Software version of myGEKKO",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 3
+      },
+      "hardware": {
+        "value": "Hardware version of myGEKKO",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 4
+      }
+    }
+  },
+  "blinds": {
+    "item0": {
+      "name": "Wohnen Terrasse",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150000
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150070
+      }
+    },
+    "item1": {
+      "name": "Wohnen Fenster",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150100
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150170
+      }
+    },
+    "item2": {
+      "name": "Essen",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150200
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150270
+      }
+    },
+    "item3": {
+      "name": "Küche",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150300
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150370
+      }
+    },
+    "item4": {
+      "name": "WC EG",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150400
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150470
+      }
+    },
+    "item5": {
+      "name": "Arbeiten",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150500
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150570
+      }
+    },
+    "item6": {
+      "name": "Eltern",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150600
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150670
+      }
+    },
+    "item7": {
+      "name": "Kind 1",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150700
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150770
+      }
+    },
+    "item8": {
+      "name": "Kind 2",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150800
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150870
+      }
+    },
+    "item9": {
+      "name": "Bad OG",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150900
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150970
+      }
+    },
+    "group0": {
+      "name": "",
+      "sumstate": {
+        "value": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500000
+      },
+      "scmd": {
+        "value": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500001
+      }
+    },
+    "group1": {
+      "name": "EG",
+      "sumstate": {
+        "value": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500100
+      },
+      "scmd": {
+        "value": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500101
+      }
+    },
+    "group2": {
+      "name": "OG",
+      "sumstate": {
+        "value": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500200
+      },
+      "scmd": {
+        "value": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500201
+      }
+    }
+  },
+  "lights": {
+    "item0": {
+      "name": "Aussen",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; dimValue[%]; RGBcolor[24Bit]; tunableWhite[0-100]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 100000
+      },
+      "scmd": {
+        "value": "0|1|D100|T|C44782|TW100 ([0=Off|1=On]|[Dim%]|[Toggle]|[RGB24Bit]|[TW0-100])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 100001
+      }
+    },
+    "item1": {
+      "name": "Aussen2",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; dimValue[%]; RGBcolor[24Bit]; tunableWhite[0-100]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 100000
+      },
+      "scmd": {
+        "value": "0|1|D100|T|C44782|TW100 ([0=Off|1=On]|[Dim%]|[Toggle]|[RGB24Bit]|[TW0-100])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 100001
+      }
+    },
+    "item2": {
+      "name": "Aussen3",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; dimValue[%]; RGBcolor[24Bit]; tunableWhite[0-100]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 100000
+      },
+      "scmd": {
+        "value": "0|1|D100|T|C44782|TW100 ([0=Off|1=On]|[Dim%]|[Toggle]|[RGB24Bit]|[TW0-100])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 100001
+      }
+    },
+    "group0": {
+      "name": "alle",
+      "sumstate": {
+        "value": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1000000
+      },
+      "scmd": {
+        "value": "0|1 (Off|On)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1000001
+      }
+    }
+  },
+  "roomtemps": {
+    "item0": {
+      "name": "WZ",
+      "page": "...",
+      "sumstate": {
+        "value": "actTemp[°C]; setpointTemp[°C]; valve[%]; mode[1=Off|8=Comfort|16=Reduced|64=Manual|256=Standby]; Reserved[Reserved]; tempAdjustment[°C]; cooling[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; humidity[%rF]; airQuality[ppm|%]; floorTemp[°C]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 300000
+      },
+      "scmd": {
+        "value": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300070
+      }
+    },
+    "item1": {
+      "name": "Flur",
+      "page": "...",
+      "sumstate": {
+        "value": "actTemp[°C]; setpointTemp[°C]; valve[%]; mode[1=Off|8=Comfort|16=Reduced|64=Manual|256=Standby]; Reserved[Reserved]; tempAdjustment[°C]; cooling[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; humidity[%rF]; airQuality[ppm|%]; floorTemp[°C]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 300100
+      },
+      "scmd": {
+        "value": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300170
+      }
+    },
+    "item2": {
+      "name": "WC",
+      "page": "...",
+      "sumstate": {
+        "value": "actTemp[°C]; setpointTemp[°C]; valve[%]; mode[1=Off|8=Comfort|16=Reduced|64=Manual|256=Standby]; Reserved[Reserved]; tempAdjustment[°C]; cooling[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; humidity[%rF]; airQuality[ppm|%]; floorTemp[°C]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 300200
+      },
+      "scmd": {
+        "value": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300270
+      }
+    },
+    "item3": {
+      "name": "Arbeiten",
+      "page": "...",
+      "sumstate": {
+        "value": "actTemp[°C]; setpointTemp[°C]; valve[%]; mode[1=Off|8=Comfort|16=Reduced|64=Manual|256=Standby]; Reserved[Reserved]; tempAdjustment[°C]; cooling[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; humidity[%rF]; airQuality[ppm|%]; floorTemp[°C]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 300300
+      },
+      "scmd": {
+        "value": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300370
+      }
+    },
+    "item4": {
+      "name": "Schlafen",
+      "page": "...",
+      "sumstate": {
+        "value": "actTemp[°C]; setpointTemp[°C]; valve[%]; mode[1=Off|8=Comfort|16=Reduced|64=Manual|256=Standby]; Reserved[Reserved]; tempAdjustment[°C]; cooling[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; humidity[%rF]; airQuality[ppm|%]; floorTemp[°C]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 300400
+      },
+      "scmd": {
+        "value": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300470
+      }
+    },
+    "item5": {
+      "name": "Kind 1",
+      "page": "...",
+      "sumstate": {
+        "value": "actTemp[°C]; setpointTemp[°C]; valve[%]; mode[1=Off|8=Comfort|16=Reduced|64=Manual|256=Standby]; Reserved[Reserved]; tempAdjustment[°C]; cooling[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; humidity[%rF]; airQuality[ppm|%]; floorTemp[°C]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 300500
+      },
+      "scmd": {
+        "value": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300570
+      }
+    },
+    "item6": {
+      "name": "Kind 2",
+      "page": "...",
+      "sumstate": {
+        "value": "actTemp[°C]; setpointTemp[°C]; valve[%]; mode[1=Off|8=Comfort|16=Reduced|64=Manual|256=Standby]; Reserved[Reserved]; tempAdjustment[°C]; cooling[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; humidity[%rF]; airQuality[ppm|%]; floorTemp[°C]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 300600
+      },
+      "scmd": {
+        "value": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300670
+      }
+    },
+    "item7": {
+      "name": "Bad OG",
+      "page": "...",
+      "sumstate": {
+        "value": "actTemp[°C]; setpointTemp[°C]; valve[%]; mode[1=Off|8=Comfort|16=Reduced|64=Manual|256=Standby]; Reserved[Reserved]; tempAdjustment[°C]; cooling[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; humidity[%rF]; airQuality[ppm|%]; floorTemp[°C]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 300700
+      },
+      "scmd": {
+        "value": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300770
+      }
+    },
+    "group0": {
+      "name": "alle",
+      "sumstate": {
+        "value": "State[0=Off|1=On|2=Comfort|3=Reduced]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 3000000
+      },
+      "scmd": {
+        "value": "M1|M2|M8|M16 (Mode_Off|Mode_On|Mode_Comfort|Mode_Reduced)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 3000001
+      }
+    }
+  }
+}

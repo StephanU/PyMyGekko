@@ -1,8 +1,9 @@
-from PyMyGekko.resources.Blinds import BlindFeature, BlindState
 import pytest
-
-from aiohttp import web, ClientSession
+from aiohttp import ClientSession
+from aiohttp import web
 from PyMyGekko import MyGekkoApiClient
+from PyMyGekko.resources.Blinds import BlindFeature
+from PyMyGekko.resources.Blinds import BlindState
 
 
 async def var_response(request):
@@ -40,7 +41,7 @@ async def test_get_blinds(mock_server):
         await api.read_data()
         blinds = api.get_blinds()
 
-        assert blinds != None
+        assert blinds is not None
         assert len(blinds) == 10
 
         assert blinds[0].id == "item0"

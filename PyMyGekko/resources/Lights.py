@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from enum import IntEnum
 from math import ceil
 
@@ -58,11 +59,11 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
         data_provider.subscribe(self)
 
     def update_status(self, status):
-        if status != None and "lights" in status:
+        if status is not None and "lights" in status:
             lights = status["lights"]
             for key in lights:
                 if key.startswith("item"):
-                    if not key in self._data:
+                    if key not in self._data:
                         self._data[key] = {}
 
                     if "sumstate" in lights[key] and "value" in lights[key]["sumstate"]:
@@ -75,11 +76,11 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
                         ) = lights[key]["sumstate"]["value"].split(";")
 
     def update_resources(self, resources):
-        if resources != None and "lights" in resources:
+        if resources is not None and "lights" in resources:
             lights = resources["lights"]
             for key in lights:
                 if key.startswith("item"):
-                    if not key in self._data:
+                    if key not in self._data:
                         self._data[key] = {}
                     self._data[key]["name"] = lights[key]["name"]
 

@@ -1,7 +1,8 @@
 import json
 import pkgutil
+from abc import ABC
+from abc import abstractmethod
 
-from abc import ABC, abstractmethod
 from aiohttp import ClientSession
 from yarl import URL
 

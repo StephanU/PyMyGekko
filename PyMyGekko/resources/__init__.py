@@ -2,4 +2,8 @@
 #
 # SPDX-License-Identifier: MIT
 
-from .Entity import Entity as Entity
+
+class Entity:
+    def __init__(self, id: str, name: str) -> None:
+        self.id = id
+        self.name = name

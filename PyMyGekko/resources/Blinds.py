@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from enum import IntEnum
 
 from PyMyGekko import DataProvider
@@ -60,11 +61,11 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
         self._data_provider.subscribe(self)
 
     def update_status(self, status):
-        if status != None and "blinds" in status:
+        if status is not None and "blinds" in status:
             blinds = status["blinds"]
             for key in blinds:
                 if key.startswith("item"):
-                    if not key in self._data:
+                    if key not in self._data:
                         self._data[key] = {}
 
                     if "sumstate" in blinds[key] and "value" in blinds[key]["sumstate"]:
@@ -77,11 +78,11 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
                         ) = blinds[key]["sumstate"]["value"].split(";")
 
     def update_resources(self, resources):
-        if resources != None and "blinds" in resources:
+        if resources is not None and "blinds" in resources:
             blinds = resources["blinds"]
             for key in blinds:
                 if key.startswith("item"):
-                    if not key in self._data:
+                    if key not in self._data:
                         self._data[key] = {}
                     self._data[key]["name"] = blinds[key]["name"]
 

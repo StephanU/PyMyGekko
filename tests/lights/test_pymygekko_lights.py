@@ -1,8 +1,9 @@
-from PyMyGekko.resources.Lights import LightFeature, LightState
 import pytest
-
-from aiohttp import web, ClientSession
+from aiohttp import ClientSession
+from aiohttp import web
 from PyMyGekko import MyGekkoApiClient
+from PyMyGekko.resources.Lights import LightFeature
+from PyMyGekko.resources.Lights import LightState
 
 
 async def var_response(request):
@@ -40,7 +41,7 @@ async def test_get_lights(mock_server):
         await api.read_data()
         lights = api.get_lights()
 
-        assert lights != None
+        assert lights is not None
         assert len(lights) == 3
 
         assert lights[0].id == "item0"

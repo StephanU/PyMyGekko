@@ -1,8 +1,9 @@
-from PyMyGekko.resources.Thermostats import ThermostatFeature, ThermostatMode
 import pytest
-
-from aiohttp import web, ClientSession
+from aiohttp import ClientSession
+from aiohttp import web
 from PyMyGekko import MyGekkoApiClient
+from PyMyGekko.resources.Thermostats import ThermostatFeature
+from PyMyGekko.resources.Thermostats import ThermostatMode
 
 
 async def var_response(request):
@@ -40,7 +41,7 @@ async def test_get_thermostats(mock_server):
         await api.read_data()
         thermostats = api.get_thermostats()
 
-        assert thermostats != None
+        assert thermostats is not None
         assert len(thermostats) == 8
 
         assert thermostats[0].id == "item0"

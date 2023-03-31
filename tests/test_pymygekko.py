@@ -1,6 +1,6 @@
 import pytest
-
-from aiohttp import web, ClientSession
+from aiohttp import ClientSession
+from aiohttp import web
 from PyMyGekko import MyGekkoApiClient
 
 
@@ -20,7 +20,7 @@ async def test_init():
     async with ClientSession() as session:
         api = MyGekkoApiClient("username", "apiKey", "gekkoId", session)
 
-        assert api != None
+        assert api is not None
 
 
 @pytest.mark.asyncio

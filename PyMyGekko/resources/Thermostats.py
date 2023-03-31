@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from enum import IntEnum
 
 from PyMyGekko import DataProvider
@@ -61,11 +62,11 @@ class ThermostatValueAccessor(DataProvider.DataSubscriberInterface):
         self._data_provider.subscribe(self)
 
     def update_status(self, status):
-        if status != None and "roomtemps" in status:
+        if status is not None and "roomtemps" in status:
             thermostats = status["roomtemps"]
             for key in thermostats:
                 if key.startswith("item"):
-                    if not key in self._data:
+                    if key not in self._data:
                         self._data[key] = {}
 
                     if (
@@ -87,11 +88,11 @@ class ThermostatValueAccessor(DataProvider.DataSubscriberInterface):
                         ) = thermostats[key]["sumstate"]["value"].split(";")
 
     def update_resources(self, resources):
-        if resources != None and "roomtemps" in resources:
+        if resources is not None and "roomtemps" in resources:
             thermostats = resources["roomtemps"]
             for key in thermostats:
                 if key.startswith("item"):
-                    if not key in self._data:
+                    if key not in self._data:
                         self._data[key] = {}
                     self._data[key]["name"] = thermostats[key]["name"]
 

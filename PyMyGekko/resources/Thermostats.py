@@ -154,4 +154,6 @@ class ThermostatValueAccessor(DataProvider.DataSubscriberInterface):
 
     async def set_mode(self, thermostat: Thermostat, mode: ThermostatMode) -> None:
         if thermostat and thermostat.id:
-            await self._data_provider.write_data(thermostat.resource_path, "M" + mode)
+            await self._data_provider.write_data(
+                thermostat.resource_path, "M" + str(mode.value)
+            )

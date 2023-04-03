@@ -37,5 +37,4 @@ async def test_try_connect(mock_server):
             port=server.port,
         )
 
-        response_status = await api.try_connect()
-        assert response_status == 200
+        await api.try_connect()

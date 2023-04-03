@@ -44,6 +44,8 @@ async def test_get_energy_meters(mock_server):
 
         assert energy_meters[0].id == "item0"
         assert energy_meters[0].name == "Hauptstromzähler"
+        assert len(energy_meters[0].sensor_data) == 2
+        assert len(energy_meters[0].sensor_data["values"]) == 20
 
         assert energy_meters[1].id == "item1"
         assert energy_meters[1].name == "Wärmemengenzähler"

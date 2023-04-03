@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from PyMyGekko import DataProvider
 from PyMyGekko.resources import Entity
 
@@ -12,6 +14,10 @@ class EnergyMeter(Entity):
         self._value_accessor = value_accessor
         self._resource_path = "/energycosts/" + self.id
 
+    @property
+    def sensor_data(self) -> dict[str, any]:
+        return self._value_accessor.get_data(self)
+
 
 class EnergyMeterValueAccessor(DataProvider.DataSubscriberInterface):
     _data = {}
@@ -19,6 +25,52 @@ class EnergyMeterValueAccessor(DataProvider.DataSubscriberInterface):
     def __init__(self, data_provider: DataProvider.DataProvider):
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
+
+    def _transform_value(self, description: str, value: str) -> any:
+        m = re.match(r"([^\[]*)\[[^\]]*\]", description)
+
+        if m is None:
+            return None
+
+        typed_value = None
+
+        unit = None if len(m.groups()) == 1 else m.group(2)
+
+        if unit is not None and unit != "Unit":
+            typed_value = float(value)
+        else:
+            typed_value = value
+
+        return {"name": m.group(1), "unit": unit, "value": typed_value}
+
+    def _decode_values(self, value: str) -> any:
+        value_descriptions = [
+            "actPower[kW]",
+            "energyToday[kWh]",
+            "energyMonth[kWh]",
+            "energySum[kWh]",
+            "powerMax[kW]",
+            "unitEnergy[Unit]",
+            "unitPower[Unit]",
+            "energyToday6[kWh]",
+            "energyToday12[kWh]",
+            "energyToday18[kWh]",
+            "energyToday24[kWh]",
+            "energyYesterd6[kWh]",
+            "energyYesterd12[kWh]",
+            "energyYesterd18[kWh]",
+            "energyYesterd24[kWh]",
+            "sum",
+            "energyYear[kWh]",
+            "energyPeriod[kWh]",
+            "energyPeriodFrom[DateTime]",
+            "unknown",
+        ]
+        values = []
+        for index, value_parts in enumerate(value.split(";")):
+            values.append(self._transform_value(value_descriptions[index], value_parts))
+
+        return values
 
     def update_status(self, status):
         if status is not None and "energycosts" in status:
@@ -32,28 +84,9 @@ class EnergyMeterValueAccessor(DataProvider.DataSubscriberInterface):
                         "sumstate" in energyMeters[key]
                         and "value" in energyMeters[key]["sumstate"]
                     ):
-                        (
-                            self._data[key]["actPower[kW]"],
-                            self._data[key]["energyToday[kWh]"],
-                            self._data[key]["energyMonth[kWh]"],
-                            self._data[key]["energySum[kWh]"],
-                            self._data[key]["powerMax[kW]"],
-                            self._data[key]["unitEnergy[Unit]"],
-                            self._data[key]["unitPower[Unit]"],
-                            self._data[key]["energyToday6[kWh]"],
-                            self._data[key]["energyToday12[kWh]"],
-                            self._data[key]["energyToday18[kWh]"],
-                            self._data[key]["energyToday24[kWh]"],
-                            self._data[key]["energyYesterd6[kWh]"],
-                            self._data[key]["energyYesterd12[kWh]"],
-                            self._data[key]["energyYesterd18[kWh]"],
-                            self._data[key]["energyYesterd24[kWh]"],
-                            self._data[key]["sum"],
-                            self._data[key]["energyYear[kWh]"],
-                            self._data[key]["energyPeriod[kWh]"],
-                            self._data[key]["energyPeriodFrom[DateTime]"],
-                            self._data[key]["unknown"],
-                        ) = energyMeters[key]["sumstate"]["value"].split(";")
+                        self._data[key]["values"] = self._decode_values(
+                            energyMeters[key]["sumstate"]["value"]
+                        )
 
     def update_resources(self, resources):
         if resources is not None and "energycosts" in resources:
@@ -71,3 +104,9 @@ class EnergyMeterValueAccessor(DataProvider.DataSubscriberInterface):
             result.append(EnergyMeter(key, self._data[key]["name"], self))
 
         return result
+
+    def get_data(self, energy_meter: EnergyMeter) -> dict[str, any]:
+        if energy_meter and energy_meter.id:
+            if energy_meter.id in self._data and self._data[energy_meter.id]:
+                return self._data[energy_meter.id]
+        return None

@@ -51,14 +51,31 @@ class MyGekkoApiClient:
             self._data_provider
         )
 
-    async def try_connect(self) -> int:
+    async def try_connect(self) -> None:
         if self._demo_mode:
-            return 200
+            pass
         else:
             async with self._session.get(
                 self._url.with_path("/api/v1/var"), params=self._authentication_params
             ) as resp:
-                return resp.status
+                if resp.status == 200:
+                    pass
+                elif resp.status == 400:
+                    raise MyGekkoBadRequest()
+                elif resp.status == 403:
+                    raise MyGekkoForbidden()
+                elif resp.status == 404:
+                    raise MyGekkoNotFound()
+                elif resp.status == 405:
+                    raise MyGekkoMethodNotAllowed()
+                elif resp.status == 410:
+                    raise MyGekkoGone()
+                elif resp.status == 429:
+                    raise MyGekkoTooManyRequests()
+                elif resp.status == 444:
+                    raise MyGekkoNoResponse()
+                else:
+                    raise MyGekkoError()
 
     async def read_data(self) -> None:
         await self._data_provider.read_data()
@@ -89,3 +106,35 @@ class MyGekkoApiClient:
 
     def get_energy_meters(self) -> list[EnergyMeter]:
         return self._energy_meter_value_accessor.energyMeters
+
+
+class MyGekkoError(Exception):
+    """Base MyGekko exception."""
+
+
+class MyGekkoBadRequest(MyGekkoError):
+    """MyGekko Bad Request exception."""
+
+
+class MyGekkoForbidden(MyGekkoError):
+    """MyGekko Forbidden exception."""
+
+
+class MyGekkoNotFound(MyGekkoError):
+    """MyGekko Not Found exception."""
+
+
+class MyGekkoMethodNotAllowed(MyGekkoError):
+    """MyGekko Method Not Allowed exception."""
+
+
+class MyGekkoGone(MyGekkoError):
+    """MyGekko Gone exception."""
+
+
+class MyGekkoTooManyRequests(MyGekkoError):
+    """MyGekko Too Many Requests exception."""
+
+
+class MyGekkoNoResponse(MyGekkoError):
+    """MyGekko No Response exception."""

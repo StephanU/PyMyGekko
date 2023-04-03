@@ -1,0 +1,45 @@
+{
+  "energycosts": {
+    "item0": {
+      "name": "Hauptstromzähler",
+      "page": "...",
+      "sumstate": {
+        "value": "actPower[kW]; energyToday[kWh]; energyMonth[kWh]; energySum[kWh]; powerMax[kW]; unitEnergy[Unit]; unitPower[Unit]; energyToday6[kWh]; energyToday12[kWh]; energyToday18[kWh]; energyToday24[kWh]; energyYesterd6[kWh]; energyYesterd12[kWh]; energyYesterd18[kWh]; energyYesterd24[kWh]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; energyYear[kWh]; energyPeriod[kWh]; energyPeriodFrom[DateTime]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 450000
+      },
+      "scmd": {
+        "value": "RP (ResetPeriod)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 450070
+      }
+    },
+    "item1": {
+      "name": "Wärmemengenzähler",
+      "page": "...",
+      "sumstate": {
+        "value": "actPower[kW]; energyToday[kWh]; energyMonth[kWh]; energySum[kWh]; powerMax[kW]; unitEnergy[Unit]; unitPower[Unit]; energyToday6[kWh]; energyToday12[kWh]; energyToday18[kWh]; energyToday24[kWh]; energyYesterd6[kWh]; energyYesterd12[kWh]; energyYesterd18[kWh]; energyYesterd24[kWh]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; energyYear[kWh]; energyPeriod[kWh]; energyPeriodFrom[DateTime]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 450100
+      },
+      "scmd": {
+        "value": "RP (ResetPeriod)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 450170
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "value": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 4500000
+      }
+    }
+  }
+}

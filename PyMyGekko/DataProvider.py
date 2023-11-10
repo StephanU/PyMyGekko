@@ -4,8 +4,9 @@ from abc import ABC
 from abc import abstractmethod
 
 from aiohttp import ClientSession
-from PyMyGekko.DataProvider import MyGekkoError
 from yarl import URL
+
+from . import MyGekkoError
 
 
 class DataSubscriberInterface:

@@ -4,6 +4,7 @@ from abc import ABC
 from abc import abstractmethod
 
 from aiohttp import ClientSession
+from PyMyGekko import MyGekkoError
 from yarl import URL
 
 
@@ -77,13 +78,21 @@ class DataProvider(DataProviderBase):
             self._url.with_path("/api/v1/var"),
             params=self._authentication_params,
         ) as resp:
-            self.resources = await resp.json(content_type="text/plain")
+            if resp.status == 200:
+                self.resources = await resp.json(content_type="text/plain")
+            else:
+                print("Error reading the resources", resp)
+                raise MyGekkoError
 
         async with self._session.get(
             self._url.with_path("/api/v1/var/status"),
             params=self._authentication_params,
         ) as resp:
-            self.status = await resp.json(content_type="text/plain")
+            if resp.status == 200:
+                self.status = await resp.json(content_type="text/plain")
+            else:
+                print("Error reading the status", resp)
+                raise MyGekkoError
 
     async def write_data(self, resource_path: str, value: str):
         async with self._session.get(

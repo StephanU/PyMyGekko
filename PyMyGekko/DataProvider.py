@@ -4,7 +4,7 @@ from abc import ABC
 from abc import abstractmethod
 
 from aiohttp import ClientSession
-from PyMyGekko import MyGekkoError
+from PyMyGekko.DataProvider import MyGekkoError
 from yarl import URL
 
 

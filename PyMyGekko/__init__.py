@@ -61,18 +61,25 @@ class MyGekkoApiClient:
                 if resp.status == 200:
                     pass
                 elif resp.status == 400:
+                    print("MyGekkoBadRequest", resp)
                     raise MyGekkoBadRequest()
                 elif resp.status == 403:
+                    print("MyGekkoForbidden", resp)
                     raise MyGekkoForbidden()
                 elif resp.status == 404:
+                    print("MyGekkoNotFound", resp)
                     raise MyGekkoNotFound()
                 elif resp.status == 405:
+                    print("MyGekkoMethodNotAllowed", resp)
                     raise MyGekkoMethodNotAllowed()
                 elif resp.status == 410:
+                    print("MyGekkoGone", resp)
                     raise MyGekkoGone()
                 elif resp.status == 429:
+                    print("MyGekkoTooManyRequests", resp)
                     raise MyGekkoTooManyRequests()
                 elif resp.status == 444:
+                    print("MyGekkoNoResponse", resp)
                     raise MyGekkoNoResponse()
                 else:
                     raise MyGekkoError()

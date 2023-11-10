@@ -6,8 +6,6 @@ from abc import abstractmethod
 from aiohttp import ClientSession
 from yarl import URL
 
-from . import MyGekkoError
-
 
 class DataSubscriberInterface:
     def update_status(self, status):
@@ -83,7 +81,7 @@ class DataProvider(DataProviderBase):
                 self.resources = await resp.json(content_type="text/plain")
             else:
                 print("Error reading the resources", resp)
-                raise MyGekkoError
+                raise Exception
 
         async with self._session.get(
             self._url.with_path("/api/v1/var/status"),
@@ -93,7 +91,7 @@ class DataProvider(DataProviderBase):
                 self.status = await resp.json(content_type="text/plain")
             else:
                 print("Error reading the status", resp)
-                raise MyGekkoError
+                raise Exception
 
     async def write_data(self, resource_path: str, value: str):
         async with self._session.get(

@@ -42,6 +42,8 @@ class MyGekkoApiClient:
         self._session = session
         self._demo_mode = demo_mode
 
+        _LOGGER.info("MyGekkoApiClient logger name is %s", __name__)
+
         if self._demo_mode:
             self._data_provider = DummyDataProvider()
         else:

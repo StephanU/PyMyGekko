@@ -1,10 +1,14 @@
 import json
+import logging
 import pkgutil
 from abc import ABC
 from abc import abstractmethod
 
 from aiohttp import ClientSession
 from yarl import URL
+
+
+_LOGGER: logging.Logger = logging.getLogger(__package__)
 
 
 class DataSubscriberInterface:
@@ -61,7 +65,7 @@ class DummyDataProvider(DataProviderBase):
         self.status = json.loads(status_demo_data)
 
     async def write_data(self, resource_path: str, value: str):
-        print("Writing to ", resource_path, value)
+        _LOGGER.info("Writing to ", resource_path, value)
 
 
 class DataProvider(DataProviderBase):
@@ -73,6 +77,7 @@ class DataProvider(DataProviderBase):
         self._session = session
 
     async def read_data(self) -> None:
+        _LOGGER.info("read_data")
         async with self._session.get(
             self._url.with_path("/api/v1/var"),
             params=self._authentication_params,
@@ -80,7 +85,7 @@ class DataProvider(DataProviderBase):
             if resp.status == 200:
                 self.resources = await resp.json(content_type="text/plain")
             else:
-                print("Error reading the resources", resp)
+                _LOGGER.info("Error reading the resources", resp)
                 raise Exception
 
         async with self._session.get(
@@ -90,7 +95,7 @@ class DataProvider(DataProviderBase):
             if resp.status == 200:
                 self.status = await resp.json(content_type="text/plain")
             else:
-                print("Error reading the status", resp)
+                _LOGGER.info("Error reading the status", resp)
                 raise Exception
 
     async def write_data(self, resource_path: str, value: str):
@@ -98,4 +103,4 @@ class DataProvider(DataProviderBase):
             self._url.with_path("/api/v1/var/" + resource_path + "/scmd/set"),
             params=self._authentication_params | {"value": value},
         ) as resp:
-            print(resp)
+            _LOGGER.info(resp)

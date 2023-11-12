@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2023-present Stephan Uhle <stephanu@gmx.net>
 #
 # SPDX-License-Identifier: MIT
+import logging
+
 from aiohttp import ClientSession
 from PyMyGekko.resources.Blinds import Blind
 from PyMyGekko.resources.Blinds import BlindValueAccessor
@@ -14,6 +16,9 @@ from yarl import URL
 
 from .DataProvider import DataProvider
 from .DataProvider import DummyDataProvider
+
+
+_LOGGER: logging.Logger = logging.getLogger(__package__)
 
 
 class MyGekkoApiClient:
@@ -52,6 +57,7 @@ class MyGekkoApiClient:
         )
 
     async def try_connect(self) -> None:
+        _LOGGER.info("try_connect")
         if self._demo_mode:
             pass
         else:
@@ -59,27 +65,28 @@ class MyGekkoApiClient:
                 self._url.with_path("/api/v1/var"), params=self._authentication_params
             ) as resp:
                 if resp.status == 200:
+                    _LOGGER.info("Ok", resp)
                     pass
                 elif resp.status == 400:
-                    print("MyGekkoBadRequest", resp)
+                    _LOGGER.info("MyGekkoBadRequest", resp)
                     raise MyGekkoBadRequest()
                 elif resp.status == 403:
-                    print("MyGekkoForbidden", resp)
+                    _LOGGER.info("MyGekkoForbidden", resp)
                     raise MyGekkoForbidden()
                 elif resp.status == 404:
-                    print("MyGekkoNotFound", resp)
+                    _LOGGER.info("MyGekkoNotFound", resp)
                     raise MyGekkoNotFound()
                 elif resp.status == 405:
-                    print("MyGekkoMethodNotAllowed", resp)
+                    _LOGGER.info("MyGekkoMethodNotAllowed", resp)
                     raise MyGekkoMethodNotAllowed()
                 elif resp.status == 410:
-                    print("MyGekkoGone", resp)
+                    _LOGGER.info("MyGekkoGone", resp)
                     raise MyGekkoGone()
                 elif resp.status == 429:
-                    print("MyGekkoTooManyRequests", resp)
+                    _LOGGER.info("MyGekkoTooManyRequests", resp)
                     raise MyGekkoTooManyRequests()
                 elif resp.status == 444:
-                    print("MyGekkoNoResponse", resp)
+                    _LOGGER.info("MyGekkoNoResponse", resp)
                     raise MyGekkoNoResponse()
                 else:
                     raise MyGekkoError()

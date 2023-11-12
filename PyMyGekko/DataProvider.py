@@ -65,7 +65,7 @@ class DummyDataProvider(DataProviderBase):
         self.status = json.loads(status_demo_data)
 
     async def write_data(self, resource_path: str, value: str):
-        _LOGGER.info("Writing to ", resource_path, value)
+        _LOGGER.info("Writing to %s %s", resource_path, value)
 
 
 class DataProvider(DataProviderBase):
@@ -85,7 +85,7 @@ class DataProvider(DataProviderBase):
             if resp.status == 200:
                 self.resources = await resp.json(content_type="text/plain")
             else:
-                _LOGGER.info("Error reading the resources", resp)
+                _LOGGER.info("Error reading the resources %s", resp)
                 raise Exception
 
         async with self._session.get(
@@ -95,7 +95,7 @@ class DataProvider(DataProviderBase):
             if resp.status == 200:
                 self.status = await resp.json(content_type="text/plain")
             else:
-                _LOGGER.info("Error reading the status", resp)
+                _LOGGER.info("Error reading the status %s", resp)
                 raise Exception
 
     async def write_data(self, resource_path: str, value: str):
@@ -103,4 +103,4 @@ class DataProvider(DataProviderBase):
             self._url.with_path("/api/v1/var/" + resource_path + "/scmd/set"),
             params=self._authentication_params | {"value": value},
         ) as resp:
-            _LOGGER.info(resp)
+            _LOGGER.info("write_data %s", resp)

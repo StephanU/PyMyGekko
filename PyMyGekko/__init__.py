@@ -65,28 +65,28 @@ class MyGekkoApiClient:
                 self._url.with_path("/api/v1/var"), params=self._authentication_params
             ) as resp:
                 if resp.status == 200:
-                    _LOGGER.info("Ok", resp)
+                    _LOGGER.info("Ok %s", resp)
                     pass
                 elif resp.status == 400:
-                    _LOGGER.info("MyGekkoBadRequest", resp)
+                    _LOGGER.info("MyGekkoBadRequest %s", resp)
                     raise MyGekkoBadRequest()
                 elif resp.status == 403:
-                    _LOGGER.info("MyGekkoForbidden", resp)
+                    _LOGGER.info("MyGekkoForbidden %s", resp)
                     raise MyGekkoForbidden()
                 elif resp.status == 404:
-                    _LOGGER.info("MyGekkoNotFound", resp)
+                    _LOGGER.info("MyGekkoNotFound %s", resp)
                     raise MyGekkoNotFound()
                 elif resp.status == 405:
-                    _LOGGER.info("MyGekkoMethodNotAllowed", resp)
+                    _LOGGER.info("MyGekkoMethodNotAllowed %s", resp)
                     raise MyGekkoMethodNotAllowed()
                 elif resp.status == 410:
-                    _LOGGER.info("MyGekkoGone", resp)
+                    _LOGGER.info("MyGekkoGone %s", resp)
                     raise MyGekkoGone()
                 elif resp.status == 429:
-                    _LOGGER.info("MyGekkoTooManyRequests", resp)
+                    _LOGGER.info("MyGekkoTooManyRequests %s", resp)
                     raise MyGekkoTooManyRequests()
                 elif resp.status == 444:
-                    _LOGGER.info("MyGekkoNoResponse", resp)
+                    _LOGGER.info("MyGekkoNoResponse %s", resp)
                     raise MyGekkoNoResponse()
                 else:
                     raise MyGekkoError()

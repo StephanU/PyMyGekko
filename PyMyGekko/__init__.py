@@ -18,7 +18,7 @@ from .DataProvider import DataProvider
 from .DataProvider import DummyDataProvider
 
 
-_LOGGER: logging.Logger = logging.getLogger(__package__)
+_LOGGER: logging.Logger = logging.getLogger(__name__)
 
 
 class MyGekkoApiClient:

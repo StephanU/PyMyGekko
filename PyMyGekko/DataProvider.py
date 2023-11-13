@@ -77,26 +77,37 @@ class DataProvider(DataProviderBase):
         self._session = session
 
     async def read_data(self) -> None:
-        _LOGGER.info("read_data")
+        _LOGGER.info("read_data /api/v1/var")
         async with self._session.get(
             self._url.with_path("/api/v1/var"),
             params=self._authentication_params,
         ) as resp:
+            _LOGGER.info("read_data /api/v1/var response received")
             if resp.status == 200:
+                _LOGGER.info("read_data /api/v1/var response received, 200")
                 self.resources = await resp.json(content_type="text/plain")
             else:
-                _LOGGER.info("Error reading the resources %s", resp)
+                _LOGGER.info(
+                    "Error reading the resources %s %s", resp.status, resp.text()
+                )
                 raise Exception
 
+        _LOGGER.info("read_data /api/v1/var/status")
         async with self._session.get(
             self._url.with_path("/api/v1/var/status"),
             params=self._authentication_params,
         ) as resp:
+            _LOGGER.info("read_data /api/v1/var/status response received")
             if resp.status == 200:
+                _LOGGER.info("read_data /api/v1/var/status response received, 200")
                 self.status = await resp.json(content_type="text/plain")
             else:
-                _LOGGER.info("Error reading the status %s", resp)
+                _LOGGER.info(
+                    "Error reading the resources %s %s", resp.status, resp.text()
+                )
                 raise Exception
+
+        _LOGGER.info("read_data end")
 
     async def write_data(self, resource_path: str, value: str):
         async with self._session.get(

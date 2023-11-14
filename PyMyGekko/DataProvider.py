@@ -84,7 +84,9 @@ class DataProvider(DataProviderBase):
         ) as resp:
             _LOGGER.info("read_data /api/v1/var response received")
             if resp.status == 200:
-                _LOGGER.info("read_data /api/v1/var response received, 200")
+                _LOGGER.info(
+                    "read_data /api/v1/var response received, 200 %s", resp.text()
+                )
                 self.resources = await resp.json(content_type="text/plain")
             else:
                 _LOGGER.info(
@@ -99,8 +101,11 @@ class DataProvider(DataProviderBase):
         ) as resp:
             _LOGGER.info("read_data /api/v1/var/status response received")
             if resp.status == 200:
-                _LOGGER.info("read_data /api/v1/var/status response received, 200")
+                _LOGGER.info(
+                    "read_data /api/v1/var/status response received, 200, %s".resp.text()
+                )
                 self.status = await resp.json(content_type="text/plain")
+                _LOGGER.info("read_data /api/v1/var/status response received, 200")
             else:
                 _LOGGER.info(
                     "Error reading the resources %s %s", resp.status, resp.text()

@@ -92,7 +92,7 @@ class DataProvider(DataProviderBase):
                 self.resources = json.loads(responseText)
             else:
                 _LOGGER.info(
-                    "Error reading the resources %s %s", resp.status, resp.text()
+                    "Error reading the resources %s %s", resp.status, await resp.text()
                 )
                 raise Exception
 
@@ -110,10 +110,9 @@ class DataProvider(DataProviderBase):
                 )
                 # self.status = await resp.json(content_type="text/plain")
                 self.status = json.loads(responseText)
-                _LOGGER.info("read_data /api/v1/var/status response received, 200")
             else:
                 _LOGGER.info(
-                    "Error reading the resources %s %s", resp.status, resp.text()
+                    "Error reading the resources %s %s", resp.status, await resp.text()
                 )
                 raise Exception
 

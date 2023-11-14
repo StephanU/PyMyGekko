@@ -42,8 +42,6 @@ class MyGekkoApiClient:
         self._session = session
         self._demo_mode = demo_mode
 
-        _LOGGER.info("MyGekkoApiClient logger name is %s", __name__)
-
         if self._demo_mode:
             self._data_provider = DummyDataProvider()
         else:
@@ -59,36 +57,37 @@ class MyGekkoApiClient:
         )
 
     async def try_connect(self) -> None:
-        _LOGGER.info("try_connect")
+        _LOGGER.debug("try_connect")
         if self._demo_mode:
             pass
         else:
             async with self._session.get(
                 self._url.with_path("/api/v1/var"), params=self._authentication_params
             ) as resp:
+                responseText = await resp.text()
                 if resp.status == 200:
-                    _LOGGER.info("Ok %s", resp)
+                    _LOGGER.debug("Ok %s", responseText)
                     pass
                 elif resp.status == 400:
-                    _LOGGER.info("MyGekkoBadRequest %s", resp)
+                    _LOGGER.error("MyGekkoBadRequest %s", responseText)
                     raise MyGekkoBadRequest()
                 elif resp.status == 403:
-                    _LOGGER.info("MyGekkoForbidden %s", resp)
+                    _LOGGER.error("MyGekkoForbidden %s", responseText)
                     raise MyGekkoForbidden()
                 elif resp.status == 404:
-                    _LOGGER.info("MyGekkoNotFound %s", resp)
+                    _LOGGER.error("MyGekkoNotFound %s", responseText)
                     raise MyGekkoNotFound()
                 elif resp.status == 405:
-                    _LOGGER.info("MyGekkoMethodNotAllowed %s", resp)
+                    _LOGGER.error("MyGekkoMethodNotAllowed %s", responseText)
                     raise MyGekkoMethodNotAllowed()
                 elif resp.status == 410:
-                    _LOGGER.info("MyGekkoGone %s", resp)
+                    _LOGGER.error("MyGekkoGone %s", responseText)
                     raise MyGekkoGone()
                 elif resp.status == 429:
-                    _LOGGER.info("MyGekkoTooManyRequests %s", resp)
+                    _LOGGER.error("MyGekkoTooManyRequests %s", responseText)
                     raise MyGekkoTooManyRequests()
                 elif resp.status == 444:
-                    _LOGGER.info("MyGekkoNoResponse %s", resp)
+                    _LOGGER.error("MyGekkoNoResponse %s", responseText)
                     raise MyGekkoNoResponse()
                 else:
                     raise MyGekkoError()

@@ -77,15 +77,14 @@ class DataProvider(DataProviderBase):
         self._session = session
 
     async def read_data(self) -> None:
-        _LOGGER.info("read_data /api/v1/var")
+        _LOGGER.debug("read_data /api/v1/var")
         async with self._session.get(
             self._url.with_path("/api/v1/var"),
             params=self._authentication_params,
         ) as resp:
-            _LOGGER.info("read_data /api/v1/var response received")
             if resp.status == 200:
                 responseText = await resp.text()
-                _LOGGER.info(
+                _LOGGER.debug(
                     "read_data /api/v1/var response received, 200 %s", responseText
                 )
                 # self.resources = await resp.json()
@@ -99,20 +98,19 @@ class DataProvider(DataProviderBase):
                         jsonDecodeError.colno,
                     )
             else:
-                _LOGGER.info(
+                _LOGGER.error(
                     "Error reading the resources %s %s", resp.status, await resp.text()
                 )
                 raise Exception
 
-        _LOGGER.info("read_data /api/v1/var/status")
+        _LOGGER.debug("read_data /api/v1/var/status")
         async with self._session.get(
             self._url.with_path("/api/v1/var/status"),
             params=self._authentication_params,
         ) as resp:
-            _LOGGER.info("read_data /api/v1/var/status response received")
             if resp.status == 200:
                 responseText = await resp.text()
-                _LOGGER.info(
+                _LOGGER.debug(
                     "read_data /api/v1/var/status response received, 200, %s",
                     responseText,
                 )
@@ -127,16 +125,16 @@ class DataProvider(DataProviderBase):
                         jsonDecodeError.colno,
                     )
             else:
-                _LOGGER.info(
+                _LOGGER.error(
                     "Error reading the resources %s %s", resp.status, await resp.text()
                 )
                 raise Exception
 
-        _LOGGER.info("read_data end")
+        _LOGGER.debug("read_data end")
 
     async def write_data(self, resource_path: str, value: str):
         async with self._session.get(
             self._url.with_path("/api/v1/var/" + resource_path + "/scmd/set"),
             params=self._authentication_params | {"value": value},
         ) as resp:
-            _LOGGER.info("write_data %s", resp)
+            _LOGGER.debug("write_data %s", resp)

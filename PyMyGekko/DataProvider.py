@@ -88,8 +88,16 @@ class DataProvider(DataProviderBase):
                 _LOGGER.info(
                     "read_data /api/v1/var response received, 200 %s", responseText
                 )
-                # self.resources = await resp.json(content_type="text/plain")
-                self.resources = json.loads(responseText)
+                # self.resources = await resp.json()
+                try:
+                    self.resources = json.loads(responseText)
+                except json.JSONDecodeError as jsonDecodeError:
+                    _LOGGER.error(
+                        "Json Parsing the response failed: %s %s:%s",
+                        jsonDecodeError.msg,
+                        jsonDecodeError.lineno,
+                        jsonDecodeError.colno,
+                    )
             else:
                 _LOGGER.info(
                     "Error reading the resources %s %s", resp.status, await resp.text()
@@ -108,8 +116,16 @@ class DataProvider(DataProviderBase):
                     "read_data /api/v1/var/status response received, 200, %s",
                     responseText,
                 )
-                # self.status = await resp.json(content_type="text/plain")
-                self.status = json.loads(responseText)
+                # self.status = await resp.json()
+                try:
+                    self.resources = json.loads(responseText)
+                except json.JSONDecodeError as jsonDecodeError:
+                    _LOGGER.error(
+                        "Json Parsing the response failed: %s %s:%s",
+                        jsonDecodeError.msg,
+                        jsonDecodeError.lineno,
+                        jsonDecodeError.colno,
+                    )
             else:
                 _LOGGER.info(
                     "Error reading the resources %s %s", resp.status, await resp.text()

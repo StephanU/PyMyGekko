@@ -102,7 +102,8 @@ class DataProvider(DataProviderBase):
             _LOGGER.info("read_data /api/v1/var/status response received")
             if resp.status == 200:
                 _LOGGER.info(
-                    "read_data /api/v1/var/status response received, 200, %s".resp.text()
+                    "read_data /api/v1/var/status response received, 200, %s",
+                    resp.text(),
                 )
                 self.status = await resp.json(content_type="text/plain")
                 _LOGGER.info("read_data /api/v1/var/status response received, 200")

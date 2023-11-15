@@ -90,13 +90,8 @@ class DataProvider(DataProviderBase):
                 # self.resources = await resp.json()
                 try:
                     self.resources = json.loads(responseText)
-                except json.JSONDecodeError as jsonDecodeError:
-                    _LOGGER.error(
-                        "Json Parsing the response failed: %s %s:%s",
-                        jsonDecodeError.msg,
-                        jsonDecodeError.lineno,
-                        jsonDecodeError.colno,
-                    )
+                except Exception:
+                    _LOGGER.exception("Json Parsing the response failed")
             else:
                 _LOGGER.error(
                     "Error reading the resources %s %s", resp.status, await resp.text()
@@ -117,13 +112,8 @@ class DataProvider(DataProviderBase):
                 # self.status = await resp.json()
                 try:
                     self.resources = json.loads(responseText)
-                except json.JSONDecodeError as jsonDecodeError:
-                    _LOGGER.error(
-                        "Json Parsing the response failed: %s %s:%s",
-                        jsonDecodeError.msg,
-                        jsonDecodeError.lineno,
-                        jsonDecodeError.colno,
-                    )
+                except Exception:
+                    _LOGGER.exception("Json Parsing the response failed")
             else:
                 _LOGGER.error(
                     "Error reading the resources %s %s", resp.status, await resp.text()

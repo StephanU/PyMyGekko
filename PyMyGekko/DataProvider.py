@@ -111,7 +111,7 @@ class DataProvider(DataProviderBase):
                 )
                 # self.status = await resp.json()
                 try:
-                    self.resources = json.loads(responseText)
+                    self.status = json.loads(responseText)
                 except Exception:
                     _LOGGER.exception("Json Parsing the response failed")
             else:

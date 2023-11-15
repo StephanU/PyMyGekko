@@ -5,6 +5,7 @@
       "page": "...",
       "sumstate": {
         "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "format": "currentState enum[-2=holdDown,-1=movingDown,0=stop,1=movingUp,2=holdUp](); positionLevel float[0.00,100.00](%); rotationLevel float[0.00,100.00](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); rotationRange enum[90=ninety,180=hundredEighty](°); ",
         "type": "STRING",
         "permission": "READ",
         "index": 150000

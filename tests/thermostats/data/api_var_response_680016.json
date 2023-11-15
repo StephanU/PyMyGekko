@@ -1,0 +1,174 @@
+{
+  "roomtemps": {
+    "item0": {
+      "name": "WohnenKüche",
+      "page": "EG",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "temperatureValue float[-100.00,100.00](°C); temperatureSetPointValue float[-100.00,100.00](°C); valveOpeningLevel float[0.00,100.00](%); workingMode #standard:enum[1=off,8=comfort,16=reduced,64=manual,256=standby]#knx:enum[0=auto,1=comfort,2=standby,3=economy,4=buildingProtection](); reserved null[reserved](); temperatureAdjustmentValue float[-100.00,100.00](°C); coolingModeState enum[0=off,1=on](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); relativeHumidityLevel float[0.00,100.00](%); airQualityLevel #co2:float[0.00,100.00](%)#quality:float[0.00,100.00](%)#voc:float[0,100000.00](ppm); floorTemperatureValue float[-100.00,100.00](°C); deviceModel enum[0=standard,3=knxDevice](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300070
+      }
+    },
+    "item1": {
+      "name": "Speisekammer",
+      "page": "EG",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "temperatureValue float[-100.00,100.00](°C); temperatureSetPointValue float[-100.00,100.00](°C); valveOpeningLevel float[0.00,100.00](%); workingMode #standard:enum[1=off,8=comfort,16=reduced,64=manual,256=standby]#knx:enum[0=auto,1=comfort,2=standby,3=economy,4=buildingProtection](); reserved null[reserved](); temperatureAdjustmentValue float[-100.00,100.00](°C); coolingModeState enum[0=off,1=on](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); relativeHumidityLevel float[0.00,100.00](%); airQualityLevel #co2:float[0.00,100.00](%)#quality:float[0.00,100.00](%)#voc:float[0,100000.00](ppm); floorTemperatureValue float[-100.00,100.00](°C); deviceModel enum[0=standard,3=knxDevice](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300170
+      }
+    },
+    "item2": {
+      "name": "HWR",
+      "page": "EG",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "temperatureValue float[-100.00,100.00](°C); temperatureSetPointValue float[-100.00,100.00](°C); valveOpeningLevel float[0.00,100.00](%); workingMode #standard:enum[1=off,8=comfort,16=reduced,64=manual,256=standby]#knx:enum[0=auto,1=comfort,2=standby,3=economy,4=buildingProtection](); reserved null[reserved](); temperatureAdjustmentValue float[-100.00,100.00](°C); coolingModeState enum[0=off,1=on](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); relativeHumidityLevel float[0.00,100.00](%); airQualityLevel #co2:float[0.00,100.00](%)#quality:float[0.00,100.00](%)#voc:float[0,100000.00](ppm); floorTemperatureValue float[-100.00,100.00](°C); deviceModel enum[0=standard,3=knxDevice](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300270
+      }
+    },
+    "item3": {
+      "name": "WC EG",
+      "page": "EG",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "temperatureValue float[-100.00,100.00](°C); temperatureSetPointValue float[-100.00,100.00](°C); valveOpeningLevel float[0.00,100.00](%); workingMode #standard:enum[1=off,8=comfort,16=reduced,64=manual,256=standby]#knx:enum[0=auto,1=comfort,2=standby,3=economy,4=buildingProtection](); reserved null[reserved](); temperatureAdjustmentValue float[-100.00,100.00](°C); coolingModeState enum[0=off,1=on](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); relativeHumidityLevel float[0.00,100.00](%); airQualityLevel #co2:float[0.00,100.00](%)#quality:float[0.00,100.00](%)#voc:float[0,100000.00](ppm); floorTemperatureValue float[-100.00,100.00](°C); deviceModel enum[0=standard,3=knxDevice](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300370
+      }
+    },
+    "item4": {
+      "name": "Gast",
+      "page": "EG",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "temperatureValue float[-100.00,100.00](°C); temperatureSetPointValue float[-100.00,100.00](°C); valveOpeningLevel float[0.00,100.00](%); workingMode #standard:enum[1=off,8=comfort,16=reduced,64=manual,256=standby]#knx:enum[0=auto,1=comfort,2=standby,3=economy,4=buildingProtection](); reserved null[reserved](); temperatureAdjustmentValue float[-100.00,100.00](°C); coolingModeState enum[0=off,1=on](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); relativeHumidityLevel float[0.00,100.00](%); airQualityLevel #co2:float[0.00,100.00](%)#quality:float[0.00,100.00](%)#voc:float[0,100000.00](ppm); floorTemperatureValue float[-100.00,100.00](°C); deviceModel enum[0=standard,3=knxDevice](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "M1|M2|M8|M16|M64|M256|K2.4|S22.5 (ModeOff|ModeOn|ModeComfort|ModeReduced|ModeManual|ModeStandby|TempAdjustment[°C]|Setpoint[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300470
+      }
+    },
+    "group0": {
+      "name": "Alle",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On|2=Comfort|3=Reduced]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 3000000
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "M1|M2|M8|M16 (Mode_Off|Mode_On|Mode_Comfort|Mode_Reduced)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 3000001
+      }
+    },
+    "group1": {
+      "name": "EG",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On|2=Comfort|3=Reduced]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 3000100
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "M1|M2|M8|M16 (Mode_Off|Mode_On|Mode_Comfort|Mode_Reduced)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 3000101
+      }
+    },
+    "group2": {
+      "name": "OG",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On|2=Comfort|3=Reduced]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 3000200
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "M1|M2|M8|M16 (Mode_Off|Mode_On|Mode_Comfort|Mode_Reduced)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 3000201
+      }
+    },
+    "group3": {
+      "name": "Büro",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On|2=Comfort|3=Reduced]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 3000300
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "M1|M2|M8|M16 (Mode_Off|Mode_On|Mode_Comfort|Mode_Reduced)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 3000301
+      }
+    },
+    "group4": {
+      "name": "Bäder",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On|2=Comfort|3=Reduced]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 3000400
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "M1|M2|M8|M16 (Mode_Off|Mode_On|Mode_Comfort|Mode_Reduced)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 3000401
+      }
+    }
+  }
+}

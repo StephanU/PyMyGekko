@@ -1,0 +1,49 @@
+{
+  "blinds": {
+    "item1": {
+      "sumstate": {
+        "value": "0;100.00;;0;90;"
+      }
+    },
+    "item2": {
+      "sumstate": {
+        "value": "0;0.31;;0;90;"
+      }
+    },
+    "item3": {
+      "sumstate": {
+        "value": "0;0.00;;0;90;"
+      }
+    },
+    "item4": {
+      "sumstate": {
+        "value": "0;0.30;;0;90;"
+      }
+    },
+    "item5": {
+      "sumstate": {
+        "value": "0;0.00;;0;90;"
+      }
+    },
+    "item6": {
+      "sumstate": {
+        "value": "0;0.42;;0;90;"
+      }
+    },
+    "item7": {
+      "sumstate": {
+        "value": "-1;0.00;;0;90;"
+      }
+    },
+    "item8": {
+      "sumstate": {
+        "value": "0;0.00;;0;90;"
+      }
+    },
+    "item9": {
+      "sumstate": {
+        "value": "0;0.42;;0;90;"
+      }
+    }
+  }
+}

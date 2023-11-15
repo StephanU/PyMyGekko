@@ -1,0 +1,89 @@
+{
+  "lights": {
+    "item0": {
+      "name": "Büro 1 Licht",
+      "page": "Büro",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[0=off,1=on](); dimLevel float[0.00,100.0](%); rgbColor int[24bit->R:23-16|G:15-8|B:7-0](); tunableWhiteLevel float[0.00,100.0](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "1|0|D100|T|C44782|TW100 (On,Off|0-100[%]|1|24BitRGB|0-100[%])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 100070
+      }
+    },
+    "item1": {
+      "name": "Büro 2 Licht",
+      "page": "Büro",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[0=off,1=on](); dimLevel float[0.00,100.0](%); rgbColor int[24bit->R:23-16|G:15-8|B:7-0](); tunableWhiteLevel float[0.00,100.0](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "1|0|D100|T|C44782|TW100 (On,Off|0-100[%]|1|24BitRGB|0-100[%])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 100170
+      }
+    },
+    "item2": {
+      "name": "Büro Küche Licht",
+      "page": "Büro",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[0=off,1=on](); dimLevel float[0.00,100.0](%); rgbColor int[24bit->R:23-16|G:15-8|B:7-0](); tunableWhiteLevel float[0.00,100.0](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "1|0|D100|T|C44782|TW100 (On,Off|0-100[%]|1|24BitRGB|0-100[%])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 100270
+      }
+    },
+    "group0": {
+      "name": "ALLE",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1000000
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "0|1 (Off|On)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1000001
+      }
+    },
+    "group1": {
+      "name": "Licht Aussen",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1000100
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "0|1 (Off|On)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1000101
+      }
+    }
+  }
+}

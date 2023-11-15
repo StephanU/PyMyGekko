@@ -127,5 +127,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-tests/api_var_response.json
-tests/api_var_status_response.json
+tests/api_var_response*.json
+tests/api_var_status_response*.json

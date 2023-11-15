@@ -84,10 +84,6 @@ class DataProvider(DataProviderBase):
         ) as resp:
             if resp.status == 200:
                 responseText = await resp.text()
-                _LOGGER.debug(
-                    "read_data /api/v1/var response received, 200 %s", responseText
-                )
-                # self.resources = await resp.json()
                 try:
                     self.resources = json.loads(responseText)
                 except Exception:
@@ -105,11 +101,6 @@ class DataProvider(DataProviderBase):
         ) as resp:
             if resp.status == 200:
                 responseText = await resp.text()
-                _LOGGER.debug(
-                    "read_data /api/v1/var/status response received, 200, %s",
-                    responseText,
-                )
-                # self.status = await resp.json()
                 try:
                     self.status = json.loads(responseText)
                 except Exception:

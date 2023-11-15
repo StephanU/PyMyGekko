@@ -55,6 +55,7 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
     _data = {}
 
     def __init__(self, data_provider: DataProvider.DataProvider):
+        self._data = {}
         self._data_provider = data_provider
         data_provider.subscribe(self)
 
@@ -73,6 +74,7 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
                             self._data[key]["RGBcolor"],
                             self._data[key]["tunableWhite"],
                             self._data[key]["sum"],
+                            *other,
                         ) = lights[key]["sumstate"]["value"].split(";")
 
     def update_resources(self, resources):

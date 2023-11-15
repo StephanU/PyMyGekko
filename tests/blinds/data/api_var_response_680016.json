@@ -1,0 +1,310 @@
+{
+  "blinds": {
+    "item1": {
+      "name": "Rollo Schlafzimmer links",
+      "page": "OG 2",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[-2=holdDown,-1=movingDown,0=stop,1=movingUp,2=holdUp](); positionLevel float[0.00,100.00](%); rotationLevel float[0.00,100.00](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); rotationRange enum[90=ninety,180=hundredEighty](°); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150170
+      }
+    },
+    "item2": {
+      "name": "Rollo Schlafzimmer rechts",
+      "page": "OG 2",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[-2=holdDown,-1=movingDown,0=stop,1=movingUp,2=holdUp](); positionLevel float[0.00,100.00](%); rotationLevel float[0.00,100.00](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); rotationRange enum[90=ninety,180=hundredEighty](°); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150270
+      }
+    },
+    "item3": {
+      "name": "Rollo Ankleidezimmer",
+      "page": "OG 2",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[-2=holdDown,-1=movingDown,0=stop,1=movingUp,2=holdUp](); positionLevel float[0.00,100.00](%); rotationLevel float[0.00,100.00](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); rotationRange enum[90=ninety,180=hundredEighty](°); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150370
+      }
+    },
+    "item4": {
+      "name": "Rollo Abstellkammer Ost",
+      "page": "OG 2",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[-2=holdDown,-1=movingDown,0=stop,1=movingUp,2=holdUp](); positionLevel float[0.00,100.00](%); rotationLevel float[0.00,100.00](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); rotationRange enum[90=ninety,180=hundredEighty](°); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150470
+      }
+    },
+    "item5": {
+      "name": "Rollo Abstellkammer Nord",
+      "page": "OG 2",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[-2=holdDown,-1=movingDown,0=stop,1=movingUp,2=holdUp](); positionLevel float[0.00,100.00](%); rotationLevel float[0.00,100.00](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); rotationRange enum[90=ninety,180=hundredEighty](°); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150570
+      }
+    },
+    "item6": {
+      "name": "Rollo Kind1 Süd",
+      "page": "OG 2",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[-2=holdDown,-1=movingDown,0=stop,1=movingUp,2=holdUp](); positionLevel float[0.00,100.00](%); rotationLevel float[0.00,100.00](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); rotationRange enum[90=ninety,180=hundredEighty](°); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150670
+      }
+    },
+    "item7": {
+      "name": "Rollo Kind1 Ost",
+      "page": "OG 2",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[-2=holdDown,-1=movingDown,0=stop,1=movingUp,2=holdUp](); positionLevel float[0.00,100.00](%); rotationLevel float[0.00,100.00](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); rotationRange enum[90=ninety,180=hundredEighty](°); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150770
+      }
+    },
+    "item8": {
+      "name": "Rollo Badezimmer OG West",
+      "page": "OG 1",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[-2=holdDown,-1=movingDown,0=stop,1=movingUp,2=holdUp](); positionLevel float[0.00,100.00](%); rotationLevel float[0.00,100.00](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); rotationRange enum[90=ninety,180=hundredEighty](°); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150870
+      }
+    },
+    "item9": {
+      "name": "Rollo Badezimmer OG Süd",
+      "page": "OG 1",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[-2=holdDown,-1=movingDown,0=stop,1=movingUp,2=holdUp](); positionLevel float[0.00,100.00](%); rotationLevel float[0.00,100.00](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); rotationRange enum[90=ninety,180=hundredEighty](°); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150970
+      }
+    },
+    "group0": {
+      "name": "EG",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500000
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500001
+      }
+    },
+    "group1": {
+      "name": "OG",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500100
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500101
+      }
+    },
+    "group2": {
+      "name": "Büro",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500200
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500201
+      }
+    },
+    "group3": {
+      "name": "Alle",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500300
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500301
+      }
+    },
+    "group4": {
+      "name": "Kino",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500400
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500401
+      }
+    },
+    "group5": {
+      "name": "Süd",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500500
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500501
+      }
+    },
+    "group6": {
+      "name": "Ost",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500600
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500601
+      }
+    },
+    "group7": {
+      "name": "West",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500700
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500701
+      }
+    },
+    "group8": {
+      "name": "Nord",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500800
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500801
+      }
+    }
+  }
+}

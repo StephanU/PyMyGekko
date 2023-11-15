@@ -58,6 +58,7 @@ class ThermostatValueAccessor(DataProvider.DataSubscriberInterface):
     _data = {}
 
     def __init__(self, data_provider: DataProvider.DataProvider):
+        self._data = {}
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
 
@@ -85,6 +86,7 @@ class ThermostatValueAccessor(DataProvider.DataSubscriberInterface):
                             self._data[key]["humidity"],
                             self._data[key]["airQuality"],
                             self._data[key]["floorTemp"],
+                            *other,
                         ) = thermostats[key]["sumstate"]["value"].split(";")
 
     def update_resources(self, resources):

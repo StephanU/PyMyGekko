@@ -23,6 +23,7 @@ class EnergyMeterValueAccessor(DataProvider.DataSubscriberInterface):
     _data = {}
 
     def __init__(self, data_provider: DataProvider.DataProvider):
+        self._data = {}
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
 

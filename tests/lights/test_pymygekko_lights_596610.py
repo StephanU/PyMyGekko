@@ -7,12 +7,12 @@ from PyMyGekko.resources.Lights import LightState
 
 
 async def var_response(request):
-    varResponseFile = open("tests/lights/api_var_response.json")
+    varResponseFile = open("tests/lights/data/api_var_response_596610.json")
     return web.Response(status=200, body=varResponseFile.read())
 
 
 async def var_status_response(request):
-    statusResponseFile = open("tests/lights/api_var_status_response.json")
+    statusResponseFile = open("tests/lights/data/api_var_status_response_596610.json")
     return web.Response(status=200, body=statusResponseFile.read())
 
 

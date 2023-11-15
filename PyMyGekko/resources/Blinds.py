@@ -57,6 +57,7 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
     _data = {}
 
     def __init__(self, data_provider: DataProvider.DataProvider):
+        self._data = {}
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
 
@@ -75,7 +76,10 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
                             self._data[key]["angle"],
                             self._data[key]["sum"],
                             self._data[key]["slatRotationArea"],
-                        ) = blinds[key]["sumstate"]["value"].split(";")
+                            *other,
+                        ) = blinds[key]["sumstate"]["value"].split(
+                            ";",
+                        )
 
     def update_resources(self, resources):
         if resources is not None and "blinds" in resources:

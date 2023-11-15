@@ -7,12 +7,12 @@ from PyMyGekko.resources.Blinds import BlindState
 
 
 async def var_response(request):
-    varResponseFile = open("tests/blinds/api_var_response.json")
+    varResponseFile = open("tests/blinds/data/api_var_response_596610.json")
     return web.Response(status=200, body=varResponseFile.read())
 
 
 async def var_status_response(request):
-    statusResponseFile = open("tests/blinds/api_var_status_response.json")
+    statusResponseFile = open("tests/blinds/data/api_var_status_response_596610.json")
     return web.Response(status=200, body=statusResponseFile.read())
 
 

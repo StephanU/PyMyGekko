@@ -10,6 +10,8 @@ from PyMyGekko.resources.EnergyMeters import EnergyMeter
 from PyMyGekko.resources.EnergyMeters import EnergyMeterValueAccessor
 from PyMyGekko.resources.Lights import Light
 from PyMyGekko.resources.Lights import LightValueAccessor
+from PyMyGekko.resources.Switches import Switch
+from PyMyGekko.resources.Switches import SwitchValueAccessor
 from PyMyGekko.resources.Thermostats import Thermostat
 from PyMyGekko.resources.Thermostats import ThermostatValueAccessor
 from yarl import URL
@@ -55,6 +57,7 @@ class MyGekkoApiClient:
         self._energy_meter_value_accessor = EnergyMeterValueAccessor(
             self._data_provider
         )
+        self._switches_value_accessor = SwitchValueAccessor(self._data_provider)
 
     async def try_connect(self) -> None:
         _LOGGER.debug("try_connect")
@@ -121,6 +124,9 @@ class MyGekkoApiClient:
 
     def get_energy_meters(self) -> list[EnergyMeter]:
         return self._energy_meter_value_accessor.energyMeters
+
+    def get_switches(self) -> list[Switch]:
+        return self._switches_value_accessor.switches
 
 
 class MyGekkoError(Exception):

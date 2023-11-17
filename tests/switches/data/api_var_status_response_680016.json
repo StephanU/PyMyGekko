@@ -1,0 +1,19 @@
+{
+  "loads": {
+    "item0": {
+      "sumstate": {
+        "value": "2;0;"
+      }
+    },
+    "item1": {
+      "sumstate": {
+        "value": "0;0;"
+      }
+    },
+    "item2": {
+      "sumstate": {
+        "value": "0;0;"
+      }
+    }
+  }
+}

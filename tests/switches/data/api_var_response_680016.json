@@ -1,0 +1,72 @@
+{
+  "loads": {
+    "item0": {
+      "name": "Balkon Steckdose",
+      "page": "...",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[0=off,1=onImpulse,2=onPermanent](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "0|1|2|T (Off|OnImpulse|OnPermanent|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 250070
+      }
+    },
+    "item1": {
+      "name": "Terrasse Steckdose",
+      "page": "...",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[0=off,1=onImpulse,2=onPermanent](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "0|1|2|T (Off|OnImpulse|OnPermanent|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 250170
+      }
+    },
+    "item2": {
+      "name": "HWR Steckdose",
+      "page": "...",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[0=off,1=onImpulse,2=onPermanent](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "0|1|2|T (Off|OnImpulse|OnPermanent|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 250270
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 2500000
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "0|2 (Off|On)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 2500001
+      }
+    }
+  }
+}

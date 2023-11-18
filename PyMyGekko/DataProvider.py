@@ -114,8 +114,12 @@ class DataProvider(DataProviderBase):
         _LOGGER.debug("read_data end")
 
     async def write_data(self, resource_path: str, value: str):
+        resource_url = "/api/v1/var/" + resource_path + "/scmd/set"
+
+        _LOGGER.debug("Writing data %s to %s", value, resource_url)
+
         async with self._session.get(
-            self._url.with_path("/api/v1/var/" + resource_path + "/scmd/set"),
+            self._url.with_path(resource_url),
             params=self._authentication_params | {"value": value},
         ) as resp:
             _LOGGER.debug("write_data %s", resp)

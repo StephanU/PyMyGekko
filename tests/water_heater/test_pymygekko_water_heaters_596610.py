@@ -50,6 +50,8 @@ async def test_get_lights(mock_server):
         assert waterHeaters[0].name == "WW Boiler"
         assert waterHeaters[0].state == WaterHeaterState.ON
         assert waterHeaters[0].target_temperature == 48.0
+        assert waterHeaters[0].current_temperature_bottom == 37.7
+        assert waterHeaters[0].current_temperature_top == 43.8
         assert len(waterHeaters[0].supported_features) == 2
         assert WaterHeaterFeature.ON_OFF in waterHeaters[0].supported_features
         assert (

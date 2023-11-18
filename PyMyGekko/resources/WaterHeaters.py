@@ -33,6 +33,14 @@ class WaterHeater(Entity):
     async def set_target_temperature(self, target_temperature: float):
         await self._value_accessor.set_target_temperature(self, target_temperature)
 
+    @property
+    def current_temperature_top(self) -> float | None:
+        return self._value_accessor.get_current_temperature_top(self)
+
+    @property
+    def current_temperature_bottom(self) -> float | None:
+        return self._value_accessor.get_current_temperature_bottom(self)
+
 
 class WaterHeaterState(IntEnum):
     OFF = 0
@@ -139,3 +147,23 @@ class WaterHeaterValueAccessor(DataProvider.DataSubscriberInterface):
             await self._data_provider.write_data(
                 waterHeater._resource_path, "T" + str(target_temperature)
             )
+
+    def get_current_temperature_top(self, waterHeater: WaterHeater) -> float | None:
+        if waterHeater and waterHeater.id:
+            if (
+                waterHeater.id in self._data
+                and "topTemp" in self._data[waterHeater.id]
+                and self._data[waterHeater.id]["topTemp"]
+            ):
+                return float(self._data[waterHeater.id]["topTemp"])
+        return None
+
+    def get_current_temperature_bottom(self, waterHeater: WaterHeater) -> float | None:
+        if waterHeater and waterHeater.id:
+            if (
+                waterHeater.id in self._data
+                and "bottomTemp" in self._data[waterHeater.id]
+                and self._data[waterHeater.id]["bottomTemp"]
+            ):
+                return float(self._data[waterHeater.id]["bottomTemp"])
+        return None

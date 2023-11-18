@@ -14,6 +14,8 @@ from PyMyGekko.resources.Switches import Switch
 from PyMyGekko.resources.Switches import SwitchValueAccessor
 from PyMyGekko.resources.Thermostats import Thermostat
 from PyMyGekko.resources.Thermostats import ThermostatValueAccessor
+from PyMyGekko.resources.WaterHeaters import WaterHeater
+from PyMyGekko.resources.WaterHeaters import WaterHeaterValueAccessor
 from yarl import URL
 
 from .DataProvider import DataProvider
@@ -58,6 +60,9 @@ class MyGekkoApiClient:
             self._data_provider
         )
         self._switches_value_accessor = SwitchValueAccessor(self._data_provider)
+        self._water_heater_value_accessor = WaterHeaterValueAccessor(
+            self._data_provider
+        )
 
     async def try_connect(self) -> None:
         _LOGGER.debug("try_connect")
@@ -127,6 +132,9 @@ class MyGekkoApiClient:
 
     def get_switches(self) -> list[Switch]:
         return self._switches_value_accessor.switches
+
+    def get_water_heaters(self) -> list[WaterHeater]:
+        return self._water_heater_value_accessor.waterHeaters
 
 
 class MyGekkoError(Exception):

@@ -1,0 +1,29 @@
+{
+  "hotwater_systems": {
+    "item0": {
+      "name": "WW Boiler",
+      "page": "...",
+      "sumstate": {
+        "value": "type[Type]; cooling[0=Off|1=On]; setpointTemp[°C]; topTemp[°C]; bottomTemp[°C]; collectorTemp[°C]; state[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 1950000
+      },
+      "scmd": {
+        "value": "0|1|T100 (Off|On|Temperature[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 1950070
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "value": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 19500000
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "hotwater_systems": {
+    "item0": {
+      "sumstate": {
+        "value": "1;0;48.00;43.80;37.70;1.10;1;0"
+      }
+    },
+    "group0": {
+      "sumstate": {
+        "value": "1"
+      }
+    }
+  }
+}

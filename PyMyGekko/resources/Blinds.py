@@ -71,11 +71,11 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
 
                     if "sumstate" in blinds[key] and "value" in blinds[key]["sumstate"]:
                         (
-                            self._data[key]["state"],
-                            self._data[key]["position"],
-                            self._data[key]["angle"],
-                            self._data[key]["sum"],
-                            self._data[key]["slatRotationArea"],
+                            self._data[key]["currentState"],
+                            self._data[key]["positionLevel"],
+                            self._data[key]["rotationLevel"],
+                            self._data[key]["elementInfo"],
+                            self._data[key]["rotationRange"],
                             *other,
                         ) = blinds[key]["sumstate"]["value"].split(
                             ";",
@@ -104,13 +104,13 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
         if blind and blind.id:
             if blind.id in self._data:
                 data = self._data[blind.id]
-                if "state" in data and data["state"]:
+                if "currentState" in data and data["currentState"]:
                     result.append(BlindFeature.OPEN_CLOSE_STOP)
 
-                if "position" in data and data["position"]:
+                if "positionLevel" in data and data["positionLevel"]:
                     result.append(BlindFeature.SET_POSITION)
 
-                if "angle" in data and data["angle"]:
+                if "rotationLevel" in data and data["rotationLevel"]:
                     result.append(BlindFeature.SET_TILT_POSITION)
 
         return result
@@ -119,10 +119,10 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
         if blind and blind.id:
             if (
                 blind.id in self._data
-                and "position" in self._data[blind.id]
-                and self._data[blind.id]["position"]
+                and "positionLevel" in self._data[blind.id]
+                and self._data[blind.id]["positionLevel"]
             ):
-                return float(self._data[blind.id]["position"])
+                return float(self._data[blind.id]["positionLevel"])
         return None
 
     async def set_position(self, blind: Blind, position: float) -> None:
@@ -135,10 +135,10 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
         if blind and blind.id:
             if (
                 blind.id in self._data
-                and "angle" in self._data[blind.id]
-                and self._data[blind.id]["angle"]
+                and "rotationLevel" in self._data[blind.id]
+                and self._data[blind.id]["rotationLevel"]
             ):
-                return float(self._data[blind.id]["angle"])
+                return float(self._data[blind.id]["rotationLevel"])
         return None
 
     async def set_tilt_position(self, blind: Blind, position: float) -> None:
@@ -151,10 +151,10 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
         if blind and blind.id:
             if (
                 blind.id in self._data
-                and "state" in self._data[blind.id]
-                and self._data[blind.id]["state"]
+                and "currentState" in self._data[blind.id]
+                and self._data[blind.id]["currentState"]
             ):
-                return BlindState(int(self._data[blind.id]["state"]))
+                return BlindState(int(self._data[blind.id]["currentState"]))
         return BlindState.NONE
 
     async def set_state(self, blind: Blind, state: BlindState) -> None:

@@ -1,0 +1,24 @@
+{
+  "actions": {
+    "item0": {
+      "sumstate": {
+        "value": "0;1;0;"
+      }
+    },
+    "item1": {
+      "sumstate": {
+        "value": "0;1;0;"
+      }
+    },
+    "item2": {
+      "sumstate": {
+        "value": "0;1;0;"
+      }
+    },
+    "item3": {
+      "sumstate": {
+        "value": "0;1;0;"
+      }
+    }
+  }
+}

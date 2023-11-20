@@ -1,0 +1,82 @@
+{
+  "actions": {
+    "item0": {
+      "name": "Zentral AUS",
+      "page": "Licht",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[0=off,1=on](); startConditionState enum[0=off,1=on](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850070
+      }
+    },
+    "item1": {
+      "name": "Alle runter",
+      "page": "Jalousie",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[0=off,1=on](); startConditionState enum[0=off,1=on](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850170
+      }
+    },
+    "item2": {
+      "name": "Alle auf Komfort",
+      "page": "Heizung",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[0=off,1=on](); startConditionState enum[0=off,1=on](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850270
+      }
+    },
+    "item3": {
+      "name": "Alle hoch",
+      "page": "Jalousie",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentState enum[0=off,1=on](); startConditionState enum[0=off,1=on](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850370
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 8500000
+      }
+    }
+  }
+}

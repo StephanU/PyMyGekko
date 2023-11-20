@@ -1,0 +1,19 @@
+{
+  "alarms_logics": {
+    "item0": {
+      "sumstate": {
+        "value": "1.00"
+      }
+    },
+    "item15": {
+      "sumstate": {
+        "value": "0.00"
+      }
+    },
+    "group0": {
+      "sumstate": {
+        "value": "1"
+      }
+    }
+  }
+}

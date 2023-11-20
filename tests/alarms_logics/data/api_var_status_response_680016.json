@@ -1,0 +1,59 @@
+{
+  "alarms_logics": {
+    "item0": {
+      "sumstate": {
+        "value": "0.00;"
+      }
+    },
+    "item1": {
+      "sumstate": {
+        "value": "1.00;"
+      }
+    },
+    "item2": {
+      "sumstate": {
+        "value": "0.00;"
+      }
+    },
+    "item3": {
+      "sumstate": {
+        "value": "0.00;"
+      }
+    },
+    "item4": {
+      "sumstate": {
+        "value": "0.00;"
+      }
+    },
+    "item5": {
+      "sumstate": {
+        "value": "1.00;"
+      }
+    },
+    "item6": {
+      "sumstate": {
+        "value": "255.00;"
+      }
+    },
+    "item7": {
+      "sumstate": {
+        "value": "0.00;"
+      }
+    },
+    "item8": {
+      "sumstate": {
+        "value": "0.00;"
+      }
+    },
+    "item9": {
+      "sumstate": {
+        "value": "0.00;"
+      }
+    },
+    "item10": {
+      "sumstate": {
+        "value": "1.00;"
+      }
+    }
+  }
+}

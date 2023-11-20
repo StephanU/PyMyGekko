@@ -1,0 +1,69 @@
+{
+  "actions": {
+    "item0": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "item1": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "item2": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "item3": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "item4": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "item5": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "item6": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "item7": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "item8": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "item9": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "item10": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "item11": {
+      "sumstate": {
+        "value": "0;1;0"
+      }
+    },
+    "group0": {
+      "sumstate": {
+        "value": "0"
+      }
+    }
+  }
+}

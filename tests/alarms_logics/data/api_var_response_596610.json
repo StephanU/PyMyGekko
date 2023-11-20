@@ -1,0 +1,45 @@
+{
+  "alarms_logics": {
+    "item0": {
+      "name": "Button",
+      "page": "...",
+      "sumstate": {
+        "value": "actValue[Status]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 500000
+      },
+      "scmd": {
+        "value": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500070
+      }
+    },
+    "item15": {
+      "name": "Klingel",
+      "page": "...",
+      "sumstate": {
+        "value": "actValue[Status]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 501500
+      },
+      "scmd": {
+        "value": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 501570
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "value": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 5000000
+      }
+    }
+  }
+}

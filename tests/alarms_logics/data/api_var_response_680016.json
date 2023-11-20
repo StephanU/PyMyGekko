@@ -1,0 +1,200 @@
+{
+  "alarms_logics": {
+    "item0": {
+      "name": "Wasserbruchsensor",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentValue float[...,...](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500070
+      }
+    },
+    "item1": {
+      "name": "Rauchmelder",
+      "page": "...",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentValue float[...,...](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500170
+      }
+    },
+    "item2": {
+      "name": "Klingel",
+      "page": "...",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentValue float[...,...](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500270
+      }
+    },
+    "item3": {
+      "name": "Licht BW dimmen bei Nacht",
+      "page": "...",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentValue float[...,...](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500370
+      }
+    },
+    "item4": {
+      "name": "Lüftung aus bei VOC Grenz",
+      "page": "...",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentValue float[...,...](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500470
+      }
+    },
+    "item5": {
+      "name": "LED Taster immer an",
+      "page": "...",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentValue float[...,...](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500570
+      }
+    },
+    "item6": {
+      "name": "Hue OG Flurschrank dimmen",
+      "page": "Licht",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentValue float[...,...](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500670
+      }
+    },
+    "item7": {
+      "name": "Aussen Dämmerung",
+      "page": "Licht",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentValue float[...,...](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500770
+      }
+    },
+    "item8": {
+      "name": "BW OG",
+      "page": "Licht",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentValue float[...,...](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500870
+      }
+    },
+    "item9": {
+      "name": "Runter bei Dämmerung ",
+      "page": "Rollläden",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentValue float[...,...](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500970
+      }
+    },
+    "item10": {
+      "name": "Test",
+      "page": "...",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "currentValue float[...,...](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "S44.7 (SetpointValue)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 501070
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 5000000
+      }
+    }
+  }
+}

@@ -4,18 +4,21 @@
 import logging
 
 from aiohttp import ClientSession
+from PyMyGekko.resources.Actions import Action
+from PyMyGekko.resources.Actions import ActionValueAccessor
+from PyMyGekko.resources.AlarmsLogics import AlarmsLogicValueAccessor
 from PyMyGekko.resources.Blinds import Blind
 from PyMyGekko.resources.Blinds import BlindValueAccessor
-from PyMyGekko.resources.EnergyMeters import EnergyMeter
-from PyMyGekko.resources.EnergyMeters import EnergyMeterValueAccessor
+from PyMyGekko.resources.EnergyCosts import EnergyCost
+from PyMyGekko.resources.EnergyCosts import EnergyCostValueAccessor
+from PyMyGekko.resources.HotWaterSystems import HotWaterSystem
+from PyMyGekko.resources.HotWaterSystems import HotWaterSystemValueAccessor
 from PyMyGekko.resources.Lights import Light
 from PyMyGekko.resources.Lights import LightValueAccessor
-from PyMyGekko.resources.Switches import Switch
-from PyMyGekko.resources.Switches import SwitchValueAccessor
-from PyMyGekko.resources.Thermostats import Thermostat
-from PyMyGekko.resources.Thermostats import ThermostatValueAccessor
-from PyMyGekko.resources.WaterHeaters import WaterHeater
-from PyMyGekko.resources.WaterHeaters import WaterHeaterValueAccessor
+from PyMyGekko.resources.Loads import Load
+from PyMyGekko.resources.Loads import LoadValueAccessor
+from PyMyGekko.resources.RoomTemps import RoomTemp
+from PyMyGekko.resources.RoomTemps import RoomTempsValueAccessor
 from yarl import URL
 
 from .DataProvider import DataProvider
@@ -53,16 +56,18 @@ class MyGekkoApiClient:
                 self._url, self._authentication_params, self._session
             )
 
+        self._actions_value_accessor = ActionValueAccessor(self._data_provider)
+        self._alarm_logics_value_accessor = AlarmsLogicValueAccessor(
+            self._data_provider
+        )
         self._blind_value_accessor = BlindValueAccessor(self._data_provider)
+        self._energy_costs_value_accessor = EnergyCostValueAccessor(self._data_provider)
+        self._hot_water_systems_value_accessor = HotWaterSystemValueAccessor(
+            self._data_provider
+        )
         self._light_value_accessor = LightValueAccessor(self._data_provider)
-        self._thermostat_value_accessor = ThermostatValueAccessor(self._data_provider)
-        self._energy_meter_value_accessor = EnergyMeterValueAccessor(
-            self._data_provider
-        )
-        self._switches_value_accessor = SwitchValueAccessor(self._data_provider)
-        self._water_heater_value_accessor = WaterHeaterValueAccessor(
-            self._data_provider
-        )
+        self._loads_value_accessor = LoadValueAccessor(self._data_provider)
+        self._room_temps_value_accessor = RoomTempsValueAccessor(self._data_provider)
 
     async def try_connect(self) -> None:
         _LOGGER.debug("try_connect")
@@ -118,23 +123,29 @@ class MyGekkoApiClient:
 
         return result
 
+    def get_actions(self) -> list[Action]:
+        return self._actions_value_accessor.actions
+
+    def get_alarms_logics(self) -> list[Action]:
+        return self._alarm_logics_value_accessor.alarmsLogics
+
     def get_blinds(self) -> list[Blind]:
         return self._blind_value_accessor.blinds
+
+    def get_energy_costs(self) -> list[EnergyCost]:
+        return self._energy_costs_value_accessor.energyCosts
+
+    def get_hot_water_systems(self) -> list[HotWaterSystem]:
+        return self._hot_water_systems_value_accessor.hotWaterSystems
 
     def get_lights(self) -> list[Light]:
         return self._light_value_accessor.lights
 
-    def get_thermostats(self) -> list[Thermostat]:
-        return self._thermostat_value_accessor.thermostats
+    def get_loads(self) -> list[Load]:
+        return self._loads_value_accessor.loads
 
-    def get_energy_meters(self) -> list[EnergyMeter]:
-        return self._energy_meter_value_accessor.energyMeters
-
-    def get_switches(self) -> list[Switch]:
-        return self._switches_value_accessor.switches
-
-    def get_water_heaters(self) -> list[WaterHeater]:
-        return self._water_heater_value_accessor.waterHeaters
+    def get_room_temps(self) -> list[RoomTemp]:
+        return self._room_temps_value_accessor.roomTemps
 
 
 class MyGekkoError(Exception):

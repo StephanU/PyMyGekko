@@ -6,9 +6,9 @@ from PyMyGekko import DataProvider
 from PyMyGekko.resources import Entity
 
 
-class EnergyMeter(Entity):
+class EnergyCost(Entity):
     def __init__(
-        self, id: str, name: str, value_accessor: EnergyMeterValueAccessor
+        self, id: str, name: str, value_accessor: EnergyCostValueAccessor
     ) -> None:
         super().__init__(id, name)
         self._value_accessor = value_accessor
@@ -19,7 +19,7 @@ class EnergyMeter(Entity):
         return self._value_accessor.get_data(self)
 
 
-class EnergyMeterValueAccessor(DataProvider.DataSubscriberInterface):
+class EnergyCostValueAccessor(DataProvider.DataSubscriberInterface):
     _data = {}
 
     def __init__(self, data_provider: DataProvider.DataProvider):
@@ -75,38 +75,38 @@ class EnergyMeterValueAccessor(DataProvider.DataSubscriberInterface):
 
     def update_status(self, status):
         if status is not None and "energycosts" in status:
-            energyMeters = status["energycosts"]
-            for key in energyMeters:
+            energyCosts = status["energycosts"]
+            for key in energyCosts:
                 if key.startswith("item"):
                     if key not in self._data:
                         self._data[key] = {}
 
                     if (
-                        "sumstate" in energyMeters[key]
-                        and "value" in energyMeters[key]["sumstate"]
+                        "sumstate" in energyCosts[key]
+                        and "value" in energyCosts[key]["sumstate"]
                     ):
                         self._data[key]["values"] = self._decode_values(
-                            energyMeters[key]["sumstate"]["value"]
+                            energyCosts[key]["sumstate"]["value"]
                         )
 
     def update_resources(self, resources):
         if resources is not None and "energycosts" in resources:
-            energyMeters = resources["energycosts"]
-            for key in energyMeters:
+            energyCosts = resources["energycosts"]
+            for key in energyCosts:
                 if key.startswith("item"):
                     if key not in self._data:
                         self._data[key] = {}
-                    self._data[key]["name"] = energyMeters[key]["name"]
+                    self._data[key]["name"] = energyCosts[key]["name"]
 
     @property
-    def energyMeters(self):
-        result: list[EnergyMeter] = []
+    def energyCosts(self):
+        result: list[EnergyCost] = []
         for key in self._data:
-            result.append(EnergyMeter(key, self._data[key]["name"], self))
+            result.append(EnergyCost(key, self._data[key]["name"], self))
 
         return result
 
-    def get_data(self, energy_meter: EnergyMeter) -> dict[str, any]:
+    def get_data(self, energy_meter: EnergyCost) -> dict[str, any]:
         if energy_meter and energy_meter.id:
             if energy_meter.id in self._data and self._data[energy_meter.id]:
                 return self._data[energy_meter.id]

@@ -1,0 +1,205 @@
+{
+  "actions": {
+    "item0": {
+      "name": "Heizung AUS",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 850000
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850070
+      }
+    },
+    "item1": {
+      "name": "Heizung EIN",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 850100
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850170
+      }
+    },
+    "item2": {
+      "name": "Alle Rollos STOP",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 850200
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850270
+      }
+    },
+    "item3": {
+      "name": "Alle Rollo AUF",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 850300
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850370
+      }
+    },
+    "item4": {
+      "name": "Alle Rollo AB",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 850400
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850470
+      }
+    },
+    "item5": {
+      "name": "Türöffner",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 850500
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850570
+      }
+    },
+    "item6": {
+      "name": "Rollo EG Auf",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 850600
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850670
+      }
+    },
+    "item7": {
+      "name": "Rollo EG Ab",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 850700
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850770
+      }
+    },
+    "item8": {
+      "name": "Rollo EG Stop",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 850800
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850870
+      }
+    },
+    "item9": {
+      "name": "Rollo OG Auf",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 850900
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 850970
+      }
+    },
+    "item10": {
+      "name": "Rollo OG Ab",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 851000
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 851070
+      }
+    },
+    "item11": {
+      "name": "Rollo OG Stop",
+      "page": "...",
+      "sumstate": {
+        "value": "state[0=Off|1=On]; startcondition[0=Off|1=On]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 851100
+      },
+      "scmd": {
+        "value": "-1|1|T (Stop|Start|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 851170
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "value": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 8500000
+      }
+    }
+  }
+}

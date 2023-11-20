@@ -69,11 +69,11 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
 
                     if "sumstate" in lights[key] and "value" in lights[key]["sumstate"]:
                         (
-                            self._data[key]["state"],
-                            self._data[key]["dimValue"],
-                            self._data[key]["RGBcolor"],
-                            self._data[key]["tunableWhite"],
-                            self._data[key]["sum"],
+                            self._data[key]["currentState"],
+                            self._data[key]["dimLevel"],
+                            self._data[key]["rgbColor"],
+                            self._data[key]["tunableWhiteLevel"],
+                            self._data[key]["elementInfo"],
                             *other,
                         ) = lights[key]["sumstate"]["value"].split(";")
 
@@ -100,11 +100,11 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
         if light and light.id:
             if light.id in self._data:
                 data = self._data[light.id]
-                if "state" in data and data["state"]:
+                if "currentState" in data and data["currentState"]:
                     result.append(LightFeature.ON_OFF)
-                if "dimValue" in data and data["dimValue"]:
+                if "dimLevel" in data and data["dimLevel"]:
                     result.append(LightFeature.DIMMABLE)
-                if "RGBcolor" in data and data["RGBcolor"]:
+                if "rgbColor" in data and data["rgbColor"]:
                     result.append(LightFeature.RGB_COLOR)
 
         return result
@@ -113,10 +113,10 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
         if light and light.id:
             if (
                 light.id in self._data
-                and "state" in self._data[light.id]
-                and self._data[light.id]["state"]
+                and "currentState" in self._data[light.id]
+                and self._data[light.id]["currentState"]
             ):
-                return LightState(int(self._data[light.id]["state"]))
+                return LightState(int(self._data[light.id]["currentState"]))
         return None
 
     async def set_state(self, light: Light, state: LightState) -> None:
@@ -127,10 +127,10 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
         if light and light.id:
             if (
                 light.id in self._data
-                and "dimValue" in self._data[light.id]
-                and self._data[light.id]["dimValue"]
+                and "dimLevel" in self._data[light.id]
+                and self._data[light.id]["dimLevel"]
             ):
-                return ceil(float(self._data[light.id]["dimValue"]))
+                return ceil(float(self._data[light.id]["dimLevel"]))
         return None
 
     async def set_brightness(self, light: Light, brightness: int) -> None:
@@ -143,10 +143,10 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
         if light and light.id:
             if (
                 light.id in self._data
-                and "RGBcolor" in self._data[light.id]
-                and self._data[light.id]["RGBcolor"]
+                and "rgbColor" in self._data[light.id]
+                and self._data[light.id]["rgbColor"]
             ):
-                decimal_rgb_color = int(self._data[light.id]["RGBcolor"])
+                decimal_rgb_color = int(self._data[light.id]["rgbColor"])
                 return ColorUtilities.decimal_to_rgb(decimal_rgb_color)
         return None
 

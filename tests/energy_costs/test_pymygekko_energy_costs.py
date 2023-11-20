@@ -5,12 +5,12 @@ from PyMyGekko import MyGekkoApiClient
 
 
 async def var_response(request):
-    varResponseFile = open("tests/energy_meters/api_var_response.json")
+    varResponseFile = open("tests/energy_costs/api_var_response.json")
     return web.Response(status=200, body=varResponseFile.read())
 
 
 async def var_status_response(request):
-    statusResponseFile = open("tests/energy_meters/api_var_status_response.json")
+    statusResponseFile = open("tests/energy_costs/api_var_status_response.json")
     return web.Response(status=200, body=statusResponseFile.read())
 
 
@@ -23,7 +23,7 @@ def mock_server(aiohttp_server):
 
 
 @pytest.mark.asyncio
-async def test_get_energy_meters(mock_server):
+async def test_get_energy_costs(mock_server):
     server = await mock_server
     async with ClientSession() as session:
         api = MyGekkoApiClient(
@@ -37,15 +37,15 @@ async def test_get_energy_meters(mock_server):
         )
 
         await api.read_data()
-        energy_meters = api.get_energy_meters()
+        energy_costs = api.get_energy_costs()
 
-        assert energy_meters is not None
-        assert len(energy_meters) == 2
+        assert energy_costs is not None
+        assert len(energy_costs) == 2
 
-        assert energy_meters[0].id == "item0"
-        assert energy_meters[0].name == "Hauptstromzähler"
-        assert len(energy_meters[0].sensor_data) == 2
-        assert len(energy_meters[0].sensor_data["values"]) == 20
+        assert energy_costs[0].id == "item0"
+        assert energy_costs[0].name == "Hauptstromzähler"
+        assert len(energy_costs[0].sensor_data) == 2
+        assert len(energy_costs[0].sensor_data["values"]) == 20
 
-        assert energy_meters[1].id == "item1"
-        assert energy_meters[1].name == "Wärmemengenzähler"
+        assert energy_costs[1].id == "item1"
+        assert energy_costs[1].name == "Wärmemengenzähler"

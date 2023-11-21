@@ -46,6 +46,34 @@ async def test_get_energy_costs(mock_server):
         assert energy_costs[0].name == "Hauptstromzähler"
         assert len(energy_costs[0].sensor_data) == 2
         assert len(energy_costs[0].sensor_data["values"]) == 20
+        assert energy_costs[0].sensor_data["name"] == "Hauptstromzähler"
+
+        assert energy_costs[0].sensor_data["values"][0]["name"] == "actPower"
+        assert energy_costs[0].sensor_data["values"][0]["unit"] == "kW"
+        assert energy_costs[0].sensor_data["values"][0]["value"] == 0.11
+
+        assert energy_costs[0].sensor_data["values"][1]["name"] == "energyToday"
+        assert energy_costs[0].sensor_data["values"][1]["unit"] == "kWh"
+        assert energy_costs[0].sensor_data["values"][1]["value"] == 12.3
+
+        assert energy_costs[0].sensor_data["values"][2]["name"] == "energyMonth"
+        assert energy_costs[0].sensor_data["values"][2]["unit"] == "kWh"
+        assert energy_costs[0].sensor_data["values"][2]["value"] == 113.6
 
         assert energy_costs[1].id == "item1"
         assert energy_costs[1].name == "Wärmemengenzähler"
+        assert len(energy_costs[1].sensor_data) == 2
+        assert len(energy_costs[1].sensor_data["values"]) == 20
+        assert energy_costs[1].sensor_data["name"] == "Wärmemengenzähler"
+
+        assert energy_costs[1].sensor_data["values"][0]["name"] == "actPower"
+        assert energy_costs[1].sensor_data["values"][0]["unit"] == "kW"
+        assert energy_costs[1].sensor_data["values"][0]["value"] == 0.7
+
+        assert energy_costs[1].sensor_data["values"][1]["name"] == "energyToday"
+        assert energy_costs[1].sensor_data["values"][1]["unit"] == "kWh"
+        assert energy_costs[1].sensor_data["values"][1]["value"] == 19.0
+
+        assert energy_costs[1].sensor_data["values"][2]["name"] == "energyMonth"
+        assert energy_costs[1].sensor_data["values"][2]["unit"] == "kWh"
+        assert energy_costs[1].sensor_data["values"][2]["value"] == 338.0

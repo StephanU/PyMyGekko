@@ -28,7 +28,7 @@ class EnergyCostValueAccessor(DataProvider.DataSubscriberInterface):
         self._data_provider.subscribe(self)
 
     def _transform_value(self, description: str, value: str) -> any:
-        m = re.match(r"([^\[]*)\[[^\]]*\]", description)
+        m = re.match(r"([^\[]*)\[([^\]]*)\]", description)
 
         if m is None:
             return None
@@ -37,7 +37,7 @@ class EnergyCostValueAccessor(DataProvider.DataSubscriberInterface):
 
         unit = None if len(m.groups()) == 1 else m.group(2)
 
-        if unit is not None and unit != "Unit":
+        if unit is not None and unit != "Unit" and unit != "DateTime":
             typed_value = float(value)
         else:
             typed_value = value

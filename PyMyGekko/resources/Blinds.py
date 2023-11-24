@@ -51,6 +51,7 @@ class BlindFeature(IntEnum):
     OPEN_CLOSE_STOP = 0
     SET_POSITION = 1
     SET_TILT_POSITION = 2
+    OPEN_CLOSE = 3
 
 
 class BlindValueAccessor(DataProvider.DataSubscriberInterface):
@@ -81,11 +82,30 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
                             ";",
                         )
 
+                if key.startswith("group"):
+                    if key not in self._data:
+                        self._data[key] = {}
+
+                    if "sumstate" in blinds[key] and "value" in blinds[key]["sumstate"]:
+                        (
+                            self._data[key]["State"],
+                            *other,
+                        ) = blinds[key][
+                            "sumstate"
+                        ]["value"].split(
+                            ";",
+                        )
+
     def update_resources(self, resources):
         if resources is not None and "blinds" in resources:
             blinds = resources["blinds"]
             for key in blinds:
                 if key.startswith("item"):
+                    if key not in self._data:
+                        self._data[key] = {}
+                    self._data[key]["name"] = blinds[key]["name"]
+
+                if key.startswith("group"):
                     if key not in self._data:
                         self._data[key] = {}
                     self._data[key]["name"] = blinds[key]["name"]
@@ -104,6 +124,10 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
         if blind and blind.id:
             if blind.id in self._data:
                 data = self._data[blind.id]
+                if blind.id.startswith("group"):
+                    """open/close feature is default for groups"""
+                    result.append(BlindFeature.OPEN_CLOSE)
+
                 if "currentState" in data and data["currentState"]:
                     result.append(BlindFeature.OPEN_CLOSE_STOP)
 
@@ -155,7 +179,7 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
                 and self._data[blind.id]["currentState"]
             ):
                 return BlindState(int(self._data[blind.id]["currentState"]))
-        return BlindState.NONE
+        return None
 
     async def set_state(self, blind: Blind, state: BlindState) -> None:
         if blind and blind.id:

@@ -42,7 +42,7 @@ async def test_get_blinds(mock_server):
         blinds = api.get_blinds()
 
         assert blinds is not None
-        assert len(blinds) == 10
+        assert len(blinds) == 13
 
         assert blinds[0].id == "item0"
         assert blinds[0].name == "Wohnen Terrasse"
@@ -134,3 +134,20 @@ async def test_get_blinds(mock_server):
         assert BlindFeature.OPEN_CLOSE_STOP in blinds[9].supported_features
         assert BlindFeature.SET_POSITION in blinds[9].supported_features
         assert BlindFeature.SET_TILT_POSITION in blinds[9].supported_features
+
+        assert blinds[10].id == "group0"
+        assert blinds[10].name == ""
+        assert blinds[10].position is None
+        assert blinds[10].tilt_position is None
+        assert blinds[10].state is None
+        await blinds[10].set_state(BlindState.UP)
+        assert len(blinds[10].supported_features) == 1
+        assert BlindFeature.OPEN_CLOSE in blinds[10].supported_features
+
+        assert blinds[11].id == "group1"
+        assert blinds[11].name == "EG"
+        assert blinds[11].position is None
+        assert blinds[11].tilt_position is None
+        assert blinds[11].state is None
+        assert len(blinds[11].supported_features) == 1
+        assert BlindFeature.OPEN_CLOSE in blinds[11].supported_features

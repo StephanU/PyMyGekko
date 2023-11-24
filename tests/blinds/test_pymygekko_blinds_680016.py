@@ -1,9 +1,13 @@
+import logging
+
 import pytest
 from aiohttp import ClientSession
 from aiohttp import web
 from PyMyGekko import MyGekkoApiClient
 from PyMyGekko.resources.Blinds import BlindFeature
 from PyMyGekko.resources.Blinds import BlindState
+
+_LOGGER: logging.Logger = logging.getLogger(__name__)
 
 
 async def var_response(request):
@@ -26,6 +30,8 @@ def mock_server(aiohttp_server):
 
 @pytest.mark.asyncio
 async def test_get_blinds(mock_server):
+    _LOGGER.setLevel(logging.DEBUG)
+
     server = await mock_server
     async with ClientSession() as session:
         api = MyGekkoApiClient(
@@ -42,7 +48,7 @@ async def test_get_blinds(mock_server):
         blinds = api.get_blinds()
 
         assert blinds is not None
-        assert len(blinds) == 9
+        assert len(blinds) == 18
 
         assert blinds[0].id == "item1"
         assert blinds[0].name == "Rollo Schlafzimmer links"
@@ -124,3 +130,20 @@ async def test_get_blinds(mock_server):
         assert len(blinds[8].supported_features) == 2
         assert BlindFeature.OPEN_CLOSE_STOP in blinds[8].supported_features
         assert BlindFeature.SET_POSITION in blinds[8].supported_features
+
+        assert blinds[9].id == "group0"
+        assert blinds[9].name == "EG"
+        assert blinds[9].position is None
+        assert blinds[9].tilt_position is None
+        assert blinds[9].state is None
+        await blinds[9].set_state(BlindState.UP)
+        assert len(blinds[9].supported_features) == 1
+        assert BlindFeature.OPEN_CLOSE in blinds[9].supported_features
+
+        assert blinds[10].id == "group1"
+        assert blinds[10].name == "OG"
+        assert blinds[10].position is None
+        assert blinds[10].tilt_position is None
+        assert blinds[10].state is None
+        assert len(blinds[10].supported_features) == 1
+        assert BlindFeature.OPEN_CLOSE in blinds[10].supported_features

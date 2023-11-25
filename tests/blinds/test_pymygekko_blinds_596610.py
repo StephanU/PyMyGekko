@@ -139,7 +139,7 @@ async def test_get_blinds(mock_server):
         assert blinds[10].name == ""
         assert blinds[10].position is None
         assert blinds[10].tilt_position is None
-        assert blinds[10].state is None
+        assert blinds[10].state == BlindState.STOP
         await blinds[10].set_state(BlindState.UP)
         assert len(blinds[10].supported_features) == 1
         assert BlindFeature.OPEN_CLOSE in blinds[10].supported_features
@@ -148,6 +148,6 @@ async def test_get_blinds(mock_server):
         assert blinds[11].name == "EG"
         assert blinds[11].position is None
         assert blinds[11].tilt_position is None
-        assert blinds[11].state is None
+        assert blinds[11].state == BlindState.STOP
         assert len(blinds[11].supported_features) == 1
         assert BlindFeature.OPEN_CLOSE in blinds[11].supported_features

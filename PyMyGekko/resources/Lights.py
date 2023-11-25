@@ -77,11 +77,30 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
                             *other,
                         ) = lights[key]["sumstate"]["value"].split(";")
 
+                if key.startswith("group"):
+                    if key not in self._data:
+                        self._data[key] = {}
+
+                    if "sumstate" in lights[key] and "value" in lights[key]["sumstate"]:
+                        (
+                            self._data[key]["currentState"],
+                            *other,
+                        ) = lights[key][
+                            "sumstate"
+                        ]["value"].split(
+                            ";",
+                        )
+
     def update_resources(self, resources):
         if resources is not None and "lights" in resources:
             lights = resources["lights"]
             for key in lights:
                 if key.startswith("item"):
+                    if key not in self._data:
+                        self._data[key] = {}
+                    self._data[key]["name"] = lights[key]["name"]
+
+                if key.startswith("group"):
                     if key not in self._data:
                         self._data[key] = {}
                     self._data[key]["name"] = lights[key]["name"]
@@ -100,10 +119,18 @@ class LightValueAccessor(DataProvider.DataSubscriberInterface):
         if light and light.id:
             if light.id in self._data:
                 data = self._data[light.id]
+
+                if light.id.startswith("group"):
+                    """on/off feature is the only feature for groups"""
+                    result.append(LightFeature.ON_OFF)
+                    return result
+
                 if "currentState" in data and data["currentState"]:
                     result.append(LightFeature.ON_OFF)
+
                 if "dimLevel" in data and data["dimLevel"]:
                     result.append(LightFeature.DIMMABLE)
+
                 if "rgbColor" in data and data["rgbColor"]:
                     result.append(LightFeature.RGB_COLOR)
 

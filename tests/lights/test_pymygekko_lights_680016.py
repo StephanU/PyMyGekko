@@ -42,7 +42,7 @@ async def test_get_lights(mock_server):
         lights = api.get_lights()
 
         assert lights is not None
-        assert len(lights) == 3
+        assert len(lights) == 5
 
         assert lights[0].id == "item0"
         assert lights[0].name == "Büro 1 Licht"
@@ -61,3 +61,19 @@ async def test_get_lights(mock_server):
         assert lights[2].state == LightState.OFF
         assert len(lights[2].supported_features) == 1
         assert LightFeature.ON_OFF in lights[1].supported_features
+
+        assert lights[3].id == "group0"
+        assert lights[3].name == "ALLE"
+        assert lights[3].state is None
+        assert lights[3].brightness is None
+        assert lights[3].rgb_color is None
+        assert len(lights[3].supported_features) == 1
+        assert LightFeature.ON_OFF in lights[3].supported_features
+
+        assert lights[4].id == "group1"
+        assert lights[4].name == "Licht Aussen"
+        assert lights[4].state is None
+        assert lights[4].brightness is None
+        assert lights[4].rgb_color is None
+        assert len(lights[3].supported_features) == 1
+        assert LightFeature.ON_OFF in lights[4].supported_features

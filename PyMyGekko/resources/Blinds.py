@@ -88,7 +88,7 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
 
                     if "sumstate" in blinds[key] and "value" in blinds[key]["sumstate"]:
                         (
-                            self._data[key]["State"],
+                            self._data[key]["currentState"],
                             *other,
                         ) = blinds[key][
                             "sumstate"
@@ -125,8 +125,9 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
             if blind.id in self._data:
                 data = self._data[blind.id]
                 if blind.id.startswith("group"):
-                    """open/close feature is default for groups"""
+                    """open/close feature is the only feature for groups"""
                     result.append(BlindFeature.OPEN_CLOSE)
+                    return result
 
                 if "currentState" in data and data["currentState"]:
                     result.append(BlindFeature.OPEN_CLOSE_STOP)

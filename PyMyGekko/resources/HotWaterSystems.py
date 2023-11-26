@@ -50,6 +50,8 @@ class HotWaterSystemState(IntEnum):
 class HotWaterSystemFeature(IntEnum):
     ON_OFF = 0
     TARGET_TEMPERATURE = 1
+    BOTTOM_TEMPERATURE = 2
+    TOP_TEMPERATURE = 3
 
 
 class HotWaterSystemValueAccessor(DataProvider.DataSubscriberInterface):
@@ -113,6 +115,10 @@ class HotWaterSystemValueAccessor(DataProvider.DataSubscriberInterface):
                     result.append(HotWaterSystemFeature.ON_OFF)
                 if "setpointTemp" in data and data["setpointTemp"]:
                     result.append(HotWaterSystemFeature.TARGET_TEMPERATURE)
+                if "bottomTemp" in data and data["bottomTemp"]:
+                    result.append(HotWaterSystemFeature.BOTTOM_TEMPERATURE)
+                if "topTemp" in data and data["topTemp"]:
+                    result.append(HotWaterSystemFeature.TOP_TEMPERATURE)
 
         return result
 

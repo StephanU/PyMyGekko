@@ -41,6 +41,14 @@ class RoomTemp(Entity):
     async def set_target_temperature(self, target_temperature: float):
         await self._value_accessor.set_target_temperature(self, target_temperature)
 
+    @property
+    def humidity(self) -> float | None:
+        return self._value_accessor.get_humidity(self)
+
+    @property
+    def air_quality(self) -> float | None:
+        return self._value_accessor.get_air_quality(self)
+
 
 class RoomTempsMode(IntEnum):
     Off = 1
@@ -52,6 +60,8 @@ class RoomTempsMode(IntEnum):
 
 class RoomTempsFeature(IntEnum):
     TARGET_TEMPERATURE = 0
+    AIR_QUALITY = 1
+    HUMIDITY = 2
 
 
 class RoomTempsValueAccessor(DataProvider.DataSubscriberInterface):
@@ -118,6 +128,12 @@ class RoomTempsValueAccessor(DataProvider.DataSubscriberInterface):
                 ):
                     result.append(RoomTempsFeature.TARGET_TEMPERATURE)
 
+                if "relativeHumidityLevel" in data and data["relativeHumidityLevel"]:
+                    result.append(RoomTempsFeature.HUMIDITY)
+
+                if "airQualityLevel" in data and data["airQualityLevel"]:
+                    result.append(RoomTempsFeature.AIR_QUALITY)
+
         return result
 
     def get_current_temperature(self, roomTemp: RoomTemp) -> float | None:
@@ -165,3 +181,23 @@ class RoomTempsValueAccessor(DataProvider.DataSubscriberInterface):
             await self._data_provider.write_data(
                 roomTemp.resource_path, "M" + str(workingMode.value)
             )
+
+    def get_humidity(self, roomTemp: RoomTemp) -> float | None:
+        if roomTemp and roomTemp.id:
+            if (
+                roomTemp.id in self._data
+                and "relativeHumidityLevel" in self._data[roomTemp.id]
+                and self._data[roomTemp.id]["relativeHumidityLevel"]
+            ):
+                return float(self._data[roomTemp.id]["relativeHumidityLevel"])
+        return None
+
+    def get_air_quality(self, roomTemp: RoomTemp) -> float | None:
+        if roomTemp and roomTemp.id:
+            if (
+                roomTemp.id in self._data
+                and "airQualityLevel" in self._data[roomTemp.id]
+                and self._data[roomTemp.id]["airQualityLevel"]
+            ):
+                return float(self._data[roomTemp.id]["airQualityLevel"])
+        return None

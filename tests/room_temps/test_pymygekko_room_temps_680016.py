@@ -64,8 +64,10 @@ async def test_get_room_temps(mock_server):
         assert roomTemps[2].name == "HWR"
         assert roomTemps[2].target_temperature == 20.00
         assert roomTemps[2].working_mode == RoomTempsMode.Comfort
-        assert len(roomTemps[2].supported_features) == 1
+        assert roomTemps[2].air_quality == 560.0
+        assert len(roomTemps[2].supported_features) == 2
         assert RoomTempsFeature.TARGET_TEMPERATURE in roomTemps[2].supported_features
+        assert RoomTempsFeature.AIR_QUALITY in roomTemps[2].supported_features
 
         assert roomTemps[3].id == "item3"
         assert roomTemps[3].name == "WC EG"

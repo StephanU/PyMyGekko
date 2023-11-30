@@ -24,6 +24,10 @@ class Action(Entity):
     async def set_state(self, state: ActionState):
         await self._value_accessor.set_state(self, state)
 
+    @property
+    def start_condition_state(self) -> ActionState | None:
+        return self._value_accessor.get_start_condition_state(self)
+
 
 class ActionState(IntEnum):
     OFF = 0
@@ -102,3 +106,13 @@ class ActionValueAccessor(DataProvider.DataSubscriberInterface):
     async def set_state(self, action: Action, state: ActionState) -> None:
         if action and action.id:
             await self._data_provider.write_data(action._resource_path, state)
+
+    def get_start_condition_state(self, action: Action) -> ActionState:
+        if action and action.id:
+            if (
+                action.id in self._data
+                and "startConditionState" in self._data[action.id]
+                and self._data[action.id]["startConditionState"]
+            ):
+                return ActionState(int(self._data[action.id]["startConditionState"]))
+        return None

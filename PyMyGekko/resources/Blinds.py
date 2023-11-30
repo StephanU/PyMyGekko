@@ -38,6 +38,10 @@ class Blind(Entity):
     async def set_tilt_position(self, position: float):
         await self._value_accessor.set_tilt_position(self, position)
 
+    @property
+    def element_info(self) -> BlindElementInfo | None:
+        return self._value_accessor.get_element_info(self)
+
 
 class BlindState(IntEnum):
     HOLD_DOWN = -2
@@ -52,6 +56,14 @@ class BlindFeature(IntEnum):
     SET_POSITION = 1
     SET_TILT_POSITION = 2
     OPEN_CLOSE = 3
+
+
+class BlindElementInfo(IntEnum):
+    OK = 0
+    MANUAL_OFF = 1
+    MANUAL_ON = 2
+    LOCKED = 3
+    ALARM = 4
 
 
 class BlindValueAccessor(DataProvider.DataSubscriberInterface):
@@ -185,3 +197,13 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
     async def set_state(self, blind: Blind, state: BlindState) -> None:
         if blind and blind.id:
             await self._data_provider.write_data(blind._resource_path, state)
+
+    def get_element_info(self, blind: Blind) -> BlindElementInfo:
+        if blind and blind.id:
+            if (
+                blind.id in self._data
+                and "elementInfo" in self._data[blind.id]
+                and self._data[blind.id]["elementInfo"]
+            ):
+                return BlindElementInfo(int(self._data[blind.id]["elementInfo"]))
+        return None

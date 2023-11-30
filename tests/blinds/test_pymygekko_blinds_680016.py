@@ -4,6 +4,7 @@ import pytest
 from aiohttp import ClientSession
 from aiohttp import web
 from PyMyGekko import MyGekkoApiClient
+from PyMyGekko.resources.Blinds import BlindElementInfo
 from PyMyGekko.resources.Blinds import BlindFeature
 from PyMyGekko.resources.Blinds import BlindState
 
@@ -55,6 +56,7 @@ async def test_get_blinds(mock_server):
         assert blinds[0].position == 100.00
         assert blinds[0].tilt_position is None
         assert blinds[0].state == BlindState.STOP
+        assert blinds[0].element_info == BlindElementInfo.OK
         assert len(blinds[0].supported_features) == 2
         assert BlindFeature.OPEN_CLOSE_STOP in blinds[0].supported_features
         assert BlindFeature.SET_POSITION in blinds[0].supported_features
@@ -64,6 +66,7 @@ async def test_get_blinds(mock_server):
         assert blinds[1].position == 0.31
         assert blinds[1].tilt_position is None
         assert blinds[1].state == BlindState.STOP
+        assert blinds[1].element_info == BlindElementInfo.OK
         assert len(blinds[1].supported_features) == 2
         assert BlindFeature.OPEN_CLOSE_STOP in blinds[1].supported_features
         assert BlindFeature.SET_POSITION in blinds[1].supported_features
@@ -73,6 +76,7 @@ async def test_get_blinds(mock_server):
         assert blinds[2].position == 0.0
         assert blinds[2].tilt_position is None
         assert blinds[2].state == BlindState.STOP
+        assert blinds[2].element_info == BlindElementInfo.OK
         assert len(blinds[2].supported_features) == 2
         assert BlindFeature.OPEN_CLOSE_STOP in blinds[2].supported_features
         assert BlindFeature.SET_POSITION in blinds[2].supported_features
@@ -82,6 +86,7 @@ async def test_get_blinds(mock_server):
         assert blinds[3].position == 0.3
         assert blinds[3].tilt_position is None
         assert blinds[3].state == BlindState.STOP
+        assert blinds[3].element_info == BlindElementInfo.OK
         assert len(blinds[3].supported_features) == 2
         assert BlindFeature.OPEN_CLOSE_STOP in blinds[3].supported_features
         assert BlindFeature.SET_POSITION in blinds[3].supported_features
@@ -91,6 +96,7 @@ async def test_get_blinds(mock_server):
         assert blinds[4].position == 0.0
         assert blinds[4].tilt_position is None
         assert blinds[4].state == BlindState.STOP
+        assert blinds[4].element_info == BlindElementInfo.OK
         assert len(blinds[4].supported_features) == 2
         assert BlindFeature.OPEN_CLOSE_STOP in blinds[4].supported_features
         assert BlindFeature.SET_POSITION in blinds[4].supported_features
@@ -100,6 +106,7 @@ async def test_get_blinds(mock_server):
         assert blinds[5].position == 0.42
         assert blinds[5].tilt_position is None
         assert blinds[5].state == BlindState.STOP
+        assert blinds[5].element_info == BlindElementInfo.OK
         assert len(blinds[5].supported_features) == 2
         assert BlindFeature.OPEN_CLOSE_STOP in blinds[5].supported_features
         assert BlindFeature.SET_POSITION in blinds[5].supported_features
@@ -109,6 +116,7 @@ async def test_get_blinds(mock_server):
         assert blinds[6].position == 0.0
         assert blinds[6].tilt_position is None
         assert blinds[6].state == BlindState.DOWN
+        assert blinds[6].element_info == BlindElementInfo.OK
         assert len(blinds[6].supported_features) == 2
         assert BlindFeature.OPEN_CLOSE_STOP in blinds[6].supported_features
         assert BlindFeature.SET_POSITION in blinds[6].supported_features
@@ -118,6 +126,7 @@ async def test_get_blinds(mock_server):
         assert blinds[7].position == 0.0
         assert blinds[7].tilt_position is None
         assert blinds[7].state == BlindState.STOP
+        assert blinds[7].element_info == BlindElementInfo.OK
         assert len(blinds[7].supported_features) == 2
         assert BlindFeature.OPEN_CLOSE_STOP in blinds[7].supported_features
         assert BlindFeature.SET_POSITION in blinds[7].supported_features
@@ -127,6 +136,7 @@ async def test_get_blinds(mock_server):
         assert blinds[8].position == 0.42
         assert blinds[8].tilt_position is None
         assert blinds[8].state == BlindState.STOP
+        assert blinds[8].element_info == BlindElementInfo.OK
         assert len(blinds[8].supported_features) == 2
         assert BlindFeature.OPEN_CLOSE_STOP in blinds[8].supported_features
         assert BlindFeature.SET_POSITION in blinds[8].supported_features

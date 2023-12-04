@@ -1,6 +1,6 @@
 # PyMyGekko
 
-Python Library to access the myGEKKO Query API. This project is a work in progress. No guarantee to work until 1.0.0
+Python Library to access the myGEKKO Query API.
 
 [![PyPI - Version](https://img.shields.io/pypi/v/pymygekko.svg)](https://pypi.org/project/pymygekko)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pymygekko.svg)](https://pypi.org/project/pymygekko)
@@ -17,6 +17,30 @@ Python Library to access the myGEKKO Query API. This project is a work in progre
 
 ```console
 pip install pymygekko
+```
+
+## Usage
+
+```python
+from aiohttp import ClientSession
+
+from PyMyGekko import MyGekkoApiClient
+from PyMyGekko.resources.Lights import LightState
+
+async with ClientSession() as session:
+    api = MyGekkoApiClient(
+        "USERNAME",
+        "APIKEY",
+        "GEKKOID",
+        session,
+    )
+
+    await api.read_data()
+
+    # Read lights
+    lights = api.get_lights()
+    # assuming there is a light...
+    await lights[0].set_state(LightState.ON)
 ```
 
 ## License

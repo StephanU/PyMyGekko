@@ -44,19 +44,19 @@ async def test_get_loads(mock_server):
         assert loads is not None
         assert len(loads) == 3
 
-        assert loads[0].id == "item0"
+        assert loads[0].entity_id == "item0"
         assert loads[0].name == "Balkon Steckdose"
         assert loads[0].state == LoadState.ON_PERMANENT
         assert len(loads[0].supported_features) == 1
         assert LoadFeature.ON_OFF in loads[0].supported_features
 
-        assert loads[1].id == "item1"
+        assert loads[1].entity_id == "item1"
         assert loads[1].name == "Terrasse Steckdose"
         assert loads[1].state == LoadState.OFF
         assert len(loads[1].supported_features) == 1
         assert LoadFeature.ON_OFF in loads[1].supported_features
 
-        assert loads[2].id == "item2"
+        assert loads[2].entity_id == "item2"
         assert loads[2].name == "HWR Steckdose"
         assert loads[2].state == LoadState.OFF
         assert len(loads[2].supported_features) == 1

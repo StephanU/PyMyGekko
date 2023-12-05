@@ -46,7 +46,7 @@ async def test_get_hotwater_systems(mock_server):
         assert hotWaterSystems is not None
         assert len(hotWaterSystems) == 1
 
-        assert hotWaterSystems[0].id == "item0"
+        assert hotWaterSystems[0].entity_id == "item0"
         assert hotWaterSystems[0].name == "Warmwasserspeicher"
         assert hotWaterSystems[0].state == HotWaterSystemState.ON
         assert hotWaterSystems[0].target_temperature == 55.0

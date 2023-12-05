@@ -44,25 +44,25 @@ async def test_get_lights(mock_server):
         assert lights is not None
         assert len(lights) == 5
 
-        assert lights[0].id == "item0"
+        assert lights[0].entity_id == "item0"
         assert lights[0].name == "Büro 1 Licht"
         assert lights[0].state == LightState.ON
         assert len(lights[0].supported_features) == 1
         assert LightFeature.ON_OFF in lights[0].supported_features
 
-        assert lights[1].id == "item1"
+        assert lights[1].entity_id == "item1"
         assert lights[1].name == "Büro 2 Licht"
         assert lights[1].state == LightState.OFF
         assert len(lights[1].supported_features) == 1
         assert LightFeature.ON_OFF in lights[1].supported_features
 
-        assert lights[2].id == "item2"
+        assert lights[2].entity_id == "item2"
         assert lights[2].name == "Büro Küche Licht"
         assert lights[2].state == LightState.OFF
         assert len(lights[2].supported_features) == 1
         assert LightFeature.ON_OFF in lights[1].supported_features
 
-        assert lights[3].id == "group0"
+        assert lights[3].entity_id == "group0"
         assert lights[3].name == "ALLE"
         assert lights[3].state is None
         assert lights[3].brightness is None
@@ -70,7 +70,7 @@ async def test_get_lights(mock_server):
         assert len(lights[3].supported_features) == 1
         assert LightFeature.ON_OFF in lights[3].supported_features
 
-        assert lights[4].id == "group1"
+        assert lights[4].entity_id == "group1"
         assert lights[4].name == "Licht Aussen"
         assert lights[4].state is None
         assert lights[4].brightness is None

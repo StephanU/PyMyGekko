@@ -1,3 +1,4 @@
+"""Base implementation of the data provider"""
 import json
 import logging
 import pkgutil
@@ -7,25 +8,48 @@ from abc import abstractmethod
 from aiohttp import ClientSession
 from yarl import URL
 
+from .resources import Entity
 
 _LOGGER: logging.Logger = logging.getLogger(__name__)
 
 
 class DataSubscriberInterface:
-    def update_status(self, status):
-        pass
+    """Interface for data subscribers"""
 
-    def update_resources(self, resource):
-        pass
+    def update_status(self, status):
+        """Method called on status updates"""
+
+    def update_resources(self, resources):
+        """Method called on resources updates"""
+
+
+class EntityValueAccessor(DataSubscriberInterface):
+    """Base class for entity values accessors"""
+
+    _data = {}
+
+    def get_value(self, entity: Entity, value_name: str) -> str | None:
+        """Returns a data value of this entity"""
+        if entity and entity.entity_id:
+            if (
+                entity.entity_id in self._data
+                and value_name in self._data[entity.entity_id]
+                and self._data[entity.entity_id][value_name]
+            ):
+                return self._data[entity.entity_id][value_name]
+        return None
 
 
 class DataProviderBase(ABC):
+    """Base class for data providers"""
+
     _subscriber: list[DataSubscriberInterface] = []
     _status = None
     _resources = None
 
     @property
     def resources(self):
+        """returns the read resources"""
         return self._resources
 
     @resources.setter
@@ -36,6 +60,7 @@ class DataProviderBase(ABC):
 
     @property
     def status(self):
+        """returns the read status"""
         return self._status
 
     @status.setter
@@ -45,18 +70,21 @@ class DataProviderBase(ABC):
             subscriber.update_status(self._status)
 
     def subscribe(self, subscriber: DataSubscriberInterface):
+        """Method to subscribe to data changes."""
         self._subscriber.append(subscriber)
 
     @abstractmethod
     async def read_data(self) -> None:
-        ...
+        """Reads data from the MyGekko API"""
 
     @abstractmethod
     async def write_data(self, resource_path: str, value: str):
-        ...
+        """Sends data to the MyGekko API"""
 
 
 class DummyDataProvider(DataProviderBase):
+    """Dummy data provider returning static test data"""
+
     async def read_data(self) -> None:
         var_demo_data = pkgutil.get_data(__name__, "api_var_demo_data.json")
         self.resources = json.loads(var_demo_data)
@@ -69,6 +97,8 @@ class DummyDataProvider(DataProviderBase):
 
 
 class DataProvider(DataProviderBase):
+    """Data provider accessing the MyGekko API"""
+
     def __init__(
         self, url: URL, authentication_params: dict[str, str], session: ClientSession
     ):
@@ -83,9 +113,9 @@ class DataProvider(DataProviderBase):
             params=self._authentication_params,
         ) as resp:
             if resp.status == 200:
-                responseText = await resp.text()
+                response_text = await resp.text()
                 try:
-                    self.resources = json.loads(responseText)
+                    self.resources = json.loads(response_text)
                 except Exception:
                     _LOGGER.exception("Json Parsing the response failed")
             else:
@@ -100,9 +130,9 @@ class DataProvider(DataProviderBase):
             params=self._authentication_params,
         ) as resp:
             if resp.status == 200:
-                responseText = await resp.text()
+                response_text = await resp.text()
                 try:
-                    self.status = json.loads(responseText)
+                    self.status = json.loads(response_text)
                 except Exception:
                     _LOGGER.exception("Json Parsing the response failed")
             else:

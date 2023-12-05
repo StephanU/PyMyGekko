@@ -44,10 +44,10 @@ async def test_get_alarms_logics(mock_server):
         assert alarms_logics is not None
         assert len(alarms_logics) == 2
 
-        assert alarms_logics[0].id == "item0"
+        assert alarms_logics[0].entity_id == "item0"
         assert alarms_logics[0].name == "Button"
         assert alarms_logics[0].value == 1.0
 
-        assert alarms_logics[1].id == "item15"
+        assert alarms_logics[1].entity_id == "item15"
         assert alarms_logics[1].name == "Klingel"
         assert alarms_logics[1].value == 0.0

@@ -42,7 +42,7 @@ async def test_get_energy_costs(mock_server):
         assert energy_costs is not None
         assert len(energy_costs) == 2
 
-        assert energy_costs[0].id == "item0"
+        assert energy_costs[0].entity_id == "item0"
         assert energy_costs[0].name == "Hauptstromzähler"
         assert len(energy_costs[0].sensor_data) == 2
         assert len(energy_costs[0].sensor_data["values"]) == 20
@@ -60,7 +60,7 @@ async def test_get_energy_costs(mock_server):
         assert energy_costs[0].sensor_data["values"][2]["unit"] == "kWh"
         assert energy_costs[0].sensor_data["values"][2]["value"] == 113.6
 
-        assert energy_costs[1].id == "item1"
+        assert energy_costs[1].entity_id == "item1"
         assert energy_costs[1].name == "Wärmemengenzähler"
         assert len(energy_costs[1].sensor_data) == 2
         assert len(energy_costs[1].sensor_data["values"]) == 20

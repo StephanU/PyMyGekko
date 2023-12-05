@@ -19,21 +19,25 @@ from PyMyGekko.resources.Loads import Load
 from PyMyGekko.resources.Loads import LoadValueAccessor
 from PyMyGekko.resources.RoomTemps import RoomTemp
 from PyMyGekko.resources.RoomTemps import RoomTempsValueAccessor
+from PyMyGekko.resources.vents import Vent
+from PyMyGekko.resources.vents import VentValueAccessor
 from yarl import URL
 
-from .DataProvider import DataProvider
-from .DataProvider import DummyDataProvider
+from .data_provider import DataProvider
+from .data_provider import DummyDataProvider
 
 
 _LOGGER: logging.Logger = logging.getLogger(__name__)
 
 
 class MyGekkoApiClient:
+    """The MyGekko api client"""
+
     def __init__(
         self,
         username: str,
-        apiKey: str,
-        gekkoId: str,
+        api_key: str,
+        gekko_id: str,
         session: ClientSession,
         demo_mode: bool = False,
         scheme: str = "https",
@@ -43,8 +47,8 @@ class MyGekkoApiClient:
         self._url = URL.build(scheme=scheme, host=host, port=port)
         self._authentication_params = {
             "username": username,
-            "key": apiKey,
-            "gekkoid": gekkoId,
+            "key": api_key,
+            "gekkoid": gekko_id,
         }
         self._session = session
         self._demo_mode = demo_mode
@@ -68,8 +72,10 @@ class MyGekkoApiClient:
         self._light_value_accessor = LightValueAccessor(self._data_provider)
         self._loads_value_accessor = LoadValueAccessor(self._data_provider)
         self._room_temps_value_accessor = RoomTempsValueAccessor(self._data_provider)
+        self._vents_value_accessor = VentValueAccessor(self._data_provider)
 
     async def try_connect(self) -> None:
+        """Tries to connect to the MyGekko API using the given credentials"""
         _LOGGER.debug("try_connect")
         if self._demo_mode:
             pass
@@ -77,38 +83,39 @@ class MyGekkoApiClient:
             async with self._session.get(
                 self._url.with_path("/api/v1/var"), params=self._authentication_params
             ) as resp:
-                responseText = await resp.text()
+                response_text = await resp.text()
                 if resp.status == 200:
-                    _LOGGER.debug("Ok %s", responseText)
-                    pass
+                    _LOGGER.debug("Ok %s", response_text)
                 elif resp.status == 400:
-                    _LOGGER.error("MyGekkoBadRequest %s", responseText)
+                    _LOGGER.error("MyGekkoBadRequest %s", response_text)
                     raise MyGekkoBadRequest()
                 elif resp.status == 403:
-                    _LOGGER.error("MyGekkoForbidden %s", responseText)
+                    _LOGGER.error("MyGekkoForbidden %s", response_text)
                     raise MyGekkoForbidden()
                 elif resp.status == 404:
-                    _LOGGER.error("MyGekkoNotFound %s", responseText)
+                    _LOGGER.error("MyGekkoNotFound %s", response_text)
                     raise MyGekkoNotFound()
                 elif resp.status == 405:
-                    _LOGGER.error("MyGekkoMethodNotAllowed %s", responseText)
+                    _LOGGER.error("MyGekkoMethodNotAllowed %s", response_text)
                     raise MyGekkoMethodNotAllowed()
                 elif resp.status == 410:
-                    _LOGGER.error("MyGekkoGone %s", responseText)
+                    _LOGGER.error("MyGekkoGone %s", response_text)
                     raise MyGekkoGone()
                 elif resp.status == 429:
-                    _LOGGER.error("MyGekkoTooManyRequests %s", responseText)
+                    _LOGGER.error("MyGekkoTooManyRequests %s", response_text)
                     raise MyGekkoTooManyRequests()
                 elif resp.status == 444:
-                    _LOGGER.error("MyGekkoNoResponse %s", responseText)
+                    _LOGGER.error("MyGekkoNoResponse %s", response_text)
                     raise MyGekkoNoResponse()
                 else:
                     raise MyGekkoError()
 
     async def read_data(self) -> None:
+        """Reads the status and resources data via the MyGekko API"""
         await self._data_provider.read_data()
 
     def get_globals_network(self):
+        """Returns the globals network information"""
         if self._data_provider.status is None:
             return None
 
@@ -124,28 +131,40 @@ class MyGekkoApiClient:
         return result
 
     def get_actions(self) -> list[Action]:
+        """Returns the MyGekko actions"""
         return self._actions_value_accessor.actions
 
     def get_alarms_logics(self) -> list[Action]:
-        return self._alarm_logics_value_accessor.alarmsLogics
+        """Returns the MyGekko alarms_logics"""
+        return self._alarm_logics_value_accessor.alarms_logics
 
     def get_blinds(self) -> list[Blind]:
+        """Returns the MyGekko blinds"""
         return self._blind_value_accessor.blinds
 
     def get_energy_costs(self) -> list[EnergyCost]:
-        return self._energy_costs_value_accessor.energyCosts
+        """Returns the MyGekko energy_costs"""
+        return self._energy_costs_value_accessor.energy_costs
 
     def get_hot_water_systems(self) -> list[HotWaterSystem]:
-        return self._hot_water_systems_value_accessor.hotWaterSystems
+        """Returns the MyGekko hot_water_systens"""
+        return self._hot_water_systems_value_accessor.hotwater_systems
 
     def get_lights(self) -> list[Light]:
+        """Returns the MyGekko lights"""
         return self._light_value_accessor.lights
 
     def get_loads(self) -> list[Load]:
+        """Returns the MyGekko load"""
         return self._loads_value_accessor.loads
 
     def get_room_temps(self) -> list[RoomTemp]:
-        return self._room_temps_value_accessor.roomTemps
+        """Returns the MyGekko room_temps"""
+        return self._room_temps_value_accessor.room_temps
+
+    def get_vents(self) -> list[Vent]:
+        """Returns the MyGekko vents"""
+        return self._vents_value_accessor.vents
 
 
 class MyGekkoError(Exception):

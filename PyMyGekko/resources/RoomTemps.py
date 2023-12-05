@@ -1,71 +1,87 @@
+"""MyGekko RoomTemps implementation"""
 from __future__ import annotations
 
 from enum import IntEnum
 
-from PyMyGekko import DataProvider
+from PyMyGekko.data_provider import DataProvider
+from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
 
 
 class RoomTemp(Entity):
+    """Class for MyGekko RoomTemp"""
+
     def __init__(
-        self, id: str, name: str, value_accessor: RoomTempsValueAccessor
+        self, entity_id: str, name: str, value_accessor: RoomTempsValueAccessor
     ) -> None:
-        super().__init__(id, name)
+        super().__init__(entity_id, name, "/roomtemps/")
         self._value_accessor = value_accessor
-        self._resource_path = "/roomtemps/" + self.id
         self._supported_features = self._value_accessor.get_features(self)
 
     @property
-    def resource_path(self) -> str:
-        return self._resource_path
-
-    @property
     def supported_features(self) -> list[RoomTempsFeature]:
+        """Returns the supported features"""
         return self._supported_features
 
     @property
     def working_mode(self) -> RoomTempsMode | None:
-        return self._value_accessor.get_working_mode(self)
+        """ "Returns the current working mode"""
+        value = self._value_accessor.get_value(self, "workingMode")
+        return RoomTempsMode(int(value)) if value is not None else None
 
-    async def set_working_mode(self, workingMode: RoomTempsMode):
-        await self._value_accessor.set_working_mode(self, workingMode)
+    async def set_working_mode(self, working_mode: RoomTempsMode):
+        """Sets the working mode"""
+        await self._value_accessor.set_working_mode(self, working_mode)
 
     @property
     def current_temperature(self) -> float | None:
-        return self._value_accessor.get_current_temperature(self)
+        """Returns the current  temperature"""
+        value = self._value_accessor.get_value(self, "temperatureValue")
+        return float(value) if value is not None else None
 
     @property
     def target_temperature(self) -> float | None:
-        return self._value_accessor.get_target_temperature(self)
+        """Returns the current target temperature"""
+        value = self._value_accessor.get_value(self, "temperatureSetPointValue")
+        return float(value) if value is not None else None
 
     async def set_target_temperature(self, target_temperature: float):
+        """Sets the target temperature"""
         await self._value_accessor.set_target_temperature(self, target_temperature)
 
     @property
     def humidity(self) -> float | None:
-        return self._value_accessor.get_humidity(self)
+        """Returns the current humidity"""
+        value = self._value_accessor.get_value(self, "relativeHumidityLevel")
+        return float(value) if value is not None else None
 
     @property
     def air_quality(self) -> float | None:
-        return self._value_accessor.get_air_quality(self)
+        """Returns the current air quality"""
+        value = self._value_accessor.get_value(self, "airQualityLevel")
+        return float(value) if value is not None else None
 
 
 class RoomTempsMode(IntEnum):
-    Off = 1
-    Comfort = 8
-    Reduced = 16
-    Manual = 64
-    Standby = 256
+    """MyGekko RoomTemps Mode"""
+
+    OFF = 1
+    COMFORT = 8
+    REDUCED = 16
+    MANUAL = 64
+    STANDBY = 256
 
 
 class RoomTempsFeature(IntEnum):
+    """MyGekko RoomTemps Feature"""
+
     TARGET_TEMPERATURE = 0
     AIR_QUALITY = 1
     HUMIDITY = 2
 
 
-class RoomTempsValueAccessor(DataProvider.DataSubscriberInterface):
-    _data = {}
+class RoomTempsValueAccessor(EntityValueAccessor):
+    """RoomTemps value accessor"""
 
     def __init__(self, data_provider: DataProvider.DataProvider):
         self._data = {}
@@ -74,15 +90,15 @@ class RoomTempsValueAccessor(DataProvider.DataSubscriberInterface):
 
     def update_status(self, status):
         if status is not None and "roomtemps" in status:
-            roomTemps = status["roomtemps"]
-            for key in roomTemps:
+            room_temps = status["roomtemps"]
+            for key in room_temps:
                 if key.startswith("item"):
                     if key not in self._data:
                         self._data[key] = {}
 
                     if (
-                        "sumstate" in roomTemps[key]
-                        and "value" in roomTemps[key]["sumstate"]
+                        "sumstate" in room_temps[key]
+                        and "value" in room_temps[key]["sumstate"]
                     ):
                         (
                             self._data[key]["temperatureValue"],
@@ -96,32 +112,34 @@ class RoomTempsValueAccessor(DataProvider.DataSubscriberInterface):
                             self._data[key]["relativeHumidityLevel"],
                             self._data[key]["airQualityLevel"],
                             self._data[key]["floorTemperatureValue"],
-                            *other,
-                        ) = roomTemps[key]["sumstate"]["value"].split(";")
+                            *_other,
+                        ) = room_temps[key]["sumstate"]["value"].split(";")
 
     def update_resources(self, resources):
         if resources is not None and "roomtemps" in resources:
-            roomTemps = resources["roomtemps"]
-            for key in roomTemps:
+            room_temps = resources["roomtemps"]
+            for key in room_temps:
                 if key.startswith("item"):
                     if key not in self._data:
                         self._data[key] = {}
-                    self._data[key]["name"] = roomTemps[key]["name"]
+                    self._data[key]["name"] = room_temps[key]["name"]
 
     @property
-    def roomTemps(self):
+    def room_temps(self):
+        """Returns the loads read from MyGekko"""
         result: list[RoomTemp] = []
-        for key in self._data:
-            result.append(RoomTemp(key, self._data[key]["name"], self))
+        for key, data in self._data.items():
+            result.append(RoomTemp(key, data["name"], self))
 
         return result
 
-    def get_features(self, roomTemp: RoomTemp) -> list[RoomTempsFeature]:
+    def get_features(self, room_temp: RoomTemp) -> list[RoomTempsFeature]:
+        """Returns the supported features"""
         result = list()
 
-        if roomTemp and roomTemp.id:
-            if roomTemp.id in self._data:
-                data = self._data[roomTemp.id]
+        if room_temp and room_temp.entity_id:
+            if room_temp.entity_id in self._data:
+                data = self._data[room_temp.entity_id]
                 if (
                     "temperatureSetPointValue" in data
                     and data["temperatureSetPointValue"]
@@ -136,68 +154,20 @@ class RoomTempsValueAccessor(DataProvider.DataSubscriberInterface):
 
         return result
 
-    def get_current_temperature(self, roomTemp: RoomTemp) -> float | None:
-        if roomTemp and roomTemp.id:
-            if (
-                roomTemp.id in self._data
-                and "temperatureValue" in self._data[roomTemp.id]
-                and self._data[roomTemp.id]["temperatureValue"]
-            ):
-                return float(self._data[roomTemp.id]["temperatureValue"])
-        return None
-
-    def get_target_temperature(self, roomTemp: RoomTemp) -> float | None:
-        if roomTemp and roomTemp.id:
-            if (
-                roomTemp.id in self._data
-                and "temperatureSetPointValue" in self._data[roomTemp.id]
-                and self._data[roomTemp.id]["temperatureSetPointValue"]
-            ):
-                return float(self._data[roomTemp.id]["temperatureSetPointValue"])
-        return None
-
     async def set_target_temperature(
-        self, roomTemp: RoomTemp, target_temperature: float
+        self, room_temp: RoomTemp, target_temperature: float
     ) -> None:
-        if roomTemp and roomTemp.id:
+        """Sets the target temperature"""
+        if room_temp and room_temp.entity_id:
             await self._data_provider.write_data(
-                roomTemp.resource_path, "S" + str(target_temperature)
+                room_temp.resource_path, "S" + str(target_temperature)
             )
-
-    def get_working_mode(self, roomTemp: RoomTemp) -> RoomTempsMode | None:
-        if roomTemp and roomTemp.id:
-            if (
-                roomTemp.id in self._data
-                and "workingMode" in self._data[roomTemp.id]
-                and self._data[roomTemp.id]["workingMode"]
-            ):
-                return RoomTempsMode(int(self._data[roomTemp.id]["workingMode"]))
-        return None
 
     async def set_working_mode(
-        self, roomTemp: RoomTemp, workingMode: RoomTempsMode
+        self, room_temp: RoomTemp, working_mode: RoomTempsMode
     ) -> None:
-        if roomTemp and roomTemp.id:
+        """Sets the working mode"""
+        if room_temp and room_temp.entity_id:
             await self._data_provider.write_data(
-                roomTemp.resource_path, "M" + str(workingMode.value)
+                room_temp.resource_path, "M" + str(working_mode.value)
             )
-
-    def get_humidity(self, roomTemp: RoomTemp) -> float | None:
-        if roomTemp and roomTemp.id:
-            if (
-                roomTemp.id in self._data
-                and "relativeHumidityLevel" in self._data[roomTemp.id]
-                and self._data[roomTemp.id]["relativeHumidityLevel"]
-            ):
-                return float(self._data[roomTemp.id]["relativeHumidityLevel"])
-        return None
-
-    def get_air_quality(self, roomTemp: RoomTemp) -> float | None:
-        if roomTemp and roomTemp.id:
-            if (
-                roomTemp.id in self._data
-                and "airQualityLevel" in self._data[roomTemp.id]
-                and self._data[roomTemp.id]["airQualityLevel"]
-            ):
-                return float(self._data[roomTemp.id]["airQualityLevel"])
-        return None

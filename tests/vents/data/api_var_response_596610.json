@@ -1,0 +1,35 @@
+{
+  "vents": {
+    "item0": {
+      "name": "Wohnraumlüftung",
+      "page": "...",
+      "sumstate": {
+        "value": "level[0-4]; type[Int]; mode[Int]; bypassState[Int]; maxLevel[0-4]; humidity[%rH]; quality[%]; CO2[ppm]; tempSupplyAir[°C]; tempExhaustAir[°C]; tempOutsideAir[°C]; tempOutgoingAir[°C]; levelIn[%]; levelOut[%]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; subType[Int]; cooling[Int]; dehumid[Int]; bypassMode[Int]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 200000
+      },
+      "scmd": {
+        "value": "-1|1|2|3|4|T|BY0|BY1|BY2|C0|C1|D0|D1|Mx (Off|Level1|Level2|Level3|Level4|Toggle|BypassAuto|BypassManual|BypassSummer|Cool.Off|Cool.On|Dehumid.Off|Dehumid.On|OperatingMode[0..x])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 200070
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "value": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 2000000
+      },
+      "scmd": {
+        "value": "-1|1|2|3|4 (Off|Level1|Level2|Level3|Level4)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 2000001
+      }
+    }
+  }
+}

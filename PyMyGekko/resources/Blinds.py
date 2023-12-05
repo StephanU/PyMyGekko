@@ -1,49 +1,68 @@
+"""MyGekko Blinds implementation"""
 from __future__ import annotations
 
 from enum import IntEnum
 
-from PyMyGekko import DataProvider
+from PyMyGekko.data_provider import DataProvider
+from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
 
 
 class Blind(Entity):
-    def __init__(self, id: str, name: str, value_accessor: BlindValueAccessor) -> None:
-        super().__init__(id, name)
+    """Class for MyGekko Blind"""
+
+    def __init__(
+        self, entity_id: str, name: str, value_accessor: BlindValueAccessor
+    ) -> None:
+        super().__init__(entity_id, name, "/blinds/")
         self._value_accessor = value_accessor
-        self._resource_path = "/blinds/" + self.id
         self._supported_features = self._value_accessor.get_features(self)
 
     @property
     def supported_features(self) -> list[BlindFeature]:
+        """Returns the supported features"""
         return self._supported_features
 
     @property
     def position(self) -> float | None:
-        return self._value_accessor.get_position(self)
+        """Returns the current position"""
+        value = self._value_accessor.get_value(self, "positionLevel")
+        return float(value) if value is not None else None
 
     async def set_position(self, position: float):
+        """Sets the position"""
         await self._value_accessor.set_position(self, position)
 
     @property
     def state(self) -> BlindState | None:
-        return self._value_accessor.get_state(self)
+        """Returns the current state"""
+        value = self._value_accessor.get_value(self, "currentState")
+        return BlindState(int(value)) if value is not None else None
 
     async def set_state(self, state: BlindState):
+        """Sets the state"""
         await self._value_accessor.set_state(self, state)
 
     @property
     def tilt_position(self) -> float | None:
-        return self._value_accessor.get_tilt_position(self)
+        """Returns the current tilt position"""
+        value = self._value_accessor.get_value(self, "rotationLevel")
+        return float(value) if value is not None else None
 
     async def set_tilt_position(self, position: float):
+        """Sets the tilt position"""
         await self._value_accessor.set_tilt_position(self, position)
 
     @property
     def element_info(self) -> BlindElementInfo | None:
-        return self._value_accessor.get_element_info(self)
+        """Returns the element info"""
+        value = self._value_accessor.get_value(self, "elementInfo")
+        return BlindElementInfo(float(value)) if value is not None else None
 
 
 class BlindState(IntEnum):
+    """MyGekko Blinds State"""
+
     HOLD_DOWN = -2
     DOWN = -1
     STOP = 0
@@ -52,6 +71,8 @@ class BlindState(IntEnum):
 
 
 class BlindFeature(IntEnum):
+    """MyGekko Blinds Feature"""
+
     OPEN_CLOSE_STOP = 0
     SET_POSITION = 1
     SET_TILT_POSITION = 2
@@ -59,6 +80,8 @@ class BlindFeature(IntEnum):
 
 
 class BlindElementInfo(IntEnum):
+    """MyGekko Blinds Element Info"""
+
     OK = 0
     MANUAL_OFF = 1
     MANUAL_ON = 2
@@ -66,8 +89,8 @@ class BlindElementInfo(IntEnum):
     ALARM = 4
 
 
-class BlindValueAccessor(DataProvider.DataSubscriberInterface):
-    _data = {}
+class BlindValueAccessor(EntityValueAccessor):
+    """Blind value accessor"""
 
     def __init__(self, data_provider: DataProvider.DataProvider):
         self._data = {}
@@ -89,7 +112,7 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
                             self._data[key]["rotationLevel"],
                             self._data[key]["elementInfo"],
                             self._data[key]["rotationRange"],
-                            *other,
+                            *_other,
                         ) = blinds[key]["sumstate"]["value"].split(
                             ";",
                         )
@@ -101,7 +124,7 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
                     if "sumstate" in blinds[key] and "value" in blinds[key]["sumstate"]:
                         (
                             self._data[key]["currentState"],
-                            *other,
+                            *_other,
                         ) = blinds[key][
                             "sumstate"
                         ]["value"].split(
@@ -124,20 +147,22 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
 
     @property
     def blinds(self):
+        """Returns the blinds read from MyGekko"""
         result: list[Blind] = []
-        for key in self._data:
-            result.append(Blind(key, self._data[key]["name"], self))
+        for key, data in self._data.items():
+            result.append(Blind(key, data["name"], self))
 
         return result
 
     def get_features(self, blind: Blind) -> list[BlindFeature]:
+        """Returns the supported features"""
         result = list()
 
-        if blind and blind.id:
-            if blind.id in self._data:
-                data = self._data[blind.id]
-                if blind.id.startswith("group"):
-                    """open/close feature is the only feature for groups"""
+        if blind and blind.entity_id:
+            if blind.entity_id in self._data:
+                data = self._data[blind.entity_id]
+                if blind.entity_id.startswith("group"):
+                    # open/close feature is the only feature for groups
                     result.append(BlindFeature.OPEN_CLOSE)
                     return result
 
@@ -152,58 +177,21 @@ class BlindValueAccessor(DataProvider.DataSubscriberInterface):
 
         return result
 
-    def get_position(self, blind: Blind) -> float | None:
-        if blind and blind.id:
-            if (
-                blind.id in self._data
-                and "positionLevel" in self._data[blind.id]
-                and self._data[blind.id]["positionLevel"]
-            ):
-                return float(self._data[blind.id]["positionLevel"])
-        return None
-
     async def set_position(self, blind: Blind, position: float) -> None:
-        if blind and blind.id and position >= 0 and position <= 100.0:
+        """Sets the position"""
+        if blind and blind.entity_id and position >= 0 and position <= 100.0:
             await self._data_provider.write_data(
-                blind._resource_path, "P" + str(position)
+                blind.resource_path, "P" + str(position)
             )
-
-    def get_tilt_position(self, blind: Blind) -> float | None:
-        if blind and blind.id:
-            if (
-                blind.id in self._data
-                and "rotationLevel" in self._data[blind.id]
-                and self._data[blind.id]["rotationLevel"]
-            ):
-                return float(self._data[blind.id]["rotationLevel"])
-        return None
 
     async def set_tilt_position(self, blind: Blind, position: float) -> None:
-        if blind and blind.id and position >= 0 and position <= 100.0:
+        """Sets the tilt position"""
+        if blind and blind.entity_id and position >= 0 and position <= 100.0:
             await self._data_provider.write_data(
-                blind._resource_path, "S" + str(position)
+                blind.resource_path, "S" + str(position)
             )
 
-    def get_state(self, blind: Blind) -> BlindState | None:
-        if blind and blind.id:
-            if (
-                blind.id in self._data
-                and "currentState" in self._data[blind.id]
-                and self._data[blind.id]["currentState"]
-            ):
-                return BlindState(int(self._data[blind.id]["currentState"]))
-        return None
-
     async def set_state(self, blind: Blind, state: BlindState) -> None:
-        if blind and blind.id:
-            await self._data_provider.write_data(blind._resource_path, state)
-
-    def get_element_info(self, blind: Blind) -> BlindElementInfo:
-        if blind and blind.id:
-            if (
-                blind.id in self._data
-                and "elementInfo" in self._data[blind.id]
-                and self._data[blind.id]["elementInfo"]
-            ):
-                return BlindElementInfo(int(self._data[blind.id]["elementInfo"]))
-        return None
+        """Sets the state"""
+        if blind and blind.entity_id:
+            await self._data_provider.write_data(blind.resource_path, state)

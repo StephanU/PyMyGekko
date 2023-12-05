@@ -1,24 +1,29 @@
+"""MyGekko AlarmsLogics implementation"""
 from __future__ import annotations
 
-from PyMyGekko import DataProvider
+from PyMyGekko.data_provider import DataProvider
+from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
 
 
 class AlarmsLogic(Entity):
+    """Class for MyGekko AlarmsLogic"""
+
     def __init__(
-        self, id: str, name: str, value_accessor: AlarmsLogicValueAccessor
+        self, entity_id: str, name: str, value_accessor: AlarmsLogicValueAccessor
     ) -> None:
-        super().__init__(id, name)
+        super().__init__(entity_id, name, "/alarms_logics/")
         self._value_accessor = value_accessor
-        self._resource_path = "/alarms_logics/" + self.id
 
     @property
     def value(self) -> float | None:
-        return self._value_accessor.get_value(self)
+        """Returns the value"""
+        value = self._value_accessor.get_value(self, "currentValue")
+        return float(value) if value is not None else None
 
 
-class AlarmsLogicValueAccessor(DataProvider.DataSubscriberInterface):
-    _data = {}
+class AlarmsLogicValueAccessor(EntityValueAccessor):
+    """AlarmsLogic value accessor"""
 
     def __init__(self, data_provider: DataProvider.DataProvider):
         self._data = {}
@@ -27,46 +32,37 @@ class AlarmsLogicValueAccessor(DataProvider.DataSubscriberInterface):
 
     def update_status(self, status):
         if status is not None and "alarms_logics" in status:
-            alarmsLogics = status["alarms_logics"]
-            for key in alarmsLogics:
+            alarms_logics = status["alarms_logics"]
+            for key in alarms_logics:
                 if key.startswith("item"):
                     if key not in self._data:
                         self._data[key] = {}
 
                     if (
-                        "sumstate" in alarmsLogics[key]
-                        and "value" in alarmsLogics[key]["sumstate"]
+                        "sumstate" in alarms_logics[key]
+                        and "value" in alarms_logics[key]["sumstate"]
                     ):
                         (
                             self._data[key]["currentValue"],
-                            *other,
-                        ) = alarmsLogics[key][
-                            "sumstate"
-                        ]["value"].split(";")
+                            *_other,
+                        ) = alarms_logics[
+                            key
+                        ]["sumstate"]["value"].split(";")
 
     def update_resources(self, resources):
         if resources is not None and "alarms_logics" in resources:
-            alarmsLogics = resources["alarms_logics"]
-            for key in alarmsLogics:
+            alarms_logics = resources["alarms_logics"]
+            for key in alarms_logics:
                 if key.startswith("item"):
                     if key not in self._data:
                         self._data[key] = {}
-                    self._data[key]["name"] = alarmsLogics[key]["name"]
+                    self._data[key]["name"] = alarms_logics[key]["name"]
 
     @property
-    def alarmsLogics(self):
+    def alarms_logics(self):
+        """Returns the alarmsLogics read from MyGekko"""
         result: list[AlarmsLogic] = []
-        for key in self._data:
-            result.append(AlarmsLogic(key, self._data[key]["name"], self))
+        for key, data in self._data.items():
+            result.append(AlarmsLogic(key, data["name"], self))
 
         return result
-
-    def get_value(self, alarmsLogic: AlarmsLogic) -> float | None:
-        if alarmsLogic and alarmsLogic.id:
-            if (
-                alarmsLogic.id in self._data
-                and "currentValue" in self._data[alarmsLogic.id]
-                and self._data[alarmsLogic.id]["currentValue"]
-            ):
-                return float(self._data[alarmsLogic.id]["currentValue"])
-        return None

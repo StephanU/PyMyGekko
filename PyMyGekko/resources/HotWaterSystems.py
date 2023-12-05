@@ -1,61 +1,79 @@
+"""MyGekko Hotwater_systems implementation"""
 from __future__ import annotations
 
 from enum import IntEnum
 
-from PyMyGekko import DataProvider
+from PyMyGekko.data_provider import DataProvider
+from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
 
 
 class HotWaterSystem(Entity):
+    """Class for MyGekko HotWaterSystem"""
+
     def __init__(
-        self, id: str, name: str, value_accessor: HotWaterSystemValueAccessor
+        self, entity_id: str, name: str, value_accessor: HotWaterSystemValueAccessor
     ) -> None:
-        super().__init__(id, name)
+        super().__init__(entity_id, name, "/hotwater_systems/")
         self._value_accessor = value_accessor
-        self._resource_path = "/hotwater_systems/" + self.id
         self._supported_features = self._value_accessor.get_features(self)
 
     @property
     def supported_features(self) -> list[HotWaterSystemFeature]:
+        """Returns the supported features"""
         return self._supported_features
 
     @property
     def state(self) -> HotWaterSystemState | None:
-        return self._value_accessor.get_state(self)
+        """Return the current state"""
+        value = self._value_accessor.get_value(self, "state")
+        return HotWaterSystemState(int(value)) if value is not None else None
 
     async def set_state(self, state: HotWaterSystemState):
+        """Sets the state"""
         await self._value_accessor.set_state(self, state)
 
     @property
     def target_temperature(self) -> float | None:
-        return self._value_accessor.get_target_temperature(self)
+        """Return the current target temperature"""
+        value = self._value_accessor.get_value(self, "setpointTemp")
+        return float(value) if value is not None else None
 
     async def set_target_temperature(self, target_temperature: float):
+        """Sets the target temperature"""
         await self._value_accessor.set_target_temperature(self, target_temperature)
 
     @property
     def current_temperature_top(self) -> float | None:
-        return self._value_accessor.get_current_temperature_top(self)
+        """Return the current top temperature"""
+        value = self._value_accessor.get_value(self, "topTemp")
+        return float(value) if value is not None else None
 
     @property
     def current_temperature_bottom(self) -> float | None:
-        return self._value_accessor.get_current_temperature_bottom(self)
+        """Return the current bottom temperature"""
+        value = self._value_accessor.get_value(self, "bottomTemp")
+        return float(value) if value is not None else None
 
 
 class HotWaterSystemState(IntEnum):
+    """MyGekko HotWaterSystem state"""
+
     OFF = 0
     ON = 1
 
 
 class HotWaterSystemFeature(IntEnum):
+    """MyGekko HotWaterSystem Feature"""
+
     ON_OFF = 0
     TARGET_TEMPERATURE = 1
     BOTTOM_TEMPERATURE = 2
     TOP_TEMPERATURE = 3
 
 
-class HotWaterSystemValueAccessor(DataProvider.DataSubscriberInterface):
-    _data = {}
+class HotWaterSystemValueAccessor(EntityValueAccessor):
+    """HotWaterSystem value accessor"""
 
     def __init__(self, data_provider: DataProvider.DataProvider):
         self._data = {}
@@ -64,15 +82,15 @@ class HotWaterSystemValueAccessor(DataProvider.DataSubscriberInterface):
 
     def update_status(self, status):
         if status is not None and "hotwater_systems" in status:
-            hotWaterSystems = status["hotwater_systems"]
-            for key in hotWaterSystems:
+            hotwater_systems = status["hotwater_systems"]
+            for key in hotwater_systems:
                 if key.startswith("item"):
                     if key not in self._data:
                         self._data[key] = {}
 
                     if (
-                        "sumstate" in hotWaterSystems[key]
-                        and "value" in hotWaterSystems[key]["sumstate"]
+                        "sumstate" in hotwater_systems[key]
+                        and "value" in hotwater_systems[key]["sumstate"]
                     ):
                         (
                             self._data[key]["type"],
@@ -83,34 +101,36 @@ class HotWaterSystemValueAccessor(DataProvider.DataSubscriberInterface):
                             self._data[key]["collectorTemp"],
                             self._data[key]["state"],
                             self._data[key]["sum"],
-                            *other,
-                        ) = hotWaterSystems[key]["sumstate"]["value"].split(";")
+                            *_other,
+                        ) = hotwater_systems[key]["sumstate"]["value"].split(";")
 
     def update_resources(self, resources):
         if resources is not None and "hotwater_systems" in resources:
-            hotWaterSystems = resources["hotwater_systems"]
-            for key in hotWaterSystems:
+            hotwater_systems = resources["hotwater_systems"]
+            for key in hotwater_systems:
                 if key.startswith("item"):
                     if key not in self._data:
                         self._data[key] = {}
-                    self._data[key]["name"] = hotWaterSystems[key]["name"]
+                    self._data[key]["name"] = hotwater_systems[key]["name"]
 
     @property
-    def hotWaterSystems(self):
+    def hotwater_systems(self):
+        """Returns the hotwater_systems read from MyGekko"""
         result: list[HotWaterSystem] = []
-        for key in self._data:
-            result.append(HotWaterSystem(key, self._data[key]["name"], self))
+        for key, data in self._data.items():
+            result.append(HotWaterSystem(key, data["name"], self))
 
         return result
 
     def get_features(
-        self, hotWaterSystem: HotWaterSystem
+        self, hotwater_system: HotWaterSystem
     ) -> list[HotWaterSystemFeature]:
+        """Returns the supported features"""
         result = list()
 
-        if hotWaterSystem and hotWaterSystem.id:
-            if hotWaterSystem.id in self._data:
-                data = self._data[hotWaterSystem.id]
+        if hotwater_system and hotwater_system.entity_id:
+            if hotwater_system.entity_id in self._data:
+                data = self._data[hotwater_system.entity_id]
                 if "state" in data and data["state"]:
                     result.append(HotWaterSystemFeature.ON_OFF)
                 if "setpointTemp" in data and data["setpointTemp"]:
@@ -122,60 +142,18 @@ class HotWaterSystemValueAccessor(DataProvider.DataSubscriberInterface):
 
         return result
 
-    def get_state(self, hotWaterSystem: HotWaterSystem) -> HotWaterSystemState:
-        if hotWaterSystem and hotWaterSystem.id:
-            if (
-                hotWaterSystem.id in self._data
-                and "state" in self._data[hotWaterSystem.id]
-                and self._data[hotWaterSystem.id]["state"]
-            ):
-                return HotWaterSystemState(int(self._data[hotWaterSystem.id]["state"]))
-        return None
-
     async def set_state(
-        self, hotWaterSystem: HotWaterSystem, state: HotWaterSystemState
+        self, hotwater_system: HotWaterSystem, state: HotWaterSystemState
     ) -> None:
-        if hotWaterSystem and hotWaterSystem.id:
-            await self._data_provider.write_data(hotWaterSystem._resource_path, state)
-
-    def get_target_temperature(self, hotWaterSystem: HotWaterSystem) -> float | None:
-        if hotWaterSystem and hotWaterSystem.id:
-            if (
-                hotWaterSystem.id in self._data
-                and "setpointTemp" in self._data[hotWaterSystem.id]
-                and self._data[hotWaterSystem.id]["setpointTemp"]
-            ):
-                return float(self._data[hotWaterSystem.id]["setpointTemp"])
-        return None
+        """Sets the state"""
+        if hotwater_system and hotwater_system.entity_id:
+            await self._data_provider.write_data(hotwater_system.resource_path, state)
 
     async def set_target_temperature(
-        self, hotWaterSystem: HotWaterSystem, target_temperature: float
+        self, hotwater_system: HotWaterSystem, target_temperature: float
     ) -> None:
-        if hotWaterSystem and hotWaterSystem.id:
+        """Sets the target temperature"""
+        if hotwater_system and hotwater_system.entity_id:
             await self._data_provider.write_data(
-                hotWaterSystem._resource_path, "T" + str(target_temperature)
+                hotwater_system.resource_path, "T" + str(target_temperature)
             )
-
-    def get_current_temperature_top(
-        self, hotWaterSystem: HotWaterSystem
-    ) -> float | None:
-        if hotWaterSystem and hotWaterSystem.id:
-            if (
-                hotWaterSystem.id in self._data
-                and "topTemp" in self._data[hotWaterSystem.id]
-                and self._data[hotWaterSystem.id]["topTemp"]
-            ):
-                return float(self._data[hotWaterSystem.id]["topTemp"])
-        return None
-
-    def get_current_temperature_bottom(
-        self, hotWaterSystem: HotWaterSystem
-    ) -> float | None:
-        if hotWaterSystem and hotWaterSystem.id:
-            if (
-                hotWaterSystem.id in self._data
-                and "bottomTemp" in self._data[hotWaterSystem.id]
-                and self._data[hotWaterSystem.id]["bottomTemp"]
-            ):
-                return float(self._data[hotWaterSystem.id]["bottomTemp"])
-        return None

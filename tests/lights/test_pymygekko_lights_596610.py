@@ -44,13 +44,13 @@ async def test_get_lights(mock_server):
         assert lights is not None
         assert len(lights) == 4
 
-        assert lights[0].id == "item0"
+        assert lights[0].entity_id == "item0"
         assert lights[0].name == "Aussen"
         assert lights[0].state == LightState.ON
         assert len(lights[0].supported_features) == 1
         assert LightFeature.ON_OFF in lights[0].supported_features
 
-        assert lights[1].id == "item1"
+        assert lights[1].entity_id == "item1"
         assert lights[1].name == "Aussen2"
         assert lights[1].state == LightState.ON
         assert lights[1].brightness == 50
@@ -58,7 +58,7 @@ async def test_get_lights(mock_server):
         assert LightFeature.ON_OFF in lights[1].supported_features
         assert LightFeature.DIMMABLE in lights[1].supported_features
 
-        assert lights[2].id == "item2"
+        assert lights[2].entity_id == "item2"
         assert lights[2].name == "Aussen3"
         assert lights[2].state == LightState.OFF
         assert lights[2].brightness == 44
@@ -68,7 +68,7 @@ async def test_get_lights(mock_server):
         assert LightFeature.DIMMABLE in lights[2].supported_features
         assert LightFeature.RGB_COLOR in lights[2].supported_features
 
-        assert lights[3].id == "group0"
+        assert lights[3].entity_id == "group0"
         assert lights[3].name == "alle"
         assert lights[3].state == LightState.ON
         assert lights[3].brightness is None

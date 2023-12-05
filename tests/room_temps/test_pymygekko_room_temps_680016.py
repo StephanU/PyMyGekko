@@ -46,39 +46,39 @@ async def test_get_room_temps(mock_server):
         assert roomTemps is not None
         assert len(roomTemps) == 5
 
-        assert roomTemps[0].id == "item0"
+        assert roomTemps[0].entity_id == "item0"
         assert roomTemps[0].name == "WohnenKüche"
         assert roomTemps[0].target_temperature == 21.3
-        assert roomTemps[0].working_mode == RoomTempsMode.Comfort
+        assert roomTemps[0].working_mode == RoomTempsMode.COMFORT
         assert len(roomTemps[0].supported_features) == 1
         assert RoomTempsFeature.TARGET_TEMPERATURE in roomTemps[0].supported_features
 
-        assert roomTemps[1].id == "item1"
+        assert roomTemps[1].entity_id == "item1"
         assert roomTemps[1].name == "Speisekammer"
         assert roomTemps[1].target_temperature == 18.00
-        assert roomTemps[1].working_mode == RoomTempsMode.Comfort
+        assert roomTemps[1].working_mode == RoomTempsMode.COMFORT
         assert len(roomTemps[1].supported_features) == 1
         assert RoomTempsFeature.TARGET_TEMPERATURE in roomTemps[1].supported_features
 
-        assert roomTemps[2].id == "item2"
+        assert roomTemps[2].entity_id == "item2"
         assert roomTemps[2].name == "HWR"
         assert roomTemps[2].target_temperature == 20.00
-        assert roomTemps[2].working_mode == RoomTempsMode.Comfort
+        assert roomTemps[2].working_mode == RoomTempsMode.COMFORT
         assert roomTemps[2].air_quality == 560.0
         assert len(roomTemps[2].supported_features) == 2
         assert RoomTempsFeature.TARGET_TEMPERATURE in roomTemps[2].supported_features
         assert RoomTempsFeature.AIR_QUALITY in roomTemps[2].supported_features
 
-        assert roomTemps[3].id == "item3"
+        assert roomTemps[3].entity_id == "item3"
         assert roomTemps[3].name == "WC EG"
         assert roomTemps[3].target_temperature == 22.00
-        assert roomTemps[3].working_mode == RoomTempsMode.Comfort
+        assert roomTemps[3].working_mode == RoomTempsMode.COMFORT
         assert len(roomTemps[3].supported_features) == 1
         assert RoomTempsFeature.TARGET_TEMPERATURE in roomTemps[3].supported_features
 
-        assert roomTemps[4].id == "item4"
+        assert roomTemps[4].entity_id == "item4"
         assert roomTemps[4].name == "Gast"
         assert roomTemps[4].target_temperature == 17.00
-        assert roomTemps[4].working_mode == RoomTempsMode.Reduced
+        assert roomTemps[4].working_mode == RoomTempsMode.REDUCED
         assert len(roomTemps[4].supported_features) == 1
         assert RoomTempsFeature.TARGET_TEMPERATURE in roomTemps[4].supported_features

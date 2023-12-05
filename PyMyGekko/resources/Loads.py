@@ -1,42 +1,55 @@
+"""MyGekko Loads implementation"""
 from __future__ import annotations
 
 from enum import IntEnum
 
-from PyMyGekko import DataProvider
+from PyMyGekko.data_provider import DataProvider
+from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
 
 
 class Load(Entity):
-    def __init__(self, id: str, name: str, value_accessor: LoadValueAccessor) -> None:
-        super().__init__(id, name)
+    """Class for MyGekko Load"""
+
+    def __init__(
+        self, entity_id: str, name: str, value_accessor: LoadValueAccessor
+    ) -> None:
+        super().__init__(entity_id, name, "/loads/")
         self._value_accessor = value_accessor
-        self._resource_path = "/loads/" + self.id
         self._supported_features = self._value_accessor.get_features(self)
 
     @property
     def supported_features(self) -> list[LoadFeature]:
+        """Returns the supported features"""
         return self._supported_features
 
     @property
     def state(self) -> LoadState | None:
-        return self._value_accessor.get_state(self)
+        """Returns the current state"""
+        value = self._value_accessor.get_value(self, "currentState")
+        return LoadState(int(value)) if value is not None else None
 
     async def set_state(self, state: LoadState):
+        """Sets the state"""
         await self._value_accessor.set_state(self, state)
 
 
 class LoadState(IntEnum):
+    """MyGekko Loads State"""
+
     OFF = 0
     ON_IMPULSE = 1
     ON_PERMANENT = 2
 
 
 class LoadFeature(IntEnum):
+    """MyGekko Loads Feature"""
+
     ON_OFF = 0
 
 
-class LoadValueAccessor(DataProvider.DataSubscriberInterface):
-    _data = {}
+class LoadValueAccessor(EntityValueAccessor):
+    """Loads value accessor"""
 
     def __init__(self, data_provider: DataProvider.DataProvider):
         self._data = {}
@@ -55,7 +68,7 @@ class LoadValueAccessor(DataProvider.DataSubscriberInterface):
                         (
                             self._data[key]["currentState"],
                             self._data[key]["elementInfo"],
-                            *other,
+                            *_other,
                         ) = loads[key]["sumstate"]["value"].split(";")
 
     def update_resources(self, resources):
@@ -69,32 +82,25 @@ class LoadValueAccessor(DataProvider.DataSubscriberInterface):
 
     @property
     def loads(self):
+        """Returns the loads read from MyGekko"""
         result: list[Load] = []
-        for key in self._data:
-            result.append(Load(key, self._data[key]["name"], self))
+        for key, data in self._data.items():
+            result.append(Load(key, data["name"], self))
 
         return result
 
     def get_features(self, load: Load) -> list[LoadFeature]:
+        """Returns the supported features"""
         result = list()
 
-        if load and load.id:
-            if load.id in self._data:
-                data = self._data[load.id]
+        if load and load.entity_id:
+            if load.entity_id in self._data:
+                data = self._data[load.entity_id]
                 if "currentState" in data and data["currentState"]:
                     result.append(LoadFeature.ON_OFF)
         return result
 
-    def get_state(self, load: Load) -> LoadState:
-        if load and load.id:
-            if (
-                load.id in self._data
-                and "currentState" in self._data[load.id]
-                and self._data[load.id]["currentState"]
-            ):
-                return LoadState(int(self._data[load.id]["currentState"]))
-        return None
-
     async def set_state(self, load: Load, state: LoadState) -> None:
-        if load and load.id:
-            await self._data_provider.write_data(load._resource_path, state)
+        """Sets the state"""
+        if load and load.entity_id:
+            await self._data_provider.write_data(load.resource_path, state)

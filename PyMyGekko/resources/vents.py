@@ -234,7 +234,10 @@ class VentDeviceModel(IntEnum):
 class VentFeature(IntEnum):
     """MyGekko Vent Features"""
 
-    COOLING_MODE = 0
+    WORKING_LEVEL = 0
+    CO2 = 1
+    HUMIDITY = 2
+    AIR_QUALITY = 3
 
 
 class VentElementInfo(IntEnum):
@@ -344,8 +347,15 @@ class VentValueAccessor(EntityValueAccessor):
         if vent and vent.entity_id:
             if vent.entity_id in self._data:
                 data = self._data[vent.entity_id]
-                if "coolingModeState" in data and data["coolingModeState"]:
-                    result.append(VentFeature.COOLING_MODE)
+                if "workingLevel" in data and data["workingLevel"]:
+                    result.append(VentFeature.WORKING_LEVEL)
+                if "airQualityLevel" in data and data["airQualityLevel"]:
+                    result.append(VentFeature.AIR_QUALITY)
+                if "co2Value" in data and data["co2Value"]:
+                    result.append(VentFeature.CO2)
+                if "relativeHumidityLevel" in data and data["relativeHumidityLevel"]:
+                    result.append(VentFeature.HUMIDITY)
+
         return result
 
     async def set_working_level(

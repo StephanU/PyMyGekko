@@ -80,5 +80,7 @@ async def test_get_vents(mock_server):
         assert vents[0].working_level is None
         assert vents[0].operating_mode == VentOperatingMode.MANUAL
         assert vents[0].sub_working_mode == VentSubWorkingMode.EXHAUST_SUPPLY
-        assert len(vents[0].supported_features) == 1
-        assert VentFeature.COOLING_MODE in vents[0].supported_features
+        assert len(vents[0].supported_features) == 3
+        assert VentFeature.CO2 in vents[0].supported_features
+        assert VentFeature.HUMIDITY in vents[0].supported_features
+        assert VentFeature.WORKING_LEVEL in vents[0].supported_features

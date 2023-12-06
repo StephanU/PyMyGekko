@@ -1,6 +1,6 @@
 from aiohttp import ClientSession
 from aiohttp import web
-from PyMyGekko import MyGekkoApiClient
+from PyMyGekko import MyGekkoApiClientBase
 from pytest import fixture
 from pytest import mark
 
@@ -28,10 +28,8 @@ async def test_get_globals_network(mock_server):
     server = await mock_server
 
     async with ClientSession() as session:
-        api = MyGekkoApiClient(
-            "USERNAME",
-            "APIKEY",
-            "GEKKOID",
+        api = MyGekkoApiClientBase(
+            {},
             session,
             scheme=server.scheme,
             host=server.host,

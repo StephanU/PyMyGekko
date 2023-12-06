@@ -3,7 +3,7 @@ import logging
 import pytest
 from aiohttp import ClientSession
 from aiohttp import web
-from PyMyGekko import MyGekkoApiClient
+from PyMyGekko import MyGekkoApiClientBase
 from PyMyGekko.resources.Blinds import BlindElementInfo
 from PyMyGekko.resources.Blinds import BlindFeature
 from PyMyGekko.resources.Blinds import BlindState
@@ -35,10 +35,8 @@ async def test_get_blinds(mock_server):
 
     server = await mock_server
     async with ClientSession() as session:
-        api = MyGekkoApiClient(
-            "USERNAME",
-            "APIKEY",
-            "GEKKOID",
+        api = MyGekkoApiClientBase(
+            {},
             session,
             scheme=server.scheme,
             host=server.host,

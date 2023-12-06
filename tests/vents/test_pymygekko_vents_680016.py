@@ -2,7 +2,7 @@
 import pytest
 from aiohttp import ClientSession
 from aiohttp import web
-from PyMyGekko import MyGekkoApiClient
+from PyMyGekko import MyGekkoApiClientBase
 from PyMyGekko.resources.vents import VentBypassMode
 from PyMyGekko.resources.vents import VentBypassState
 from PyMyGekko.resources.vents import VentCoolingMode
@@ -44,10 +44,8 @@ async def test_get_vents(mock_server):
     """test for the vents"""
     server = await mock_server
     async with ClientSession() as session:
-        api = MyGekkoApiClient(
-            "USERNAME",
-            "APIKEY",
-            "GEKKOID",
+        api = MyGekkoApiClientBase(
+            {},
             session,
             scheme=server.scheme,
             host=server.host,

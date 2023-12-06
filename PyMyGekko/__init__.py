@@ -30,14 +30,12 @@ from .data_provider import DummyDataProvider
 _LOGGER: logging.Logger = logging.getLogger(__name__)
 
 
-class MyGekkoApiClient:
-    """The MyGekko api client"""
+class MyGekkoApiClientBase:
+    """The base class for the MyGekko api client"""
 
     def __init__(
         self,
-        username: str,
-        api_key: str,
-        gekko_id: str,
+        authentication_params: dict,
         session: ClientSession,
         demo_mode: bool = False,
         scheme: str = "https",
@@ -45,11 +43,7 @@ class MyGekkoApiClient:
         port: int = None,
     ) -> None:
         self._url = URL.build(scheme=scheme, host=host, port=port)
-        self._authentication_params = {
-            "username": username,
-            "key": api_key,
-            "gekkoid": gekko_id,
-        }
+        self._authentication_params = authentication_params
         self._session = session
         self._demo_mode = demo_mode
 
@@ -165,6 +159,46 @@ class MyGekkoApiClient:
     def get_vents(self) -> list[Vent]:
         """Returns the MyGekko vents"""
         return self._vents_value_accessor.vents
+
+
+class MyGekkoQueryApiClient(MyGekkoApiClientBase):
+    """The api client to access MyGekko via the MyGekko query api"""
+
+    def __init__(
+        self,
+        username: str,
+        api_key: str,
+        gekko_id: str,
+        session: ClientSession,
+    ) -> None:
+        super().__init__(
+            {
+                "username": username,
+                "key": api_key,
+                "gekkoid": gekko_id,
+            },
+            session,
+        )
+
+
+class MyGekkoLocalApiClient(MyGekkoApiClientBase):
+    """The api client to access MyGekko locally."""
+
+    def __init__(
+        self,
+        username: str,
+        password: str,
+        session: ClientSession,
+        host: str,
+    ) -> None:
+        super().__init__(
+            {
+                "username": username,
+                "password": password,
+            },
+            session,
+            host,
+        )
 
 
 class MyGekkoError(Exception):

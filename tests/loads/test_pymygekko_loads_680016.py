@@ -1,7 +1,7 @@
 import pytest
 from aiohttp import ClientSession
 from aiohttp import web
-from PyMyGekko import MyGekkoApiClient
+from PyMyGekko import MyGekkoApiClientBase
 from PyMyGekko.resources.Loads import LoadFeature
 from PyMyGekko.resources.Loads import LoadState
 
@@ -28,10 +28,8 @@ def mock_server(aiohttp_server):
 async def test_get_loads(mock_server):
     server = await mock_server
     async with ClientSession() as session:
-        api = MyGekkoApiClient(
-            "USERNAME",
-            "APIKEY",
-            "GEKKOID",
+        api = MyGekkoApiClientBase(
+            {},
             session,
             scheme=server.scheme,
             host=server.host,

@@ -142,22 +142,22 @@ class Vent(Entity):
         await self._value_accessor.set_bypass_state(self, bypass_state)
 
     @property
-    def operating_mode(self) -> VentOperatingMode | VentOperatingModeZimmermann | None:
-        """Returns the operating mode"""
-        value = self._value_accessor.get_value(self, "operating_mode")
+    def working_mode(self) -> VentWorkingMode | VentWorkingModeZimmermann | None:
+        """Returns the working mode"""
+        value = self._value_accessor.get_value(self, "working_mode")
         if self.device_model in [
             VentDeviceModel.ZIMMERMANN_V1,
             VentDeviceModel.ZIMMERMANN_V2,
         ]:
             return (int(value)) if value is not None else None
         else:
-            return VentOperatingMode(int(value)) if value is not None else None
+            return VentWorkingMode(int(value)) if value is not None else None
 
-    async def set_operating_mode(
-        self, operating_mode: VentOperatingMode | VentOperatingModeZimmermann
+    async def set_working_mode(
+        self, working_mode: VentWorkingMode | VentWorkingModeZimmermann
     ):
-        """Sets the operating mode"""
-        await self._value_accessor.set_operating_mode(self, operating_mode)
+        """Sets the working mode"""
+        await self._value_accessor.set_working_mode(self, working_mode)
 
     @property
     def sub_working_mode(
@@ -176,8 +176,8 @@ class Vent(Entity):
             return VentSubWorkingMode(int(value)) if value is not None else None
 
 
-class VentOperatingMode(IntEnum):
-    """MyGekko Vent Operating Mode"""
+class VentWorkingMode(IntEnum):
+    """MyGekko Vent Working Mode"""
 
     AUTO = 0
     MANUAL = 1
@@ -185,8 +185,8 @@ class VentOperatingMode(IntEnum):
     PLUGGIT_WEEK = 3
 
 
-class VentOperatingModeZimmermann(IntEnum):
-    """MyGekko Vent Operating Mode for Zimmermann"""
+class VentWorkingModeZimmermann(IntEnum):
+    """MyGekko Vent Working Mode for Zimmermann"""
 
     OFF = 0
     ECO_SUMMER = 1
@@ -300,7 +300,7 @@ class VentValueAccessor(EntityValueAccessor):
                         (
                             self._data[key]["workingLevel"],
                             self._data[key]["deviceModel"],
-                            self._data[key]["operating_mode"],
+                            self._data[key]["working_mode"],
                             self._data[key]["bypassState"],
                             self._data[key]["maximumWorkingLevel"],
                             self._data[key]["relativeHumidityLevel"],
@@ -388,13 +388,13 @@ class VentValueAccessor(EntityValueAccessor):
                 vent.resource_path, "D" + str(dehumid_mode)
             )
 
-    async def set_operating_mode(
+    async def set_working_mode(
         self,
         vent: Vent,
-        operating_mode: VentOperatingMode | VentOperatingModeZimmermann,
+        working_mode: VentWorkingMode | VentWorkingModeZimmermann,
     ) -> None:
-        """Sets the operating mode"""
+        """Sets the working mode"""
         if vent and vent.entity_id:
             await self._data_provider.write_data(
-                vent.resource_path, "M" + str(operating_mode)
+                vent.resource_path, "M" + str(working_mode)
             )

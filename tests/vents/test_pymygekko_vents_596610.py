@@ -10,8 +10,8 @@ from PyMyGekko.resources.vents import VentDehumidMode
 from PyMyGekko.resources.vents import VentDeviceModel
 from PyMyGekko.resources.vents import VentElementInfo
 from PyMyGekko.resources.vents import VentFeature
-from PyMyGekko.resources.vents import VentOperatingMode
 from PyMyGekko.resources.vents import VentSubWorkingMode
+from PyMyGekko.resources.vents import VentWorkingMode
 
 
 async def var_response(_request):
@@ -76,7 +76,7 @@ async def test_get_vents(mock_server):
         assert vents[0].bypass_mode == VentBypassMode.AUTO
         assert vents[0].bypass_state == VentBypassState.AUTO
         assert vents[0].working_level is None
-        assert vents[0].operating_mode == VentOperatingMode.AUTO
+        assert vents[0].working_mode == VentWorkingMode.AUTO
         assert vents[0].sub_working_mode == VentSubWorkingMode.EXHAUST
         assert len(vents[0].supported_features) == 2
         assert VentFeature.HUMIDITY in vents[0].supported_features

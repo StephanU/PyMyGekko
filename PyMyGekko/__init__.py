@@ -172,12 +172,12 @@ class MyGekkoQueryApiClient(MyGekkoApiClientBase):
         session: ClientSession,
     ) -> None:
         super().__init__(
-            {
+            authentication_params={
                 "username": username,
                 "key": api_key,
                 "gekkoid": gekko_id,
             },
-            session,
+            session=session,
         )
 
 
@@ -192,12 +192,12 @@ class MyGekkoLocalApiClient(MyGekkoApiClientBase):
         host: str,
     ) -> None:
         super().__init__(
-            {
+            authentication_params={
                 "username": username,
                 "password": password,
             },
-            session,
-            host,
+            session=session,
+            host=host,
         )
 
 

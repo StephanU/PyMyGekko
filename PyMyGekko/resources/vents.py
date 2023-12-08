@@ -32,7 +32,7 @@ class Vent(Entity):
     @property
     def working_level(self) -> VentWorkingLevel | None:
         """Returns the current working level"""
-        value = self._value_accessor.get_value(self, "working_level")
+        value = self._value_accessor.get_value(self, "workingLevel")
         return VentWorkingLevel(int(value)) if value is not None else None
 
     @property
@@ -144,7 +144,7 @@ class Vent(Entity):
     @property
     def working_mode(self) -> VentWorkingMode | VentWorkingModeZimmermann | None:
         """Returns the working mode"""
-        value = self._value_accessor.get_value(self, "working_mode")
+        value = self._value_accessor.get_value(self, "workingMode")
         if self.device_model in [
             VentDeviceModel.ZIMMERMANN_V1,
             VentDeviceModel.ZIMMERMANN_V2,
@@ -300,7 +300,7 @@ class VentValueAccessor(EntityValueAccessor):
                         (
                             self._data[key]["workingLevel"],
                             self._data[key]["deviceModel"],
-                            self._data[key]["working_mode"],
+                            self._data[key]["workingMode"],
                             self._data[key]["bypassState"],
                             self._data[key]["maximumWorkingLevel"],
                             self._data[key]["relativeHumidityLevel"],

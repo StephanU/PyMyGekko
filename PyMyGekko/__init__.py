@@ -47,6 +47,10 @@ class MyGekkoApiClientBase:
         self._session = session
         self._demo_mode = demo_mode
 
+        _LOGGER.debug(
+            "Initializing MyGekkoApiClientBase demo_mode: %s", self._demo_mode
+        )
+
         if self._demo_mode:
             self._data_provider = DummyDataProvider()
         else:
@@ -70,39 +74,7 @@ class MyGekkoApiClientBase:
 
     async def try_connect(self) -> None:
         """Tries to connect to the MyGekko API using the given credentials"""
-        _LOGGER.debug("try_connect")
-        if self._demo_mode:
-            pass
-        else:
-            async with self._session.get(
-                self._url.with_path("/api/v1/var"), params=self._authentication_params
-            ) as resp:
-                response_text = await resp.text()
-                if resp.status == 200:
-                    _LOGGER.debug("Ok %s", response_text)
-                elif resp.status == 400:
-                    _LOGGER.error("MyGekkoBadRequest %s", response_text)
-                    raise MyGekkoBadRequest()
-                elif resp.status == 403:
-                    _LOGGER.error("MyGekkoForbidden %s", response_text)
-                    raise MyGekkoForbidden()
-                elif resp.status == 404:
-                    _LOGGER.error("MyGekkoNotFound %s", response_text)
-                    raise MyGekkoNotFound()
-                elif resp.status == 405:
-                    _LOGGER.error("MyGekkoMethodNotAllowed %s", response_text)
-                    raise MyGekkoMethodNotAllowed()
-                elif resp.status == 410:
-                    _LOGGER.error("MyGekkoGone %s", response_text)
-                    raise MyGekkoGone()
-                elif resp.status == 429:
-                    _LOGGER.error("MyGekkoTooManyRequests %s", response_text)
-                    raise MyGekkoTooManyRequests()
-                elif resp.status == 444:
-                    _LOGGER.error("MyGekkoNoResponse %s", response_text)
-                    raise MyGekkoNoResponse()
-                else:
-                    raise MyGekkoError()
+        await self._data_provider.try_connect()
 
     async def read_data(self) -> None:
         """Reads the status and resources data via the MyGekko API"""
@@ -199,35 +171,3 @@ class MyGekkoLocalApiClient(MyGekkoApiClientBase):
             session=session,
             host=host,
         )
-
-
-class MyGekkoError(Exception):
-    """Base MyGekko exception."""
-
-
-class MyGekkoBadRequest(MyGekkoError):
-    """MyGekko Bad Request exception."""
-
-
-class MyGekkoForbidden(MyGekkoError):
-    """MyGekko Forbidden exception."""
-
-
-class MyGekkoNotFound(MyGekkoError):
-    """MyGekko Not Found exception."""
-
-
-class MyGekkoMethodNotAllowed(MyGekkoError):
-    """MyGekko Method Not Allowed exception."""
-
-
-class MyGekkoGone(MyGekkoError):
-    """MyGekko Gone exception."""
-
-
-class MyGekkoTooManyRequests(MyGekkoError):
-    """MyGekko Too Many Requests exception."""
-
-
-class MyGekkoNoResponse(MyGekkoError):
-    """MyGekko No Response exception."""

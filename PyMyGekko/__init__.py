@@ -35,8 +35,8 @@ class MyGekkoApiClientBase:
 
     def __init__(
         self,
-        authentication_params: dict,
-        session: ClientSession,
+        authentication_params: dict = None,
+        session: ClientSession = None,
         demo_mode: bool = False,
         scheme: str = "https",
         host: str = "live.my-gekko.com",
@@ -170,4 +170,15 @@ class MyGekkoLocalApiClient(MyGekkoApiClientBase):
             },
             session=session,
             host=host,
+        )
+
+
+class MyGekkoDemoModeClient(MyGekkoApiClientBase):
+    """The api client in demo mode."""
+
+    def __init__(
+        self,
+    ) -> None:
+        super().__init__(
+            demo_mode=True,
         )

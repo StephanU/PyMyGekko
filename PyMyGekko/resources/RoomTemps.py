@@ -169,5 +169,5 @@ class RoomTempsValueAccessor(EntityValueAccessor):
         """Sets the working mode"""
         if room_temp and room_temp.entity_id:
             await self._data_provider.write_data(
-                room_temp.resource_path, "M" + str(working_mode.value)
+                room_temp.resource_path, "M" + str(working_mode)
             )

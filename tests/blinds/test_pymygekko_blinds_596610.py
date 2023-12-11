@@ -149,7 +149,6 @@ async def test_get_blinds(mock_server):
         assert blinds[10].position is None
         assert blinds[10].tilt_position is None
         assert blinds[10].state == BlindState.STOP
-        await blinds[10].set_state(BlindState.UP)
         assert len(blinds[10].supported_features) == 1
         assert BlindFeature.OPEN_CLOSE in blinds[10].supported_features
 

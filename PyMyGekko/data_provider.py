@@ -172,7 +172,9 @@ class DataProvider(DataProviderBase):
             self._url.with_path(resource_url),
             params=self._authentication_params | {"value": value},
         ) as resp:
-            _LOGGER.debug("write_data %s", resp)
+            if resp.status != 200:
+                response_text = await resp.text()
+                self.handle_api_error(resp.status, response_text)
 
     def handle_api_error(self, response_status, response_text):
         """Handles the api response in case of errors"""

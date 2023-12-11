@@ -5,12 +5,14 @@ from PyMyGekko import MyGekkoApiClientBase
 
 
 async def var_response(request):
-    varResponseFile = open("tests/energy_costs/api_var_response.json")
+    varResponseFile = open("tests/energy_costs/data/api_var_response_596610.json")
     return web.Response(status=200, body=varResponseFile.read())
 
 
 async def var_status_response(request):
-    statusResponseFile = open("tests/energy_costs/api_var_status_response.json")
+    statusResponseFile = open(
+        "tests/energy_costs/data/api_var_status_response_596610.json"
+    )
     return web.Response(status=200, body=statusResponseFile.read())
 
 

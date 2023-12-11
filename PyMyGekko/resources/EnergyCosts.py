@@ -1,11 +1,15 @@
 """MyGekko EnergyCosts implementation"""
 from __future__ import annotations
 
+import logging
 import re
 
 from PyMyGekko.data_provider import DataProvider
 from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
+
+
+_LOGGER: logging.Logger = logging.getLogger(__name__)
 
 
 class EnergyCost(Entity):
@@ -65,21 +69,30 @@ class EnergyCostValueAccessor(EntityValueAccessor):
             "energyYesterd12[kWh]",
             "energyYesterd18[kWh]",
             "energyYesterd24[kWh]",
-            "sum",
+            "elementInfo",
             "energyYear[kWh]",
             "energyPeriod[kWh]",
             "energyPeriodFrom[DateTime]",
-            "unknown",
+            "counterDirection",
+            "other",
         ]
         values = []
         for index, value_parts in enumerate(value.split(";")):
-            values.append(self._transform_value(value_descriptions[index], value_parts))
+            if index < len(value_descriptions):
+                values.append(
+                    self._transform_value(value_descriptions[index], value_parts)
+                )
+            else:
+                _LOGGER.error("OutOfBounds access for value %s", value)
 
         return values
 
     def update_status(self, status):
         if status is not None and "energycosts" in status:
             energy_costs = status["energycosts"]
+
+            _LOGGER.debug("EnergyCosts update_status %s", energy_costs)
+
             for key in energy_costs:
                 if key.startswith("item"):
                     if key not in self._data:
@@ -96,6 +109,9 @@ class EnergyCostValueAccessor(EntityValueAccessor):
     def update_resources(self, resources):
         if resources is not None and "energycosts" in resources:
             energy_costs = resources["energycosts"]
+
+            _LOGGER.debug("EnergyCosts update_resources %s", energy_costs)
+
             for key in energy_costs:
                 if key.startswith("item"):
                     if key not in self._data:

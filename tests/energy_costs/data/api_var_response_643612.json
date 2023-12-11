@@ -1,0 +1,77 @@
+{
+  "energycosts": {
+    "item0": {
+      "name": "Meter 1",
+      "page": "Counter",
+      "sumstate": {
+        "description": "actPower [kW]; energyToday [kWh]; energyMonth [kWh]; energySum [kWh]; powerMax [kW]; unitEnergy [Unit]; unitPower [Unit]; energyToday6 [kWh]; energyToday12 [kWh]; energyToday18 [kWh]; energyToday24 [kWh]; energyYesterd6 [kWh]; energyYesterd12 [kWh]; energyYesterd18 [kWh]; energyYesterd24 [kWh]; elementInfo 0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm; energyYear [kWh]; energyPeriod [kWh]; energyPeriodFrom [DateTime]; ",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 450000
+      },
+      "scmd": {
+        "description": "RP (ResetPeriod)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 450070
+      }
+    },
+    "item1": {
+      "name": "Meter 2",
+      "page": "Counter",
+      "sumstate": {
+        "description": "actPower [kW]; energyToday [kWh]; energyMonth [kWh]; energySum [kWh]; powerMax [kW]; unitEnergy [Unit]; unitPower [Unit]; energyToday6 [kWh]; energyToday12 [kWh]; energyToday18 [kWh]; energyToday24 [kWh]; energyYesterd6 [kWh]; energyYesterd12 [kWh]; energyYesterd18 [kWh]; energyYesterd24 [kWh]; elementInfo 0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm; energyYear [kWh]; energyPeriod [kWh]; energyPeriodFrom [DateTime]; ",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 450100
+      },
+      "scmd": {
+        "description": "RP (ResetPeriod)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 450170
+      }
+    },
+    "item2": {
+      "name": "Photovoltaics",
+      "page": "Counter",
+      "sumstate": {
+        "description": "actPower [kW]; energyToday [kWh]; energyMonth [kWh]; energySum [kWh]; powerMax [kW]; unitEnergy [Unit]; unitPower [Unit]; energyToday6 [kWh]; energyToday12 [kWh]; energyToday18 [kWh]; energyToday24 [kWh]; energyYesterd6 [kWh]; energyYesterd12 [kWh]; energyYesterd18 [kWh]; energyYesterd24 [kWh]; elementInfo 0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm; energyYear [kWh]; energyPeriod [kWh]; energyPeriodFrom [DateTime]; ",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 450200
+      },
+      "scmd": {
+        "description": "RP (ResetPeriod)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 450270
+      }
+    },
+    "item3": {
+      "name": "Swimming Pool",
+      "page": "Counter",
+      "sumstate": {
+        "description": "actPower [kW]; energyToday [kWh]; energyMonth [kWh]; energySum [kWh]; powerMax [kW]; unitEnergy [Unit]; unitPower [Unit]; energyToday6 [kWh]; energyToday12 [kWh]; energyToday18 [kWh]; energyToday24 [kWh]; energyYesterd6 [kWh]; energyYesterd12 [kWh]; energyYesterd18 [kWh]; energyYesterd24 [kWh]; elementInfo 0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm; energyYear [kWh]; energyPeriod [kWh]; energyPeriodFrom [DateTime]; ",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 450300
+      },
+      "scmd": {
+        "description": "RP (ResetPeriod)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 450370
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "description": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 4500000
+      }
+    }
+  }
+}

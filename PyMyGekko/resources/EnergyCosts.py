@@ -52,30 +52,53 @@ class EnergyCostValueAccessor(EntityValueAccessor):
 
         return {"name": m.group(1), "unit": unit, "value": typed_value}
 
-    def _decode_values(self, value: str) -> any:
-        value_descriptions = [
-            "actPower[kW]",
-            "energyToday[kWh]",
-            "energyMonth[kWh]",
-            "energySum[kWh]",
-            "powerMax[kW]",
-            "unitEnergy[Unit]",
-            "unitPower[Unit]",
-            "energyToday6[kWh]",
-            "energyToday12[kWh]",
-            "energyToday18[kWh]",
-            "energyToday24[kWh]",
-            "energyYesterd6[kWh]",
-            "energyYesterd12[kWh]",
-            "energyYesterd18[kWh]",
-            "energyYesterd24[kWh]",
-            "elementInfo",
-            "energyYear[kWh]",
-            "energyPeriod[kWh]",
-            "energyPeriodFrom[DateTime]",
-            "counterDirection",
-            "other",
-        ]
+    def _decode_values(self, value: str, hardware: str) -> any:
+        value_descriptions = []
+
+        if hardware == "legacy":
+            value_descriptions = [
+                "actPower[kW]",
+                "energyToday[kWh]",
+                "energyMonth[kWh]",
+                "energySum[kWh]",
+                "powerMax[kW]",
+                "unitEnergy[Unit]",
+                "unitPower[Unit]",
+                "energyToday6[kWh]",
+                "energyToday12[kWh]",
+                "energyToday18[kWh]",
+                "energyToday24[kWh]",
+                "energyYesterd6[kWh]",
+                "energyYesterd12[kWh]",
+                "energyYesterd18[kWh]",
+                "energyYesterd24[kWh]",
+                "elementInfo",
+                "other",
+            ]
+        else:
+            value_descriptions = [
+                "actPower[kW]",
+                "energyToday[kWh]",
+                "energyMonth[kWh]",
+                "energySum[kWh]",
+                "powerMax[kW]",
+                "unitEnergy[Unit]",
+                "unitPower[Unit]",
+                "energyToday6[kWh]",
+                "energyToday12[kWh]",
+                "energyToday18[kWh]",
+                "energyToday24[kWh]",
+                "energyYesterd6[kWh]",
+                "energyYesterd12[kWh]",
+                "energyYesterd18[kWh]",
+                "energyYesterd24[kWh]",
+                "elementInfo",
+                "energyYear[kWh]",
+                "energyPeriod[kWh]",
+                "energyPeriodFrom[DateTime]",
+                "counterDirection",
+                "other",
+            ]
         values = []
         for index, value_parts in enumerate(value.split(";")):
             if index < len(value_descriptions):
@@ -87,7 +110,7 @@ class EnergyCostValueAccessor(EntityValueAccessor):
 
         return values
 
-    def update_status(self, status):
+    def update_status(self, status, hardware):
         if status is not None and "energycosts" in status:
             energy_costs = status["energycosts"]
 
@@ -103,7 +126,7 @@ class EnergyCostValueAccessor(EntityValueAccessor):
                         and "value" in energy_costs[key]["sumstate"]
                     ):
                         self._data[key]["values"] = self._decode_values(
-                            energy_costs[key]["sumstate"]["value"]
+                            energy_costs[key]["sumstate"]["value"], hardware
                         )
 
     def update_resources(self, resources):

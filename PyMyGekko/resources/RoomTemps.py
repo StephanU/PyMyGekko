@@ -88,7 +88,7 @@ class RoomTempsValueAccessor(EntityValueAccessor):
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
 
-    def update_status(self, status):
+    def update_status(self, status, hardware):
         if status is not None and "roomtemps" in status:
             room_temps = status["roomtemps"]
             for key in room_temps:
@@ -100,20 +100,39 @@ class RoomTempsValueAccessor(EntityValueAccessor):
                         "sumstate" in room_temps[key]
                         and "value" in room_temps[key]["sumstate"]
                     ):
-                        (
-                            self._data[key]["temperatureValue"],
-                            self._data[key]["temperatureSetPointValue"],
-                            self._data[key]["valveOpeningLevel"],
-                            self._data[key]["workingMode"],
-                            self._data[key]["Reserved"],
-                            self._data[key]["temperatureAdjustmentValue"],
-                            self._data[key]["coolingModeState"],
-                            self._data[key]["elementInfo"],
-                            self._data[key]["relativeHumidityLevel"],
-                            self._data[key]["airQualityLevel"],
-                            self._data[key]["floorTemperatureValue"],
-                            *_other,
-                        ) = room_temps[key]["sumstate"]["value"].split(";")
+                        self.read_value(
+                            key, room_temps[key]["sumstate"]["value"], hardware
+                        )
+
+    def read_value(self, key, value, hardware):
+        """Reads a value based on the given hardware."""
+        if hardware == "legacy":
+            (
+                self._data[key]["temperatureValue"],
+                self._data[key]["temperatureSetPointValue"],
+                self._data[key]["valveOpeningLevel"],
+                self._data[key]["workingMode"],
+                self._data[key]["Reserved"],
+                self._data[key]["temperatureAdjustmentValue"],
+                self._data[key]["coolingModeState"],
+                self._data[key]["elementInfo"],
+                *_other,
+            ) = value.split(";")
+        else:
+            (
+                self._data[key]["temperatureValue"],
+                self._data[key]["temperatureSetPointValue"],
+                self._data[key]["valveOpeningLevel"],
+                self._data[key]["workingMode"],
+                self._data[key]["Reserved"],
+                self._data[key]["temperatureAdjustmentValue"],
+                self._data[key]["coolingModeState"],
+                self._data[key]["elementInfo"],
+                self._data[key]["relativeHumidityLevel"],
+                self._data[key]["airQualityLevel"],
+                self._data[key]["floorTemperatureValue"],
+                *_other,
+            ) = value.split(";")
 
     def update_resources(self, resources):
         if resources is not None and "roomtemps" in resources:

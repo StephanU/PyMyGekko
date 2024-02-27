@@ -288,7 +288,7 @@ class VentValueAccessor(EntityValueAccessor):
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
 
-    def update_status(self, status):
+    def update_status(self, status, hardware):
         if status is not None and "vents" in status:
             vents = status["vents"]
             for key in vents:
@@ -297,30 +297,56 @@ class VentValueAccessor(EntityValueAccessor):
                         self._data[key] = {}
 
                     if "sumstate" in vents[key] and "value" in vents[key]["sumstate"]:
-                        (
-                            self._data[key]["workingLevel"],
-                            self._data[key]["deviceModel"],
-                            self._data[key]["workingMode"],
-                            self._data[key]["bypassState"],
-                            self._data[key]["maximumWorkingLevel"],
-                            self._data[key]["relativeHumidityLevel"],
-                            self._data[key]["airQualityLevel"],
-                            self._data[key]["co2Value"],
-                            self._data[key]["supplyAirTemperatureValue"],
-                            self._data[key]["exhaustAirTemperatureValue"],
-                            self._data[key]["outsideAirTemperatureValue"],
-                            self._data[key]["outgoingAirTemperatureValue"],
-                            self._data[key]["supplyAirWorkingLevel"],
-                            self._data[key]["exhaustAirWorkingLevel"],
-                            self._data[key]["elementInfo"],
-                            self._data[key]["subWorkingMode"],
-                            self._data[key]["coolingModeState"],
-                            self._data[key]["dehumidModeState"],
-                            self._data[key]["bypassMode"],
-                            *_other,
-                        ) = vents[key]["sumstate"]["value"].split(
-                            ";",
-                        )
+                        self.read_value(key, vents[key]["sumstate"]["value"], hardware)
+
+    def read_value(self, key, value, hardware):
+        """Reads a value based on the given hardware."""
+        if hardware == "legacy":
+            (
+                self._data[key]["workingLevel"],
+                self._data[key]["deviceModel"],
+                self._data[key]["workingMode"],
+                self._data[key]["bypassState"],
+                self._data[key]["maximumWorkingLevel"],
+                self._data[key]["relativeHumidityLevel"],
+                self._data[key]["co2Value"],
+                self._data[key]["airQualityLevel"],
+                self._data[key]["supplyAirTemperatureValue"],
+                self._data[key]["exhaustAirTemperatureValue"],
+                self._data[key]["outsideAirTemperatureValue"],
+                self._data[key]["outgoingAirTemperatureValue"],
+                self._data[key]["supplyAirWorkingLevel"],
+                self._data[key]["exhaustAirWorkingLevel"],
+                self._data[key]["elementInfo"],
+                *_other,
+            ) = value.split(
+                ";",
+            )
+        else:
+            (
+                self._data[key]["workingLevel"],
+                self._data[key]["deviceModel"],
+                self._data[key]["workingMode"],
+                self._data[key]["bypassState"],
+                self._data[key]["maximumWorkingLevel"],
+                self._data[key]["relativeHumidityLevel"],
+                self._data[key]["airQualityLevel"],
+                self._data[key]["co2Value"],
+                self._data[key]["supplyAirTemperatureValue"],
+                self._data[key]["exhaustAirTemperatureValue"],
+                self._data[key]["outsideAirTemperatureValue"],
+                self._data[key]["outgoingAirTemperatureValue"],
+                self._data[key]["supplyAirWorkingLevel"],
+                self._data[key]["exhaustAirWorkingLevel"],
+                self._data[key]["elementInfo"],
+                self._data[key]["subWorkingMode"],
+                self._data[key]["coolingModeState"],
+                self._data[key]["dehumidModeState"],
+                self._data[key]["bypassMode"],
+                *_other,
+            ) = value.split(
+                ";",
+            )
 
     def update_resources(self, resources):
         if resources is not None and "vents" in resources:

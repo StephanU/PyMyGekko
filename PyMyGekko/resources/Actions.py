@@ -61,7 +61,7 @@ class ActionValueAccessor(EntityValueAccessor):
         self._data_provider = data_provider
         data_provider.subscribe(self)
 
-    def update_status(self, status):
+    def update_status(self, status, hardware):
         if status is not None and "actions" in status:
             actions = status["actions"]
             for key in actions:

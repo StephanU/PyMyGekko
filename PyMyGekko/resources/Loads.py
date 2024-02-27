@@ -56,7 +56,7 @@ class LoadValueAccessor(EntityValueAccessor):
         self._data_provider = data_provider
         data_provider.subscribe(self)
 
-    def update_status(self, status):
+    def update_status(self, status, hardware):
         if status is not None and "loads" in status:
             loads = status["loads"]
             for key in loads:

@@ -1,0 +1,16 @@
+{
+  "globals": {
+    "network": {
+      "gekkoname": {
+        "value": "myGEKKO"
+      }
+    }
+  },
+  "vents": {
+    "item0": {
+      "sumstate": {
+        "value": "1;1;0;0;4;;;;20.9;24.5;8.6;10.3;25.0;25.0;0;"
+      }
+    }
+  }
+}

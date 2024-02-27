@@ -1,0 +1,22 @@
+{
+  "energycosts": {
+    "item0": {
+      "name": "Strom",
+      "sumstate": {
+        "value": "2.50;0.01;0.01;0.01;10.00;kWh;kW;0;0;6;0;0;0;0;0;1; (Act.power;Energy today;Energy month;Energy sum;Power max.;Unit energy;Unit power;Energy today 0-6;6-12;12-18;18-24;Energy yesterd. 0-6;6-12;12-18;18-24;1=Act.Power avaiable)",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800000
+      }
+    },
+    "item1": {
+      "name": "Wärme",
+      "sumstate": {
+        "value": "2.50;0.01;0.01;0.01;10.00;kWh;kW;0;0;6;0;0;0;0;0;1; (Act.power;Energy today;Energy month;Energy sum;Power max.;Unit energy;Unit power;Energy today 0-6;6-12;12-18;18-24;Energy yesterd. 0-6;6-12;12-18;18-24;1=Act.Power avaiable)",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800100
+      }
+    }
+  }
+}

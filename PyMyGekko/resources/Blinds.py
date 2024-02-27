@@ -97,7 +97,7 @@ class BlindValueAccessor(EntityValueAccessor):
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
 
-    def update_status(self, status):
+    def update_status(self, status, hardware):
         if status is not None and "blinds" in status:
             blinds = status["blinds"]
             for key in blinds:

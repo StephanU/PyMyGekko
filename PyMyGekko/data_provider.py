@@ -16,7 +16,7 @@ _LOGGER: logging.Logger = logging.getLogger(__name__)
 class DataSubscriberInterface:
     """Interface for data subscribers"""
 
-    def update_status(self, status):
+    def update_status(self, status, hardware):
         """Method called on status updates"""
 
     def update_resources(self, resources):
@@ -66,8 +66,20 @@ class DataProviderBase(ABC):
     @status.setter
     def status(self, status):
         self._status = status
+
+        # current assumption is, that the hardware property is not set in legacy hardware (Slide)
+        # but only in newer hardware (Slide 2, Nova)
+        hardware = "legacy"
+        network_data = status["globals"]["network"]
+        if (
+            "hardware" in network_data
+            and network_data["hardware"]
+            and "value" in network_data["hardware"]
+        ):
+            hardware = network_data["hardware"]["value"]
+
         for subscriber in self._subscriber:
-            subscriber.update_status(self._status)
+            subscriber.update_status(self._status, hardware)
 
     def subscribe(self, subscriber: DataSubscriberInterface):
         """Method to subscribe to data changes."""

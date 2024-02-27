@@ -78,7 +78,7 @@ class LightValueAccessor(EntityValueAccessor):
         self._data_provider = data_provider
         data_provider.subscribe(self)
 
-    def update_status(self, status):
+    def update_status(self, status, hardware):
         if status is not None and "lights" in status:
             lights = status["lights"]
             for key in lights:

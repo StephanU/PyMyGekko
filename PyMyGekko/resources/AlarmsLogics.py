@@ -30,7 +30,7 @@ class AlarmsLogicValueAccessor(EntityValueAccessor):
         self._data_provider = data_provider
         data_provider.subscribe(self)
 
-    def update_status(self, status):
+    def update_status(self, status, hardware):
         if status is not None and "alarms_logics" in status:
             alarms_logics = status["alarms_logics"]
             for key in alarms_logics:

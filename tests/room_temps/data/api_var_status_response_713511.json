@@ -1,4 +1,20 @@
 {
+  "globals": {
+    "network": {
+      "gekkoname": {
+        "value": "myGEKKO Slide Haus"
+      },
+      "language": {
+        "value": "0"
+      },
+      "version": {
+        "value": "713511"
+      },
+      "hardware": {
+        "value": "NOVA (AC0DFE3100C9)"
+      }
+    }
+  },
   "roomtemps": {
     "item0": {
       "sumstate": {

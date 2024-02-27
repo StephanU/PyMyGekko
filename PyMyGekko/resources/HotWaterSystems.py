@@ -80,7 +80,7 @@ class HotWaterSystemValueAccessor(EntityValueAccessor):
         self._data_provider = data_provider
         data_provider.subscribe(self)
 
-    def update_status(self, status):
+    def update_status(self, status, hardware):
         if status is not None and "hotwater_systems" in status:
             hotwater_systems = status["hotwater_systems"]
             for key in hotwater_systems:

@@ -24,11 +24,11 @@ pip install pymygekko
 ```python
 from aiohttp import ClientSession
 
-from PyMyGekko import MyGekkoApiClient
+from PyMyGekko import MyGekkoQueryApiClient
 from PyMyGekko.resources.Lights import LightState
 
 async with ClientSession() as session:
-    api = MyGekkoApiClient(
+    api = MyGekkoQueryApiClient(
         "USERNAME",
         "APIKEY",
         "GEKKOID",

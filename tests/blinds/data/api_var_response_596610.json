@@ -1,0 +1,210 @@
+{
+  "blinds": {
+    "item0": {
+      "name": "Wohnen Terrasse",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "format": "currentState enum[-2=holdDown,-1=movingDown,0=stop,1=movingUp,2=holdUp](); positionLevel float[0.00,100.00](%); rotationLevel float[0.00,100.00](%); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); rotationRange enum[90=ninety,180=hundredEighty](°); ",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150000
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150070
+      }
+    },
+    "item1": {
+      "name": "Wohnen Fenster",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150100
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150170
+      }
+    },
+    "item2": {
+      "name": "Essen",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150200
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150270
+      }
+    },
+    "item3": {
+      "name": "Küche",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150300
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150370
+      }
+    },
+    "item4": {
+      "name": "WC EG",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150400
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150470
+      }
+    },
+    "item5": {
+      "name": "Arbeiten",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150500
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150570
+      }
+    },
+    "item6": {
+      "name": "Eltern",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150600
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150670
+      }
+    },
+    "item7": {
+      "name": "Kind 1",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150700
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150770
+      }
+    },
+    "item8": {
+      "name": "Kind 2",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150800
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150870
+      }
+    },
+    "item9": {
+      "name": "Bad OG",
+      "page": "...",
+      "sumstate": {
+        "value": "state[-2=Hold_down|-1=Down|0=Stop|1=Up|2=Hold_up]; position[%]; angle[°]; sum[0=Ok|1=ManualOff|2=ManualOn|3=Locked|4=Alarm]; slatRotationArea[°]",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 150900
+      },
+      "scmd": {
+        "value": "-2|-1|0|1|2|T|P55.4|S32.4 (Hold_down|Down|Stop|Up|Hold_up|Toggle|Position|Angle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 150970
+      }
+    },
+    "group0": {
+      "name": "",
+      "sumstate": {
+        "value": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500000
+      },
+      "scmd": {
+        "value": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500001
+      }
+    },
+    "group1": {
+      "name": "EG",
+      "sumstate": {
+        "value": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500100
+      },
+      "scmd": {
+        "value": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500101
+      }
+    },
+    "group2": {
+      "name": "OG",
+      "sumstate": {
+        "value": "State[1=Up|-1=Down]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 1500200
+      },
+      "scmd": {
+        "value": "2|-2 (Up|Down)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 1500201
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "vents": {
+    "item0": {
+      "name": "Wohnraumlüftung",
+      "page": "...",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "workingLevel enum[0=off,1=level1,2=level2,3=level3,4=level4](); deviceModel enum[0=standard,1=pluggit,2=zimmermannV1,3=westaflex,4=stiebelLWZ,5=zimmermannV2](); 3 #zimmermann:enum[0=off,1=ecoSummer,2=ecoWinter,3=comfort,4=stove]#others:[0=auto,1=manual,2=pluggitAuto,3=pluggitWeek,4=](); bypassState enum[0=auto,1=manual,2=summer](); maximumWorkingLevel enum[0=off,1=level1,2=level2,3=level3,4=level4](); relativeHumidityLevel float[0.00,100.00](%); airQualityLevel float[0.00,100.00](%); co2Value float[0.00,100000.00](ppm); supplyAirTemperatureValue float[-100.00,100.00](°C); exhaustAirTemperatureValue float[-100.00,100.00](°C); outsideAirTemperatureValue float[-100.00,100.00](°C); outgoingAirTemperatureValue float[-100.00,100.00](°C); supplyAirWorkingLevel float[0.00,100.00](%); exhaustAirWorkingLevel float[0.00,100.00](%); elementInfo enum[0=auto,1=manualOff,2=manualOn,3=locked,4=alarm](); subWorkingMode #zimmermann:enum[0=middleTemp+offset,1=onlyOffset]#others:enum[0=exhaust,1=exhaust/supply,2=exhaust/supply/heatRecovery](); coolingModeState enum[0=off,1=on](); dehumidModeState enum[0=off,1=on](); bypassMode enum[0=auto,1=manual,2=summer](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-1|1|2|3|4|T|BY0|BY1|BY2|C0|C1|D0|D1|Mx (Off|Level1|Level2|Level3|Level4|Toggle|BypassAuto|BypassManual|BypassSummer|Cool.Off|Cool.On|Dehumid.Off|Dehumid.On|OperatingMode[0..x])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 200070
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 2000000
+      },
+      "scmd": {
+        "description": "Summary of the group commands and their formats",
+        "format": "-1|1|2|3|4 (Off|Level1|Level2|Level3|Level4)",
+        "type": "AV",
+        "permission": "WRITE",
+        "index": 2000001
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "roomtemps": {
+    "item0": {
+      "name": "Wohnen",
+      "sumstate": {
+        "value": "0|1|2 (Off|On Impulse|On Permanent)",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 500000
+      },
+      "scmd": {
+        "value": "M1|M8|M16|M64|M256|K2.4 (Mode_Off|Mode_Auto|Mode_Reduced|Mode_Standby|Mode_Manual|Temp. adjustment[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500001
+      }
+    },
+    "item1": {
+      "name": "Gäste-Wc",
+      "sumstate": {
+        "value": "0|1|2 (Off|On Impulse|On Permanent)",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 500100
+      },
+      "scmd": {
+        "value": "M1|M8|M16|M64|M256|K2.4 (Mode_Off|Mode_Auto|Mode_Reduced|Mode_Standby|Mode_Manual|Temp. adjustment[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500101
+      }
+    },
+    "item2": {
+      "name": "Kind 1",
+      "sumstate": {
+        "value": "0|1|2 (Off|On Impulse|On Permanent)",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 500200
+      },
+      "scmd": {
+        "value": "M1|M8|M16|M64|M256|K2.4 (Mode_Off|Mode_Auto|Mode_Reduced|Mode_Standby|Mode_Manual|Temp. adjustment[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500201
+      }
+    },
+    "item3": {
+      "name": "Schlafzimmer",
+      "sumstate": {
+        "value": "0|1|2 (Off|On Impulse|On Permanent)",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 500300
+      },
+      "scmd": {
+        "value": "M1|M8|M16|M64|M256|K2.4 (Mode_Off|Mode_Auto|Mode_Reduced|Mode_Standby|Mode_Manual|Temp. adjustment[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500301
+      }
+    },
+    "item4": {
+      "name": "Kind 2",
+      "sumstate": {
+        "value": "0|1|2 (Off|On Impulse|On Permanent)",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 500400
+      },
+      "scmd": {
+        "value": "M1|M8|M16|M64|M256|K2.4 (Mode_Off|Mode_Auto|Mode_Reduced|Mode_Standby|Mode_Manual|Temp. adjustment[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500401
+      }
+    },
+    "item5": {
+      "name": "Kind 3",
+      "sumstate": {
+        "value": "0|1|2 (Off|On Impulse|On Permanent)",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 500500
+      },
+      "scmd": {
+        "value": "M1|M8|M16|M64|M256|K2.4 (Mode_Off|Mode_Auto|Mode_Reduced|Mode_Standby|Mode_Manual|Temp. adjustment[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500501
+      }
+    },
+    "item6": {
+      "name": "Bad",
+      "sumstate": {
+        "value": "0|1|2 (Off|On Impulse|On Permanent)",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 500600
+      },
+      "scmd": {
+        "value": "M1|M8|M16|M64|M256|K2.4 (Mode_Off|Mode_Auto|Mode_Reduced|Mode_Standby|Mode_Manual|Temp. adjustment[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 500601
+      }
+    }
+  }
+}

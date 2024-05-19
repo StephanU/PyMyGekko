@@ -1,0 +1,19 @@
+{
+  "vents": {
+    "item0": {
+      "name": "Lüftung",
+      "sumstate": {
+        "value": "3;1;0;0;4;55.7;64.0;54.7;22.1;22.8;7.6;9.3;33.3;33.3;0; (Level|Type|Mode|Bypassstate|MaxLevel|Humidity|CO2|VOC|TempSupplyAir|TempExhaustAir|TempOutsideAir|TempOutgoingAir|LevelIn%|LevelOut%|Locked)",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 300000
+      },
+      "scmd": {
+        "value": "-1|1|2|3|4|T (Off|Level1|Level2|Level3|Level4|Toggle)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 300001
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "hotwater_systems": {
+    "item0": {
+      "name": "Warmwasserspeicher",
+      "page": "Warmwasserspeicher",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "deviceModel enum[0=individual,1=buderus,2=stiebel,3=tecalor,4=vaillant](); coolingModeState enum[0=off,1=on](); waterTemperatureSetPointValue float[-100.00,100.00](°C); waterTemperatureTopValue float[-100.00,100.00](°C); waterTemperatureBottomValue float[-100.00,100.00](°C); collectorTemperatureValue float[-100.00,100.00](°C); currentState enum[0=off,1=on](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "0|1|T100 (Off|On|Temperature[°C])",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 1950070
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 19500000
+      }
+    }
+  }
+}

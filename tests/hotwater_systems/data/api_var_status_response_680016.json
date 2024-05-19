@@ -1,0 +1,25 @@
+{
+  "globals": {
+    "network": {
+      "gekkoname": {
+        "value": "myGEKKO"
+      },
+      "language": {
+        "value": "0"
+      },
+      "version": {
+        "value": "680016"
+      },
+      "hardware": {
+        "value": "Slide 2 (AC0DFE300913)"
+      }
+    }
+  },
+  "hotwater_systems": {
+    "item0": {
+      "sumstate": {
+        "value": "1;0;55.00;61.10;22.00;5.90;1;0;"
+      }
+    }
+  }
+}

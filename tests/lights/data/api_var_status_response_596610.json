@@ -1,0 +1,40 @@
+{
+  "globals": {
+    "network": {
+      "gekkoname": {
+        "value": "myGEKKO"
+      },
+      "language": {
+        "value": "0"
+      },
+      "version": {
+        "value": "596610"
+      },
+      "hardware": {
+        "value": "Slide 2 (AC0DFE300913)"
+      }
+    }
+  },
+  "lights": {
+    "item0": {
+      "sumstate": {
+        "value": "1;;;;0"
+      }
+    },
+    "item1": {
+      "sumstate": {
+        "value": "1;50.00;;;0"
+      }
+    },
+    "item2": {
+      "sumstate": {
+        "value": "0;44.00;16711719;;0"
+      }
+    },
+    "group0": {
+      "sumstate": {
+        "value": "1"
+      }
+    }
+  }
+}

@@ -144,8 +144,8 @@ class DataProvider(DataProviderBase):
             self._url.with_path("/api/v1/var"),
             params=self._authentication_params,
         ) as resp:
+            response_text = await resp.text()
             if resp.status == 200:
-                response_text = await resp.text()
                 try:
                     self.resources = json.loads(response_text)
                 except json.JSONDecodeError:
@@ -161,8 +161,8 @@ class DataProvider(DataProviderBase):
             self._url.with_path("/api/v1/var/status"),
             params=self._authentication_params,
         ) as resp:
+            response_text = await resp.text()
             if resp.status == 200:
-                response_text = await resp.text()
                 try:
                     self.status = json.loads(response_text)
                 except json.JSONDecodeError:

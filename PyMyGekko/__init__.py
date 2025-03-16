@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 import logging
+from urllib import parse
 
 from aiohttp import ClientSession
 from PyMyGekko.resources.Actions import Action
@@ -113,7 +114,7 @@ class MyGekkoApiClientBase:
         return self._energy_costs_value_accessor.energy_costs
 
     def get_hot_water_systems(self) -> list[HotWaterSystem]:
-        """Returns the MyGekko hot_water_systens"""
+        """Returns the MyGekko hot_water_systems"""
         return self._hot_water_systems_value_accessor.hotwater_systems
 
     def get_lights(self) -> list[Light]:
@@ -166,7 +167,7 @@ class MyGekkoLocalApiClient(MyGekkoApiClientBase):
         super().__init__(
             authentication_params={
                 "username": username,
-                "password": password,
+                "password": parse.quote(password),
             },
             session=session,
             host=host,

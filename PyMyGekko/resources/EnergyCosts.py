@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 import re
 
-from PyMyGekko.data_provider import DataProvider
+from PyMyGekko.data_provider import DataProviderBase
 from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
 
@@ -22,7 +22,7 @@ class EnergyCost(Entity):
         self._value_accessor = value_accessor
 
     @property
-    def sensor_data(self) -> dict[str, any]:
+    def sensor_data(self) -> dict[str, any] | None:
         """Returns the sensor data"""
         return self._value_accessor.get_data(self)
 
@@ -30,7 +30,7 @@ class EnergyCost(Entity):
 class EnergyCostValueAccessor(EntityValueAccessor):
     """EnergyCost value accessor"""
 
-    def __init__(self, data_provider: DataProvider.DataProvider):
+    def __init__(self, data_provider: DataProviderBase):
         self._data = {}
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
@@ -150,7 +150,7 @@ class EnergyCostValueAccessor(EntityValueAccessor):
 
         return result
 
-    def get_data(self, energy_meter: EnergyCost) -> dict[str, any]:
+    def get_data(self, energy_meter: EnergyCost) -> dict[str, any] | None:
         """Returns the data of the given energy meter"""
         if energy_meter and energy_meter.entity_id:
             if (

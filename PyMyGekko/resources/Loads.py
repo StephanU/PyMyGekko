@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from enum import IntEnum
 
-from PyMyGekko.data_provider import DataProvider
+from PyMyGekko.data_provider import DataProviderBase
 from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
 
@@ -51,7 +51,7 @@ class LoadFeature(IntEnum):
 class LoadValueAccessor(EntityValueAccessor):
     """Loads value accessor"""
 
-    def __init__(self, data_provider: DataProvider.DataProvider):
+    def __init__(self, data_provider: DataProviderBase):
         self._data = {}
         self._data_provider = data_provider
         data_provider.subscribe(self)
@@ -103,4 +103,4 @@ class LoadValueAccessor(EntityValueAccessor):
     async def set_state(self, load: Load, state: LoadState) -> None:
         """Sets the state"""
         if load and load.entity_id:
-            await self._data_provider.write_data(load.resource_path, state)
+            await self._data_provider.write_data(load.resource_path, str(state))

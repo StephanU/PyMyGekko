@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from enum import IntEnum
 
-from PyMyGekko.data_provider import DataProvider
+from PyMyGekko.data_provider import DataProviderBase
 from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
 
@@ -75,7 +75,7 @@ class HotWaterSystemFeature(IntEnum):
 class HotWaterSystemValueAccessor(EntityValueAccessor):
     """HotWaterSystem value accessor"""
 
-    def __init__(self, data_provider: DataProvider.DataProvider):
+    def __init__(self, data_provider: DataProviderBase):
         self._data = {}
         self._data_provider = data_provider
         data_provider.subscribe(self)
@@ -147,7 +147,9 @@ class HotWaterSystemValueAccessor(EntityValueAccessor):
     ) -> None:
         """Sets the state"""
         if hotwater_system and hotwater_system.entity_id:
-            await self._data_provider.write_data(hotwater_system.resource_path, state)
+            await self._data_provider.write_data(
+                hotwater_system.resource_path, str(state)
+            )
 
     async def set_target_temperature(
         self, hotwater_system: HotWaterSystem, target_temperature: float

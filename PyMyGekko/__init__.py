@@ -2,11 +2,13 @@
 #
 # SPDX-License-Identifier: MIT
 import logging
+from typing import Union
 from urllib import parse
 
 from aiohttp import ClientSession
 from PyMyGekko.resources.Actions import Action
 from PyMyGekko.resources.Actions import ActionValueAccessor
+from PyMyGekko.resources.AlarmsLogics import AlarmsLogic
 from PyMyGekko.resources.AlarmsLogics import AlarmsLogicValueAccessor
 from PyMyGekko.resources.Blinds import Blind
 from PyMyGekko.resources.Blinds import BlindValueAccessor
@@ -36,12 +38,12 @@ class MyGekkoApiClientBase:
 
     def __init__(
         self,
-        authentication_params: dict = None,
+        authentication_params: dict[str, str] = None,
         session: ClientSession = None,
         demo_mode: bool = False,
         scheme: str = "https",
         host: str = "live.my-gekko.com",
-        port: int = None,
+        port: Union[int, None] = None,
     ) -> None:
         self._url = URL.build(scheme=scheme, host=host, port=port)
         self._authentication_params = authentication_params
@@ -101,7 +103,7 @@ class MyGekkoApiClientBase:
         """Returns the MyGekko actions"""
         return self._actions_value_accessor.actions
 
-    def get_alarms_logics(self) -> list[Action]:
+    def get_alarms_logics(self) -> list[AlarmsLogic]:
         """Returns the MyGekko alarms_logics"""
         return self._alarm_logics_value_accessor.alarms_logics
 

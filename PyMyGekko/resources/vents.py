@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from enum import IntEnum
 
-from PyMyGekko.data_provider import DataProvider
+from PyMyGekko.data_provider import DataProviderBase
 from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
 
@@ -149,7 +149,7 @@ class Vent(Entity):
             VentDeviceModel.ZIMMERMANN_V1,
             VentDeviceModel.ZIMMERMANN_V2,
         ]:
-            return (int(value)) if value is not None else None
+            return VentWorkingModeZimmermann(int(value)) if value is not None else None
         else:
             return VentWorkingMode(int(value)) if value is not None else None
 
@@ -283,7 +283,7 @@ class VentBypassState(IntEnum):
 class VentValueAccessor(EntityValueAccessor):
     """Vent value accessor"""
 
-    def __init__(self, data_provider: DataProvider):
+    def __init__(self, data_provider: DataProviderBase):
         self._data = {}
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
@@ -390,7 +390,7 @@ class VentValueAccessor(EntityValueAccessor):
         """Sets the working level, OFF is sent as -1"""
         await self._data_provider.write_data(
             vent.resource_path,
-            working_level if working_level is not VentWorkingLevel.OFF else -1,
+            str(working_level if working_level is not VentWorkingLevel.OFF else -1),
         )
 
     async def set_bypass_state(self, vent: Vent, bypass_state: VentBypassState) -> None:

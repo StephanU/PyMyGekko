@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import logging
+from typing import Any
 
 from PyMyGekko.data_provider import DataProviderBase
 from PyMyGekko.data_provider import EntityValueAccessor
@@ -21,7 +22,7 @@ class Meteo(ReadOnlyEntity):
         self._value_accessor = value_accessor
 
     @property
-    def sensor_data(self) -> dict[str, any]:
+    def sensor_data(self) -> dict[str, Any]:
         """Returns the sensor data"""
         return self._value_accessor.get_data(self)
 
@@ -35,17 +36,12 @@ class MeteoValueAccessor(EntityValueAccessor):
         self._data_provider.subscribe(self)
 
     def update_status(self, status, hardware):
-        if status is not None and "globals" in status:
-            globals = status["globals"]
-            if globals is not None and "meteo" in globals:
-                meteo = globals["meteo"]
-
-                for key in meteo:
-                    if key not in self._data:
-                        self._data[key] = {}
-
-                    if "value" in meteo[key]:
-                        self._data[key] = meteo[key]["value"]
+        meteo = status.get("globals", {}).get("meteo", {})
+        for key, value in meteo.items():
+            if "value" in value:
+                self._data[key] = value["value"]
+            else:
+                self._data.setdefault(key, {})
 
     def update_resources(self, resources):
         """Nothing to do here since Meteo data is in status and no additional resources are available"""
@@ -53,8 +49,8 @@ class MeteoValueAccessor(EntityValueAccessor):
     @property
     def meteo(self):
         """Returns the meteo read from MyGekko"""
-        return Meteo("meteo", "meteo", self)
+        return Meteo("meteo", "Weather", self)
 
-    def get_data(self, meteo: Meteo) -> dict[str, any]:
+    def get_data(self, meteo: Meteo) -> dict[str, Any]:
         """Returns the data of the given meteo"""
         return self._data

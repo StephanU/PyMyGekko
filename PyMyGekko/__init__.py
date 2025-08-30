@@ -3,7 +3,6 @@
 # SPDX-License-Identifier: MIT
 import logging
 from typing import Union
-from urllib import parse
 
 from aiohttp import ClientSession
 from PyMyGekko.resources.Actions import Action
@@ -176,7 +175,7 @@ class MyGekkoLocalApiClient(MyGekkoApiClientBase):
         super().__init__(
             authentication_params={
                 "username": username,
-                "password": parse.quote(password),
+                "password": password,
             },
             session=session,
             host=host,

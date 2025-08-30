@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from enum import IntEnum
 
-from PyMyGekko.data_provider import DataProvider
+from PyMyGekko.data_provider import DataProviderBase
 from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
 
@@ -92,7 +92,7 @@ class BlindElementInfo(IntEnum):
 class BlindValueAccessor(EntityValueAccessor):
     """Blind value accessor"""
 
-    def __init__(self, data_provider: DataProvider.DataProvider):
+    def __init__(self, data_provider: DataProviderBase):
         self._data = {}
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
@@ -194,4 +194,4 @@ class BlindValueAccessor(EntityValueAccessor):
     async def set_state(self, blind: Blind, state: BlindState) -> None:
         """Sets the state"""
         if blind and blind.entity_id:
-            await self._data_provider.write_data(blind.resource_path, state)
+            await self._data_provider.write_data(blind.resource_path, str(state))

@@ -1,0 +1,41 @@
+{
+  "globals": {
+    "network": {
+      "gekkoname": {
+        "value": "myGEKKO"
+      },
+      "language": {
+        "value": "0"
+      },
+      "version": {
+        "value": "879015"
+      },
+      "hardware": {
+        "value": "Slide 2 (AC0DFE300DCB)"
+      }
+    },
+    "meteo": {
+      "twilight": {
+        "value": "10000.000000"
+      },
+      "brightness": {
+        "value": "99.000000"
+      },
+      "brightnessw": {
+        "value": "21.000000"
+      },
+      "brightnesso": {
+        "value": "16.000000"
+      },
+      "wind": {
+        "value": "0.003052"
+      },
+      "temperature": {
+        "value": "23.400000"
+      },
+      "rain": {
+        "value": "0.000000"
+      }
+    }
+  }
+}

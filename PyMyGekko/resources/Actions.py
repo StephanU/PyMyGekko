@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from enum import IntEnum
 
-from PyMyGekko.data_provider import DataProvider
+from PyMyGekko.data_provider import DataProviderBase
 from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
 
@@ -56,7 +56,7 @@ class ActionFeature(IntEnum):
 class ActionValueAccessor(EntityValueAccessor):
     """Action value accessor"""
 
-    def __init__(self, data_provider: DataProvider.DataProvider):
+    def __init__(self, data_provider: DataProviderBase):
         self._data = {}
         self._data_provider = data_provider
         data_provider.subscribe(self)
@@ -113,4 +113,4 @@ class ActionValueAccessor(EntityValueAccessor):
     async def set_state(self, action: Action, state: ActionState) -> None:
         """Sets the state"""
         if action and action.entity_id:
-            await self._data_provider.write_data(action.resource_path, state)
+            await self._data_provider.write_data(action.resource_path, str(state))

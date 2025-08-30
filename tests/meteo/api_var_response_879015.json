@@ -1,0 +1,55 @@
+{
+  "globals": {
+    "meteo": {
+      "twilight": {
+        "description": "Current twilight value in lux (lx)",
+        "format": "float[0.00,100000.00](lx)",
+        "type": "AI",
+        "permission": "READ",
+        "index": 201
+      },
+      "brightness": {
+        "description": "Current brightness value in kilo lux (kLx)",
+        "format": "float[0.00,100000.00](kLx)",
+        "type": "AI",
+        "permission": "READ",
+        "index": 203
+      },
+      "brightnessw": {
+        "description": "Current brightness value from the west sensor in kilo lux (kLx)",
+        "format": "float[0.00,100000.00](kLx)",
+        "type": "AI",
+        "permission": "READ",
+        "index": 204
+      },
+      "brightnesso": {
+        "description": "Current brightness value from the east sensor in kilo lux (kLx)",
+        "format": "float[0.00,100000.00](kLx)",
+        "type": "AI",
+        "permission": "READ",
+        "index": 205
+      },
+      "wind": {
+        "description": "Current value of the wind in meter/second (m/s)",
+        "format": "float[0.00,100000.00](m/s)",
+        "type": "AI",
+        "permission": "READ",
+        "index": 206
+      },
+      "temperature": {
+        "description": "Current value of the temperature in degrees celsius (°C)",
+        "format": "float[-100.00,100.00](°C)",
+        "type": "AI",
+        "permission": "READ",
+        "index": 207
+      },
+      "rain": {
+        "description": "Current value of the accumulated rain in liter/hour (l/h)",
+        "format": "float[0.00,100.00](l/h)",
+        "type": "AI",
+        "permission": "READ",
+        "index": 208
+      }
+    }
+  }
+}

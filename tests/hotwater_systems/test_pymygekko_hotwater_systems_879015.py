@@ -52,6 +52,9 @@ async def test_get_hotwater_systems(mock_server):
         assert hotWaterSystems[0].current_temperature_top == 48.70
         assert len(hotWaterSystems[0].supported_features) == 4
         assert HotWaterSystemFeature.ON_OFF in hotWaterSystems[0].supported_features
+        assert HotWaterSystemFeature.BOTTOM_TEMPERATURE in hotWaterSystems[0].supported_features
+        assert HotWaterSystemFeature.TARGET_TEMPERATURE in hotWaterSystems[0].supported_features
+        assert HotWaterSystemFeature.TOP_TEMPERATURE in hotWaterSystems[0].supported_features
         assert (
             HotWaterSystemFeature.TARGET_TEMPERATURE
             in hotWaterSystems[0].supported_features

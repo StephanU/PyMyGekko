@@ -73,12 +73,24 @@ class ActionValueAccessor(EntityValueAccessor):
                         "sumstate" in actions[key]
                         and "value" in actions[key]["sumstate"]
                     ):
-                        (
-                            self._data[key]["currentState"],
-                            self._data[key]["startConditionState"],
-                            self._data[key]["elementInfo"],
-                            *_other,
-                        ) = actions[key]["sumstate"]["value"].split(";")
+                        self.read_value(
+                            key, actions[key]["sumstate"]["value"], hardware
+                        )
+
+    def read_value(self, key, value, hardware):
+        """Reads a value based on the given hardware."""
+        if hardware == "legacy":
+            (
+                self._data[key]["currentState"],
+                self._data[key]["elementInfo"],
+            ) = value.split(";")
+        else:
+            (
+                self._data[key]["currentState"],
+                self._data[key]["startConditionState"],
+                self._data[key]["elementInfo"],
+                *_other,
+            ) = value.split(";")
 
     def update_resources(self, resources):
         if resources is not None and "actions" in resources:

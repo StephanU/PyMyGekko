@@ -47,6 +47,23 @@ async with ClientSession() as session:
 
 `pymygekko` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
 
+## Development
+
+### Setup
+
+- Install `hatch``
+- Create hatch environment
+
+```
+hatch env create
+```
+
+### Execute Tests
+
+```
+hatch run pytest
+```
+
 ---
 
 [buymecoffee]: https://www.buymeacoffee.com/stephanu

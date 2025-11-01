@@ -76,7 +76,7 @@ class ActionValueAccessor(EntityValueAccessor):
                         self.read_value(
                             key, actions[key]["sumstate"]["value"], hardware
                         )
-    
+
     def read_value(self, key, value, hardware):
         """Reads a value based on the given hardware."""
         if hardware == "legacy":

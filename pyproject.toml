@@ -46,7 +46,7 @@ cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=PyMyGe
 no-cov = "cov --no-cov {args}"
 
 [[tool.hatch.envs.test.matrix]]
-python = ["310", "311"]
+python = ["312"]
 
 [tool.coverage.run]
 branch = true

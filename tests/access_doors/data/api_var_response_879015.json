@@ -1,0 +1,31 @@
+{
+  "accessdoors": {
+    "item0": {
+      "name": "Türöffner",
+      "page": "Türöffner",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "accessControllerActionState enum[0=close,1=open,2=holdOpen,3=partiallyOpen,4=partiallyHoldOpen](); elementInfo enum[0=ok,1=manualOff,2=manualOn,3=locked,4=alarm](); accessState enum[0=closed,1=open](); gateRuntimeLevel int[0,100](%); accessType enum[0=door control,1=gate control,2=barrier control,3=gate operation,10=myGEKKO Net remote door](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "-3|-2|-1|1|2 (Stop|Close|Lock|Open|Hold open)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 550070
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Closed|1=Open]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 5500000
+      }
+    }
+  }
+}

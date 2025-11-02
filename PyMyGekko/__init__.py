@@ -5,6 +5,8 @@ import logging
 from typing import Union
 
 from aiohttp import ClientSession
+from PyMyGekko.resources.AccessDoors import AccessDoor
+from PyMyGekko.resources.AccessDoors import AccessDoorValueAccessor
 from PyMyGekko.resources.Actions import Action
 from PyMyGekko.resources.Actions import ActionValueAccessor
 from PyMyGekko.resources.AlarmsLogics import AlarmsLogic
@@ -23,8 +25,8 @@ from PyMyGekko.resources.Meteo import Meteo
 from PyMyGekko.resources.Meteo import MeteoValueAccessor
 from PyMyGekko.resources.RoomTemps import RoomTemp
 from PyMyGekko.resources.RoomTemps import RoomTempsValueAccessor
-from PyMyGekko.resources.vents import Vent
-from PyMyGekko.resources.vents import VentValueAccessor
+from PyMyGekko.resources.Vents import Vent
+from PyMyGekko.resources.Vents import VentValueAccessor
 from yarl import URL
 
 from .data_provider import DataProvider
@@ -62,6 +64,7 @@ class MyGekkoApiClientBase:
                 self._url, self._authentication_params, self._session
             )
 
+        self._access_doors_value_accessor = AccessDoorValueAccessor(self._data_provider)
         self._actions_value_accessor = ActionValueAccessor(self._data_provider)
         self._alarm_logics_value_accessor = AlarmsLogicValueAccessor(
             self._data_provider
@@ -71,11 +74,11 @@ class MyGekkoApiClientBase:
         self._hot_water_systems_value_accessor = HotWaterSystemValueAccessor(
             self._data_provider
         )
+        self._meteo_value_accessor = MeteoValueAccessor(self._data_provider)
         self._light_value_accessor = LightValueAccessor(self._data_provider)
         self._loads_value_accessor = LoadValueAccessor(self._data_provider)
         self._room_temps_value_accessor = RoomTempsValueAccessor(self._data_provider)
         self._vents_value_accessor = VentValueAccessor(self._data_provider)
-        self._meteo_value_accessor = MeteoValueAccessor(self._data_provider)
 
     async def try_connect(self) -> None:
         """Tries to connect to the MyGekko API using the given credentials"""
@@ -100,6 +103,10 @@ class MyGekkoApiClientBase:
                 result[key] = network_data[key]["value"]
 
         return result
+
+    def get_access_doors(self) -> list[AccessDoor]:
+        """Returns the MyGekko access doors"""
+        return self._access_doors_value_accessor.access_doors
 
     def get_actions(self) -> list[Action]:
         """Returns the MyGekko actions"""
@@ -129,6 +136,10 @@ class MyGekkoApiClientBase:
         """Returns the MyGekko load"""
         return self._loads_value_accessor.loads
 
+    def get_meteo(self) -> Meteo:
+        """Returns the MyGekko meteo"""
+        return self._meteo_value_accessor.meteo
+
     def get_room_temps(self) -> list[RoomTemp]:
         """Returns the MyGekko room_temps"""
         return self._room_temps_value_accessor.room_temps
@@ -136,10 +147,6 @@ class MyGekkoApiClientBase:
     def get_vents(self) -> list[Vent]:
         """Returns the MyGekko vents"""
         return self._vents_value_accessor.vents
-
-    def get_meteo(self) -> Meteo:
-        """Returns the MyGekko meteo"""
-        return self._meteo_value_accessor.meteo
 
 
 class MyGekkoQueryApiClient(MyGekkoApiClientBase):

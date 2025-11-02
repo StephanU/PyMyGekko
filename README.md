@@ -64,6 +64,20 @@ hatch env create
 hatch run pytest
 ```
 
+### Build
+
+```
+hatch build
+```
+
+### Release
+
+- Increase version, then
+  ´´´
+  hatch build
+  hatch publish -u **token** -a <PyPiToken>
+  ´´´
+
 ---
 
 [buymecoffee]: https://www.buymeacoffee.com/stephanu

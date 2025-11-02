@@ -51,7 +51,7 @@ async with ClientSession() as session:
 
 ### Setup
 
-- Install `hatch``
+- Install `hatch`
 - Create hatch environment
 
 ```

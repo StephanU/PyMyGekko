@@ -3,12 +3,12 @@ import pytest
 from aiohttp import ClientSession
 from aiohttp import web
 from PyMyGekko import MyGekkoApiClientBase
-from PyMyGekko.resources.vents import VentBypassState
-from PyMyGekko.resources.vents import VentDeviceModel
-from PyMyGekko.resources.vents import VentElementInfo
-from PyMyGekko.resources.vents import VentFeature
-from PyMyGekko.resources.vents import VentWorkingLevel
-from PyMyGekko.resources.vents import VentWorkingMode
+from PyMyGekko.resources.Vents import VentBypassState
+from PyMyGekko.resources.Vents import VentDeviceModel
+from PyMyGekko.resources.Vents import VentElementInfo
+from PyMyGekko.resources.Vents import VentFeature
+from PyMyGekko.resources.Vents import VentWorkingLevel
+from PyMyGekko.resources.Vents import VentWorkingMode
 
 
 async def var_response(_request):

@@ -17,7 +17,9 @@ async def var_response(request):
 
 
 async def var_status_response(request):
-    statusResponseFile = open("tests/access_doors/data/api_var_status_response_879015.json")
+    statusResponseFile = open(
+        "tests/access_doors/data/api_var_status_response_879015.json"
+    )
     return web.Response(status=200, body=statusResponseFile.read())
 
 
@@ -55,4 +57,3 @@ async def test_get_access_doors(mock_server):
         assert doors[0].element_info == AccessDoorElementInfo.OK
         assert len(doors[0].supported_features) == 1
         assert AccessDoorFeature.OPEN in doors[0].supported_features
-       

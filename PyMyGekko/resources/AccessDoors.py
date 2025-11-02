@@ -1,4 +1,5 @@
 """MyGekko AccessDoors implementation"""
+
 from __future__ import annotations
 
 from enum import IntEnum
@@ -28,7 +29,7 @@ class AccessDoor(Entity):
         """Returns the current access state"""
         value = self._value_accessor.get_value(self, "accessState")
         return AccessDoorAccessState(int(value)) if value is not None else None
-    
+
     @property
     def access_type(self) -> AccessDoorAccessType | None:
         """Returns the current access type"""
@@ -52,6 +53,7 @@ class AccessDoorAccessState(IntEnum):
     CLOSED = 0
     OPEN = 1
 
+
 class AccessDoorAccessType(IntEnum):
     """MyGekko AccessDoors State"""
 
@@ -60,6 +62,7 @@ class AccessDoorAccessType(IntEnum):
     BARRIER_CONTROL = 2
     GATE_OPERATION = 3
     MYGEKKO_NET_REMOTE_DOOR = 10
+
 
 class AccessDoorState(IntEnum):
     """MyGekko AccessDoors State"""
@@ -70,6 +73,7 @@ class AccessDoorState(IntEnum):
     PARTIALLY_OPEN = 3
     PARTIALLY_HOLD_OPEN = 4
 
+
 class AccessDoorCommand(IntEnum):
     """MyGekko AccessDoors Command"""
 
@@ -79,10 +83,12 @@ class AccessDoorCommand(IntEnum):
     OPEN = 1
     HOLD_OPEN = 2
 
+
 class AccessDoorFeature(IntEnum):
     """MyGekko AccessDoors Feature"""
 
     OPEN = 0
+
 
 class AccessDoorElementInfo(IntEnum):
     """MyGekko AccessDoors Element Info"""
@@ -110,7 +116,10 @@ class AccessDoorValueAccessor(EntityValueAccessor):
                     if key not in self._data:
                         self._data[key] = {}
 
-                    if "sumstate" in access_doors[key] and "value" in access_doors[key]["sumstate"]:
+                    if (
+                        "sumstate" in access_doors[key]
+                        and "value" in access_doors[key]["sumstate"]
+                    ):
                         (
                             self._data[key]["accessControllerActionState"],
                             self._data[key]["elementInfo"],
@@ -147,7 +156,10 @@ class AccessDoorValueAccessor(EntityValueAccessor):
         if door and door.entity_id:
             if door.entity_id in self._data:
                 data = self._data[door.entity_id]
-                if "accessControllerActionState" in data and data["accessControllerActionState"]:
+                if (
+                    "accessControllerActionState" in data
+                    and data["accessControllerActionState"]
+                ):
                     result.append(AccessDoorFeature.OPEN)
 
         return result

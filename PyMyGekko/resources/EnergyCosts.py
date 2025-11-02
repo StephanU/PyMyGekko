@@ -1,4 +1,5 @@
 """MyGekko EnergyCosts implementation"""
+
 from __future__ import annotations
 
 import logging
@@ -106,7 +107,10 @@ class EnergyCostValueAccessor(EntityValueAccessor):
                     self._transform_value(value_descriptions[index], value_parts)
                 )
             else:
-                _LOGGER.info("OutOfBounds access for value %s. Not all energy_costs value are read currently.", value)
+                _LOGGER.info(
+                    "OutOfBounds access for value %s. Not all energy_costs value are read currently.",
+                    value,
+                )
 
         return values
 

@@ -1,0 +1,26 @@
+{
+  "cams": {
+    "item2": {
+      "name": "DoorBird",
+      "page": "Eingang",
+      "imagepath": "http://XXX@192.168.1.50/bha-api/image.cgi",
+      "streampath": "http://XXX@192.168.1.50/bha-api/video.cgi",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "newRecordsAvailableState enum[0=no,1=yes](); ",
+        "type": "STRING",
+        "permission": "READ"
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 7500000
+      }
+    }
+  }
+}

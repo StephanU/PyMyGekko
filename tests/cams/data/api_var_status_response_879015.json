@@ -1,0 +1,30 @@
+{
+  "globals": {
+    "network": {
+      "gekkoname": {
+        "value": "myGEKKO"
+      },
+      "language": {
+        "value": "0"
+      },
+      "version": {
+        "value": "879015"
+      },
+      "hardware": {
+        "value": "Slide 2 (AC0DFE3012E6)"
+      }
+    }
+  },
+  "cams": {
+    "item2": {
+      "sumstate": {
+        "value": "0;"
+      }
+    },
+    "group0": {
+      "sumstate": {
+        "value": "1"
+      }
+    }
+  }
+}

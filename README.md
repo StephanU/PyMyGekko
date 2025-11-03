@@ -73,9 +73,10 @@ hatch build
 ### Release
 
 - Increase version, then
+
 ```
-  hatch build
-  hatch publish -u __token__ -a <PyPiToken>
+hatch build
+hatch publish -u __token__ -a <PyPiToken>
 ```
 
 ---

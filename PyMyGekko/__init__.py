@@ -13,6 +13,8 @@ from PyMyGekko.resources.AlarmsLogics import AlarmsLogic
 from PyMyGekko.resources.AlarmsLogics import AlarmsLogicValueAccessor
 from PyMyGekko.resources.Blinds import Blind
 from PyMyGekko.resources.Blinds import BlindValueAccessor
+from PyMyGekko.resources.Cams import Cam
+from PyMyGekko.resources.Cams import CamValueAccessor
 from PyMyGekko.resources.EnergyCosts import EnergyCost
 from PyMyGekko.resources.EnergyCosts import EnergyCostValueAccessor
 from PyMyGekko.resources.HotWaterSystems import HotWaterSystem
@@ -70,6 +72,7 @@ class MyGekkoApiClientBase:
             self._data_provider
         )
         self._blind_value_accessor = BlindValueAccessor(self._data_provider)
+        self._cam_value_accessor = CamValueAccessor(self._data_provider)
         self._energy_costs_value_accessor = EnergyCostValueAccessor(self._data_provider)
         self._hot_water_systems_value_accessor = HotWaterSystemValueAccessor(
             self._data_provider
@@ -119,6 +122,10 @@ class MyGekkoApiClientBase:
     def get_blinds(self) -> list[Blind]:
         """Returns the MyGekko blinds"""
         return self._blind_value_accessor.blinds
+
+    def get_cams(self) -> list[Cam]:
+        """Returns the MyGekko cams"""
+        return self._cam_value_accessor.cams
 
     def get_energy_costs(self) -> list[EnergyCost]:
         """Returns the MyGekko energy_costs"""

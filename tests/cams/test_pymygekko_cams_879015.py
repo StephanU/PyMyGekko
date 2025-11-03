@@ -5,7 +5,6 @@ from aiohttp import ClientSession
 from aiohttp import web
 from PyMyGekko import MyGekkoApiClientBase
 from PyMyGekko.resources.Cams import CamFeature
-from PyMyGekko.resources.Cams import Cam
 
 _LOGGER: logging.Logger = logging.getLogger(__name__)
 

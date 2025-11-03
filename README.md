@@ -51,7 +51,7 @@ async with ClientSession() as session:
 
 ### Setup
 
-- Install `hatch``
+- Install `hatch`
 - Create hatch environment
 
 ```
@@ -74,10 +74,10 @@ hatch build
 
 - Increase version, then
 
-  ´´´
-  hatch build
-  hatch publish -u \_\_token\_\_ -a <PyPiToken>
-  ´´´
+```
+hatch build
+hatch publish -u __token__ -a <PyPiToken>
+```
 
 ---
 

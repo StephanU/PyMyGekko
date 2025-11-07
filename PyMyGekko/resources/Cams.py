@@ -94,13 +94,13 @@ class CamValueAccessor(EntityValueAccessor):
 
         return result
 
-    def get_features(self, door: Cam) -> list[CamFeature]:
+    def get_features(self, cam: Cam) -> list[CamFeature]:
         """Returns the supported features"""
         result = list()
 
-        if door and door.entity_id:
-            if door.entity_id in self._data:
-                data = self._data[door.entity_id]
+        if cam and cam.entity_id:
+            if cam.entity_id in self._data:
+                data = self._data[cam.entity_id]
                 if "streampath" in data and data["streampath"]:
                     result.append(CamFeature.STREAM)
 

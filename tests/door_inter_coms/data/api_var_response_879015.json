@@ -1,0 +1,33 @@
+{
+  "door_intercom": {
+    "item1": {
+      "name": "2n",
+      "page": "2N Video",
+      "imagepath": "http://XXX.XXX.10.XXX/api/camera/snapshot?width=640&height=480",
+      "streampath": "http://XXX.XXX.10.XXX/api/camera/snapshot?width=640&height=480&fps=15",
+      "sumstate": {
+        "description": "Summary of the states and their formats",
+        "format": "soundMode enum[0=mute,1=ringing](); actionOnRingState enum[0=off,1=on]; connectionState enum[-6=errorProcessing,-5=errorAuthorization,-4=voIPNotActive,-3=errorFavCheck,-2=errorProvisioning,-1=errorConnection,0=notSet,1=ok](); missedCallsValue int[0,65535](); lastMissedCallDate string[dd.mm.yyyy hh:mm:ss](); ",
+        "type": "STRING",
+        "permission": "READ"
+      },
+      "scmd": {
+        "description": "Summary of the commands and their formats",
+        "format": "O|M1|M0|A1|A0 (Open|Ringing|Mute|ActionOn|ActionOff)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 2100170
+      }
+    },
+    "group0": {
+      "name": "Grp 1",
+      "sumstate": {
+        "description": "Summary of the group states and their formats",
+        "format": "State[0=Off|1=On]",
+        "type": "AO",
+        "permission": "READ",
+        "index": 21000000
+      }
+    }
+  }
+}

@@ -2,7 +2,8 @@
 from __future__ import annotations
 
 from datetime import datetime
-from enum import IntEnum, StrEnum
+from enum import IntEnum
+from enum import StrEnum
 
 from PyMyGekko.data_provider import DataProviderBase
 from PyMyGekko.data_provider import EntityValueAccessor

@@ -1,15 +1,10 @@
 import logging
 
-from PyMyGekko.resources.DoorInterComs import (
-    DoorInterComActionOnRingState,
-    DoorInterComConnectionState,
-)
-
 import pytest
 from aiohttp import ClientSession
 from aiohttp import web
-from datetime import datetime
 from PyMyGekko import MyGekkoApiClientBase
+from PyMyGekko.resources.DoorInterComs import DoorInterComConnectionState
 
 _LOGGER: logging.Logger = logging.getLogger(__name__)
 
@@ -64,7 +59,7 @@ async def test_get_door_inter_coms(mock_server):
             door_inter_coms[0].stream_url
             == "http://XXX.XXX.10.XXX/api/camera/snapshot?width=640&height=480&fps=15"
         )
-        assert door_inter_coms[0].action_on_ring_state == None
+        assert door_inter_coms[0].action_on_ring_state is None
         assert door_inter_coms[0].connection_state == DoorInterComConnectionState.OK
-        assert door_inter_coms[0].last_missed_call_date == None
+        assert door_inter_coms[0].last_missed_call_date is None
         assert door_inter_coms[0].missed_calls == 0

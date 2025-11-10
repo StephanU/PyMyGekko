@@ -82,8 +82,8 @@ class CamValueAccessor(EntityValueAccessor):
                     if key not in self._data:
                         self._data[key] = {}
                     self._data[key]["name"] = cams[key]["name"]
-                    self._data[key]["imagepath"] = cams[key]["imagepath"]
-                    self._data[key]["streampath"] = cams[key]["streampath"]
+                    self._data[key]["imagepath"] = cams[key].get("imagepath", None)
+                    self._data[key]["streampath"] = cams[key].get("streampath", None)
 
     @property
     def cams(self):

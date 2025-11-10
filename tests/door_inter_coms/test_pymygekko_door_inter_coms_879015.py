@@ -5,6 +5,7 @@ from aiohttp import ClientSession
 from aiohttp import web
 from PyMyGekko import MyGekkoApiClientBase
 from PyMyGekko.resources.DoorInterComs import DoorInterComConnectionState
+from PyMyGekko.resources.DoorInterComs import DoorInterComSoundMode
 
 _LOGGER: logging.Logger = logging.getLogger(__name__)
 
@@ -63,3 +64,4 @@ async def test_get_door_inter_coms(mock_server):
         assert door_inter_coms[0].connection_state == DoorInterComConnectionState.OK
         assert door_inter_coms[0].last_missed_call_date is None
         assert door_inter_coms[0].missed_calls == 0
+        assert door_inter_coms[0].sound_mode == DoorInterComSoundMode.RINGING

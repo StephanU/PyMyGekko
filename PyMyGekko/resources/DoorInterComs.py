@@ -96,7 +96,7 @@ class DoorInterComConnectionState(IntEnum):
     ERROR_FAV_CHECK = -3
     ERROR_PROVISIONING = -2
     ERROR_CONNECTION = -1
-    NOT_SET_UP = (0,)
+    NOT_SET_UP = 0
     OK = 1
 
 

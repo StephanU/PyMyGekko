@@ -1,5 +1,4 @@
 """Base implementation of the data provider"""
-
 import json
 import logging
 import pkgutil

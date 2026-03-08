@@ -1,5 +1,4 @@
 """MyGekko EnergyCosts implementation"""
-
 from __future__ import annotations
 
 import logging
@@ -8,7 +7,6 @@ import re
 from PyMyGekko.data_provider import DataProviderBase
 from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import Entity
-
 
 _LOGGER: logging.Logger = logging.getLogger(__name__)
 

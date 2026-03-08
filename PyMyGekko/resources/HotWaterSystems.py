@@ -1,5 +1,4 @@
 """MyGekko Hotwater_systems implementation"""
-
 from __future__ import annotations
 
 from enum import IntEnum

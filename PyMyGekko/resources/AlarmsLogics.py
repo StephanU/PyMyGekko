@@ -1,5 +1,4 @@
 """MyGekko AlarmsLogics implementation"""
-
 from __future__ import annotations
 
 from PyMyGekko.data_provider import DataProviderBase

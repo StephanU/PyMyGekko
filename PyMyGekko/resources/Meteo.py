@@ -1,5 +1,4 @@
 """MyGekko Meteos implementation"""
-
 from __future__ import annotations
 
 import logging
@@ -8,7 +7,6 @@ from typing import Any
 from PyMyGekko.data_provider import DataProviderBase
 from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import ReadOnlyEntity
-
 
 _LOGGER: logging.Logger = logging.getLogger(__name__)
 

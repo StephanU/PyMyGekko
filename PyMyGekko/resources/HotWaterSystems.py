@@ -76,7 +76,7 @@ class HotWaterSystemValueAccessor(EntityValueAccessor):
     """HotWaterSystem value accessor"""
 
     def __init__(self, data_provider: DataProviderBase):
-        self._data = {}
+        super().__init__()
         self._data_provider = data_provider
         data_provider.subscribe(self)
 

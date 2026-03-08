@@ -8,7 +8,6 @@ from PyMyGekko.data_provider import DataProviderBase
 from PyMyGekko.data_provider import EntityValueAccessor
 from PyMyGekko.resources import ReadOnlyEntity
 
-
 _LOGGER: logging.Logger = logging.getLogger(__name__)
 
 
@@ -31,7 +30,7 @@ class MeteoValueAccessor(EntityValueAccessor):
     """Meteo value accessor"""
 
     def __init__(self, data_provider: DataProviderBase):
-        self._data = {}
+        super().__init__()
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
 

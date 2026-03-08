@@ -36,7 +36,6 @@ from yarl import URL
 from .data_provider import DataProvider
 from .data_provider import DummyDataProvider
 
-
 _LOGGER: logging.Logger = logging.getLogger(__name__)
 
 

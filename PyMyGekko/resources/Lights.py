@@ -1,4 +1,5 @@
 """MyGekko Lights implementation"""
+
 from __future__ import annotations
 
 from enum import IntEnum
@@ -74,7 +75,7 @@ class LightValueAccessor(EntityValueAccessor):
     """Lights value accessor"""
 
     def __init__(self, data_provider: DataProviderBase):
-        self._data = {}
+        super().__init__()
         self._data_provider = data_provider
         data_provider.subscribe(self)
 

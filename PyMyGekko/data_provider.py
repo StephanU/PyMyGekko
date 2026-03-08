@@ -27,7 +27,8 @@ class DataSubscriberInterface:
 class EntityValueAccessor(DataSubscriberInterface):
     """Base class for entity values accessors"""
 
-    _data = {}
+    def __init__(self):
+        self._data = {}
 
     def get_value(self, entity: Entity, value_name: str) -> str | None:
         """Returns a data value of this entity"""

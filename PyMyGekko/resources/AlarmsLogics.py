@@ -1,4 +1,5 @@
 """MyGekko AlarmsLogics implementation"""
+
 from __future__ import annotations
 
 from PyMyGekko.data_provider import DataProviderBase
@@ -26,7 +27,7 @@ class AlarmsLogicValueAccessor(EntityValueAccessor):
     """AlarmsLogic value accessor"""
 
     def __init__(self, data_provider: DataProviderBase):
-        self._data = {}
+        super().__init__()
         self._data_provider = data_provider
         data_provider.subscribe(self)
 

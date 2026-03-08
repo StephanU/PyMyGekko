@@ -1,4 +1,5 @@
 """MyGekko EnergyCosts implementation"""
+
 from __future__ import annotations
 
 import logging
@@ -31,7 +32,7 @@ class EnergyCostValueAccessor(EntityValueAccessor):
     """EnergyCost value accessor"""
 
     def __init__(self, data_provider: DataProviderBase):
-        self._data = {}
+        super().__init__()
         self._data_provider = data_provider
         self._data_provider.subscribe(self)
 

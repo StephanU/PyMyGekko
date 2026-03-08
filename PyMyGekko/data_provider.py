@@ -1,4 +1,5 @@
 """Base implementation of the data provider"""
+
 import json
 import logging
 import pkgutil
@@ -43,9 +44,10 @@ class EntityValueAccessor(DataSubscriberInterface):
 class DataProviderBase(ABC):
     """Base class for data providers"""
 
-    _subscriber: list[DataSubscriberInterface] = []
-    _status = None
-    _resources = None
+    def __init__(self):
+        self._subscriber: list[DataSubscriberInterface] = []
+        self._status = None
+        self._resources = None
 
     @property
     def resources(self):
@@ -101,6 +103,9 @@ class DataProviderBase(ABC):
 class DummyDataProvider(DataProviderBase):
     """Dummy data provider returning static test data"""
 
+    def __init__(self):
+        super().__init__()
+
     async def try_connect(self) -> None:
         _LOGGER.debug("try_connect in DummyDataProvider")
 
@@ -122,6 +127,7 @@ class DataProvider(DataProviderBase):
     def __init__(
         self, url: URL, authentication_params: dict[str, str], session: ClientSession
     ):
+        super().__init__()
         self._url = url
         self._authentication_params = authentication_params
         self._session = session

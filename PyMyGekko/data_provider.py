@@ -145,22 +145,27 @@ class DataProvider(DataProviderBase):
                 self.handle_api_error(resp.status, response_text)
 
     async def read_data(self) -> None:
-        _LOGGER.debug("read_data in DataProvider: /api/v1/var")
-        async with self._session.get(
-            self._url.with_path("/api/v1/var"),
-            params=self._authentication_params,
-        ) as resp:
-            response_text = await resp.text()
-            if resp.status == 200:
-                try:
-                    self.resources = json.loads(response_text)
-                except json.JSONDecodeError:
-                    _LOGGER.exception("Json Parsing the response failed")
-            else:
-                _LOGGER.error(
-                    "Error reading the resources %s %s", resp.status, await resp.text()
-                )
-                self.handle_api_error(resp.status, response_text)
+        # The resource tree only changes when the myGEKKO configuration is
+        # changed, so it is read once and cached afterwards.
+        if self.resources is None:
+            _LOGGER.debug("read_data in DataProvider: /api/v1/var")
+            async with self._session.get(
+                self._url.with_path("/api/v1/var"),
+                params=self._authentication_params,
+            ) as resp:
+                response_text = await resp.text()
+                if resp.status == 200:
+                    try:
+                        self.resources = json.loads(response_text)
+                    except json.JSONDecodeError:
+                        _LOGGER.exception("Json Parsing the response failed")
+                else:
+                    _LOGGER.error(
+                        "Error reading the resources %s %s",
+                        resp.status,
+                        response_text,
+                    )
+                    self.handle_api_error(resp.status, response_text)
 
         _LOGGER.debug("read_data in DataProvider: /api/v1/var/status")
         async with self._session.get(

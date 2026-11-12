@@ -1,0 +1,157 @@
+{
+  "globals": {
+    "network": {
+      "gekkoname": {
+        "value": "Test",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 1
+      },
+      "version": {
+        "value": "1",
+        "type": "AO",
+        "permission": "READ",
+        "index": 3
+      },
+      "hardware": {
+        "value": "GEKKO",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 4
+      }
+    }
+  },
+  "alarmsystem": {
+    "item0": {
+      "name": "SB1 EG",
+      "page": "Alarmanlage",
+      "sumstate": {
+        "value": "zone1AlarmState enum[0=ok,1=alarm]();zone1DeviceModel enum[3=complex400_V2,4=hiplex8400_V2]();zone1SharpState enum[0=noInfo,1=unsharp,2=internalSharp,3=externalSharp]();zone1InputGroupsState 128B[0x63H63L62H62L...0H0L]();zone1AlarmDeviceState enum[0=ok,1=alarm,2=fault]();",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800000
+      },
+      "scmd": {
+        "value": "2|3 (Zone 1 Internal Sharp|Zone 1 External Sharp)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 800010
+      }
+    },
+    "item1": {
+      "name": "SB2 1.OG",
+      "page": "Alarmanlage",
+      "sumstate": {
+        "value": "zone1AlarmState enum[0=ok,1=alarm]();zone1DeviceModel enum[3=complex400_V2,4=hiplex8400_V2]();zone1SharpState enum[0=noInfo,1=unsharp,2=internalSharp,3=externalSharp]();zone1InputGroupsState 128B[0x63H63L62H62L...0H0L]();zone1AlarmDeviceState enum[0=ok,1=alarm,2=fault]();",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800100
+      },
+      "scmd": {
+        "value": "2|3 (Zone 1 Internal Sharp|Zone 1 External Sharp)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 800110
+      }
+    },
+    "item2": {
+      "name": "SB3 2.OG",
+      "page": "Alarmanlage",
+      "sumstate": {
+        "value": "zone1AlarmState enum[0=ok,1=alarm]();zone1DeviceModel enum[3=complex400_V2,4=hiplex8400_V2]();zone1SharpState enum[0=noInfo,1=unsharp,2=internalSharp,3=externalSharp]();zone1InputGroupsState 128B[0x63H63L62H62L...0H0L]();zone1AlarmDeviceState enum[0=ok,1=alarm,2=fault]();",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800200
+      },
+      "scmd": {
+        "value": "2|3 (Zone 1 Internal Sharp|Zone 1 External Sharp)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 800210
+      }
+    },
+    "item3": {
+      "name": "SB4 3.OG",
+      "page": "Alarmanlage",
+      "sumstate": {
+        "value": "zone1AlarmState enum[0=ok,1=alarm]();zone1DeviceModel enum[3=complex400_V2,4=hiplex8400_V2]();zone1SharpState enum[0=noInfo,1=unsharp,2=internalSharp,3=externalSharp]();zone1InputGroupsState 128B[0x63H63L62H62L...0H0L]();zone1AlarmDeviceState enum[0=ok,1=alarm,2=fault]();",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800300
+      },
+      "scmd": {
+        "value": "2|3 (Zone 1 Internal Sharp|Zone 1 External Sharp)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 800310
+      }
+    },
+    "item4": {
+      "name": "SB5 4.OG",
+      "page": "Alarmanlage",
+      "sumstate": {
+        "value": "zone1AlarmState enum[0=ok,1=alarm]();zone1DeviceModel enum[3=complex400_V2,4=hiplex8400_V2]();zone1SharpState enum[0=noInfo,1=unsharp,2=internalSharp,3=externalSharp]();zone1InputGroupsState 128B[0x63H63L62H62L...0H0L]();zone1AlarmDeviceState enum[0=ok,1=alarm,2=fault]();",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800400
+      },
+      "scmd": {
+        "value": "2|3 (Zone 1 Internal Sharp|Zone 1 External Sharp)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 800410
+      }
+    },
+    "item5": {
+      "name": "SB6 5.OG",
+      "page": "Alarmanlage",
+      "sumstate": {
+        "value": "zone1AlarmState enum[0=ok,1=alarm]();zone1DeviceModel enum[3=complex400_V2,4=hiplex8400_V2]();zone1SharpState enum[0=noInfo,1=unsharp,2=internalSharp,3=externalSharp]();zone1InputGroupsState 128B[0x63H63L62H62L...0H0L]();zone1AlarmDeviceState enum[0=ok,1=alarm,2=fault]();",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800500
+      },
+      "scmd": {
+        "value": "2|3 (Zone 1 Internal Sharp|Zone 1 External Sharp)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 800510
+      }
+    },
+    "item6": {
+      "name": "SB7 Treppenhaus",
+      "page": "Alarmanlage",
+      "sumstate": {
+        "value": "zone1AlarmState enum[0=ok,1=alarm]();zone1DeviceModel enum[3=complex400_V2,4=hiplex8400_V2]();zone1SharpState enum[0=noInfo,1=unsharp,2=internalSharp,3=externalSharp]();zone1InputGroupsState 128B[0x63H63L62H62L...0H0L]();zone1AlarmDeviceState enum[0=ok,1=alarm,2=fault]();",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800600
+      },
+      "scmd": {
+        "value": "2|3 (Zone 1 Internal Sharp|Zone 1 External Sharp)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 800610
+      }
+    },
+    "item7": {
+      "name": "SB8 Tresor-Lager",
+      "page": "Alarmanlage",
+      "sumstate": {
+        "value": "zone1AlarmState enum[0=ok,1=alarm]();zone1DeviceModel enum[3=complex400_V2,4=hiplex8400_V2]();zone1SharpState enum[0=noInfo,1=unsharp,2=internalSharp,3=externalSharp]();zone1InputGroupsState 128B[0x63H63L62H62L...0H0L]();zone1AlarmDeviceState enum[0=ok,1=alarm,2=fault]();",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800700
+      },
+      "scmd": {
+        "value": "2|3 (Zone 1 Internal Sharp|Zone 1 External Sharp)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 800710
+      }
+    },
+    "group0": {
+      "name": "Grp 1"
+    }
+  }
+}

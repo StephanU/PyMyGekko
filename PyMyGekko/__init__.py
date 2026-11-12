@@ -11,6 +11,8 @@ from PyMyGekko.resources.Actions import Action
 from PyMyGekko.resources.Actions import ActionValueAccessor
 from PyMyGekko.resources.AlarmsLogics import AlarmsLogic
 from PyMyGekko.resources.AlarmsLogics import AlarmsLogicValueAccessor
+from PyMyGekko.resources.AlarmSystems import AlarmSystem
+from PyMyGekko.resources.AlarmSystems import AlarmSystemValueAccessor
 from PyMyGekko.resources.Blinds import Blind
 from PyMyGekko.resources.Blinds import BlindValueAccessor
 from PyMyGekko.resources.Cams import Cam
@@ -80,6 +82,9 @@ class MyGekkoApiClientBase:
         self._alarm_logics_value_accessor = AlarmsLogicValueAccessor(
             self._data_provider
         )
+        self._alarm_systems_value_accessor = AlarmSystemValueAccessor(
+            self._data_provider
+        )
         self._blind_value_accessor = BlindValueAccessor(self._data_provider)
         self._cam_value_accessor = CamValueAccessor(self._data_provider)
         self._clock_value_accessor = ClockValueAccessor(self._data_provider)
@@ -138,6 +143,10 @@ class MyGekkoApiClientBase:
     def get_alarms_logics(self) -> list[AlarmsLogic]:
         """Returns the MyGekko alarms_logics"""
         return self._alarm_logics_value_accessor.alarms_logics
+
+    def get_alarm_systems(self) -> list[AlarmSystem]:
+        """Returns the MyGekko alarm system items (security areas)"""
+        return self._alarm_systems_value_accessor.alarm_systems
 
     def get_blinds(self) -> list[Blind]:
         """Returns the MyGekko blinds"""

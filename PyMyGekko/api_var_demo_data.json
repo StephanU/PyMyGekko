@@ -565,5 +565,39 @@
         "index": 4000000
       }
     }
+  },
+  "alarmsystem": {
+    "item0": {
+      "name": "Ground floor",
+      "page": "Alarmanlage",
+      "sumstate": {
+        "value": "zone1AlarmState enum[0=ok,1=alarm]();zone1DeviceModel enum[3=complex400_V2,4=hiplex8400_V2]();zone1SharpState enum[0=noInfo,1=unsharp,2=internalSharp,3=externalSharp]();zone1InputGroupsState 128B[0x63H63L62H62L...0H0L]();zone1AlarmDeviceState enum[0=ok,1=alarm,2=fault]();",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800000
+      },
+      "scmd": {
+        "value": "2|3 (Zone 1 Internal Sharp|Zone 1 External Sharp)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 800010
+      }
+    },
+    "item1": {
+      "name": "First floor",
+      "page": "Alarmanlage",
+      "sumstate": {
+        "value": "zone1AlarmState enum[0=ok,1=alarm]();zone1DeviceModel enum[3=complex400_V2,4=hiplex8400_V2]();zone1SharpState enum[0=noInfo,1=unsharp,2=internalSharp,3=externalSharp]();zone1InputGroupsState 128B[0x63H63L62H62L...0H0L]();zone1AlarmDeviceState enum[0=ok,1=alarm,2=fault]();",
+        "type": "STRING",
+        "permission": "READ",
+        "index": 800100
+      },
+      "scmd": {
+        "value": "2|3 (Zone 1 Internal Sharp|Zone 1 External Sharp)",
+        "type": "STRING",
+        "permission": "WRITE",
+        "index": 800110
+      }
+    }
   }
 }
